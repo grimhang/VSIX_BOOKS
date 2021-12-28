@@ -3,8 +3,8 @@ name  : "Sungchool Park"
 lang: ko
 description: "Visual Studio Extension Development 2019"
 
-# url     : "https://grimhang.github.io"
-# baseurl : "/SQLServerQueryPerformanceTuning"
+url     : "https://grimhang.github.io"
+baseurl : "/VSIX_Books"
 
 
 #theme: jekyll-rtd-theme
