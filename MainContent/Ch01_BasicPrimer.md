@@ -6,7 +6,7 @@ sort: 1
 이 장에서는 Visual Studio 확장을 배우고 개발하기 위한 여정의 시작을 표시합니다. 이 길을 닦기 위해 우리는 이 책을 통해 필요하고 Visual Studio 확장을 개발하기 위한 전제 조건을 빠르게 복습할 것입니다. 이 장은 기본 사항에 대한 입문서 역할을 할 것이며 여기에서 다루는 주제에 정통한 독자는 건너뛸 수 있습니다. 기본 사항을 살펴보기 전에 가장 먼저 떠오르는 질문은 "왜 Visual Studio를 확장해야 합니까?"입니다. 그럼 먼저 답을 드리겠습니다.
 
 ***
-## 1.1 Visual Studio를 확장해야 하는 이유는 무엇인가요?
+## <font color='dodgerblue' size="6">1) Visual Studio를 확장해야 하는 이유는 무엇인가요?</font>
 왜 Visual Studio IDE를 확장해야 합니까?  
 
 나는 이 질문을 여러 번 들었고 수많은 소프트웨어 개발자가 이 매우 적절한 질문을 하는 것을 보았습니다. 그래서, 우리는 여기 왜? Visual Studio는 훌륭한 IDE이며 개발자를 코딩, 개발, 디버깅 및 문제 해결에서 매우 생산적으로 만듭니다. 그렇다면 굳이 굳이 연장을 해야 하는 이유는 무엇일까요? 글쎄요 – 그렇게 하는 데에는 여러 가지 이유가 있습니다. 상위 항목 중 일부는 다음과 같습니다.
@@ -22,7 +22,7 @@ sort: 1
 Visual Studio Marketplace(https://marketplace.visualstudio.com/)에서 사용할 수 있는 개발자 생산성, 품질, 리팩토링, 편집기 및 컨트롤을 개선하기 위한 Visual Studio용 확장이 많이 있습니다. 현재 시장에는 970만 개 이상의 확장 프로그램이 있으며 다운로드 수는 2,500만 개 이상입니다. 이제 기초를 닦는 탐구를 시작하겠습니다.
 
 
-## 1.2 Compiler
+## <font color='dodgerblue' size="6">2) Compiler</font>
 컴파일러의 기본 정의부터 시작하겠습니다. 컴파일러는 고급 언어로 작성된 모든 컴퓨터 프로그램을 저급 언어로 변환하는 소프트웨어입니다. 컴파일러를 더 자세히 이해하기 전에 이 정의에 사용된 용어를 하나씩 이해합시다.
 
 * 소프트웨어: 컴퓨터에서 실행되는 모든 프로그램을 소프트웨어라고 합니다. 
@@ -62,8 +62,7 @@ namespace BasicsPrimer
 
 그림 1-2. 헬로월드
 
-## 1.3 SDK란?
-
+## <font color='dodgerblue' size="6">3) SDK란?</font>
 소프트웨어 개발 키트는 이름에서 알 수 있듯이 소프트웨어를 개발하기 위한 키트입니다. 이를 이해하기 위해 먼저 개발 키트에 대해 알아보겠습니다.  
 
 키트는 무엇이든 만드는 데 필요한 도구 세트입니다(예: 목수가 망치, 끌 등과 같은 가구를 만들기 위해 도구 세트가 필요함). 마찬가지로 소프트웨어를 개발하려면 소프트웨어 개발 키트라고 하는 도구 집합 또는 개발 키트가 필요합니다. 약칭은 SDK입니다. 일반적인 SDK는 개발 환경에서 개발을 지원, 지원 및 용이하게 하는 DLL 및 라이브러리로 구성됩니다.   
@@ -76,7 +75,7 @@ namespace BasicsPrimer
 다른 SDK는 해당 SDK를 사용하여 소프트웨어를 개발하는 동안 개발자가 필요로 하는 내용에 따라 다른 콘텐츠를 갖습니다. 이 책에서 배우고자 하는 주제와 관련된 예를 하나 더 들 수 있습니다. Visual Studio 확장을 개발하려면 Visual Studio SDK(VSSDK)가 필요합니다. Visual Studio 설치 중에 관련 워크로드(다음 장에서 설명)를 추가하면 기본적으로 Visual Studio 확장을 개발하는 데 필요한 SDK를 설치하게 됩니다. 우리는 이 책을 통해 Visual Studio SDK에 대해 논의하면서 확장을 개발하고 필요에 따라 해당 구성 요소를 탐구할 것입니다.  
 6장에서는 Roslyn이라고도 하는 .NET 컴파일러 플랫폼을 사용하는 코드 분석기 및 코드 수정 작업 확장을 개발할 것입니다. Roslyn은 "구문 트리"라고 하는 것을 광범위하게 사용하므로 트리 데이터 구조를 빠르게 요약해 보겠습니다. 트리 데이터 구조의 기본 사항에 이미 익숙하다면 이 새로 고침을 건너뛸 수 있습니다.
 
-## 1.4 트리 데이터 구조 요약
+## <font color='dodgerblue' size="6">4) 트리 데이터 구조 요약</font>
 이제 데이터 구조와 알고리즘으로 시작하는 프로그래밍의 몇 가지 기본 사항을 요약해 보겠습니다. 이 주제는 그 자체로 거대합니다. 전체 책이 데이터 구조에 대해 작성되었습니다. 그래서 저는 이 주제에 대한 간략한 요약을 제시하려고 합니다. 이러한 주제에 대한 자세한 내용은 이 책의 범위를 벗어납니다. 이 섹션에서는 트리 데이터 구조를 다시 살펴보겠습니다. 이 리프레셔는 Roslyn 기반 확장으로 작업하는 동안 편리합니다.  
 
 시작하자.  
@@ -200,15 +199,18 @@ namespace BasicsPrimer
 
 우리는 Roslyn에 대해 논의하는 동안 트리 순회와 특정 유형의 노드 찾기에 대해 조금 더 알게 될 것입니다. Visual Studio는 매우 광범위하며 이러한 확장성의 대부분은 Visual Studio에서 MEF라고 하는 확장성 프레임워크를 기반으로 합니다. 이제 MEF로 넘어갑시다.
 
-## 1.5 매니지드 확장 프레임워크 : Managed Extensibility Framework (MEF)
+
+## <font color='dodgerblue' size="6">5) 매니지드 확장성 프레임워크 : Managed Extensibility Framework (MEF)</font>
 MEF(Managed Extensibility Framework)를 이해하려면 이름의 처음 두 부분인 "Managed"와 "Extensibility"를 이해해야 합니다. 다음 용어를 하나씩 이해해 보겠습니다.
     
     * Managed(관리): CLR(공용 언어 런타임) 컨텍스트에서 실행되는 모든 코드를 관리 코드라고 합니다.
-    • Extensibility(확장성): 클래스, 구성 요소, 프레임워크, 도구, IDE, 브라우저 등의 기능/동작을 확장하는 방법을 확장성이라고 부릅니다.
+    * Extensibility(확장성): 클래스, 구성 요소, 프레임워크, 도구, IDE, 브라우저 등의 기능/동작을 확장하는 방법을 확장성이라고 부릅니다.
 
 이제 공식 Microsoft 문서 페이지에서 가져온 MEF의 공식적인 정의를 살펴보겠습니다.    
 
-    Managed Extensibility Framework 또는 MEF는 가볍고 확장 가능한 응용 프로그램을 만들기 위한 라이브러리입니다. 이를 통해 애플리케이션 개발자는 구성이 필요 없이 확장을 검색하고 사용할 수 있습니다. 또한 확장 개발자가 코드를 쉽게 캡슐화하고 취약한 하드 종속성을 피할 수 있습니다. MEF를 사용하면 애플리케이션 내에서뿐만 아니라 애플리케이션 간에도 확장을 재사용할 수 있습니다.
+    Managed Extensibility Framework 또는 MEF는 가볍고 확장 가능한 응용 프로그램을 만들기 위한 라이브러리입니다. 
+    이를 통해 애플리케이션 개발자는 구성 필요 없이 확장을 검색하고 사용할 수 있습니다. 또한 확장 개발자가 코드를 쉽게 캡슐화하고 취약한 
+    하드 종속성을 피할 수 있습니다. MEF를 사용하면 애플리케이션 내에서뿐만 아니라 애플리케이션 간에도 확장을 재사용할 수 있습니다.
 
 MEF는 .NET Framework에서 쉽게 추가 기능 또는 플러그인 기반 확장 가능한 응용 프로그램을 만들기 위해 버전 4.0과 함께 .NET Framework 팀에서 제공했습니다. MEF는 .NET Framework 4 이상의 필수적인 부분이며 .NET Framework가 사용되는 모든 곳에서 사용할 수 있습니다. Windows Forms, WPF 또는 기타 기술을 사용하는 클라이언트 응용 프로그램이나 ASP.NET을 사용하는 서버 응용 프로그램에서 MEF를 사용할 수 있습니다.
 
@@ -235,39 +237,30 @@ MEF에 대한 간략한 요약을 위해 독자들에게 Microsoft의 이 좋은
 
 확장을 작성하는 동안 XML 파일인 vsixmanifest 파일을 보게 됩니다. 확장 기능을 마켓플레이스에 게시하는 동안 JSON 파일인 publishManifest 파일을 만들 것이므로 신규 및 초보자 개발자를 위해 XML 및 JSON을 간단히 살펴보겠습니다.
 
-## 1.6 XML and JSON
+## <font color='dodgerblue' size="6">6) XML and JSON</font>
 XML과 JSON은 인터넷을 통해 정보를 교환하기 위한 가장 일반적인 두 가지 데이터 형식입니다. 하나씩 요약해 보겠습니다.  
 XML은 Extensible Markup Language의 약자입니다. HTML(Hypertext Markup Language)과 같은 마크업 언어입니다. 그것은 본질적으로 자기 설명적입니다. SOA(Service-Oriented-Architecture)에서 사용되는 매우 유명한 SOAP 프로토콜도 XML 형식을 사용하여 WSDL(Web Service Description Language)을 정의합니다. Visual Studio 확장을 개발하는 동안 확장 메타데이터를 정의하는 vsixmanifest 파일이 XML임을 알 수 있습니다. 샘플 XML 파일을 살펴보겠습니다.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/
-developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/
-vsx-schema-design/2011">
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="VarToStrongType..b0eb46a5-106e-44f0-ad4a-bb66f19335a8"
-Version="1.0" Language="en-US" Publisher="rishabhv"/>
+        <Identity Id="VarToStrongType..b0eb46a5-106e-44f0-ad4a-bb66f19335a8" Version="1.0" Language="en-US" Publisher="rishabhv"/>
         <DisplayName>VarToStrongType</DisplayName>
-        <Description xml:space="preserve">This is a sample code refactoring
-extension for the .NET Compiler Platform ("Roslyn").</Description>
+        <Description xml:space="preserve">This is a sample code refactoring extension for the .NET Compiler Platform ("Roslyn").</Description>
     </Metadata>
     <Installation>
         <InstallationTarget Version="[14.0,]" Id="Microsoft.VisualStudio.Pro" />
     </Installation>
     <Dependencies>
-        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET
-Framework" d:Source="Manual" Version="[4.5,)" />
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
     </Dependencies>
     <Assets>
-        <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project"
-d:ProjectName="VarToStrongType" Path="|VarToStrongType|"/>
+        <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="VarToStrongType" Path="|VarToStrongType|"/>
     </Assets>
     <Prerequisites>
-        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor"
-Version="[15.0,16.0)" DisplayName="Visual Studio core editor" />
-        <Prerequisite Id="Microsoft.VisualStudio.Component.Roslyn.
-LanguageServices" Version="[15.0,16.0)" DisplayName="Roslyn Language
-Services" />
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[15.0,16.0)" DisplayName="Visual Studio core editor" />
+        <Prerequisite Id="Microsoft.VisualStudio.Component.Roslyn.LanguageServices" Version="[15.0,16.0)" DisplayName="Roslyn LanguageServices" />
     </Prerequisites>
 </PackageManifest>
 ```
@@ -307,7 +300,7 @@ JSON 구문에 대해 알아야 할 핵심 사항은 다음과 같습니다.
 
 Visual Studio는 직렬화 및 역직렬화를 광범위하게 사용하는 동시에 파일 및 기타 다양한 위치에서 유지합니다. 간단히 요약해 보겠습니다.    
 
-## 1.7 직렬화와 역직렬화
+## <font color='dodgerblue' size="6">7) 직렬화와 역직렬화</font>
 직렬화 및 역직렬화에 대해 논의하기 전에 우선 이것이 필요한 이유를 이해합시다.  
 
 우리는 컴퓨터가 서로 대화하고 데이터를 공유하는 인터넷 세상에 살고 있습니다. SOAP 또는 REST 프로토콜을 사용하여 웹 서비스의 메소드를 호출하면 일부 데이터가 클라이언트 PC와 서버 간에 공유됩니다. 컴퓨터 간의 이러한 데이터 공유는 네트워크 케이블을 통해 발생합니다. 서로 다른 PC에서 실행되는 두 프로세스 간에 유선을 통해 데이터를 공유하려면 데이터를 유선을 통해 전송할 수 있는 형식으로 변환해야 합니다. 그런 다음 수신자 측에서 이 형식화된 정보를 데이터로 다시 재구성해야 합니다. 이것은 본질적으로 직렬화 및 역직렬화의 개념입니다.
@@ -324,7 +317,7 @@ Windows 운영 체제에서 작업하고 시스템을 최대 절전 모드로 �
 
 Visual Studio 및 해당 확장은 널리 알려진 디자인 패턴을 광범위하게 사용합니다. 일반적으로 사용되는 디자인 패턴 중 일부는 Roslyn 구문 트리로 작업하는 동안의 방문자 디자인 패턴, 사용자 지정 명령을 초기화할 때의 싱글톤 디자인 패턴, 메뉴의 추상 팩토리 등입니다. 몇 가지 중요한 디자인 패턴을 다시 살펴보겠습니다.
 
-## 1.8 재방문 방문자, 추상 공장 및 공장 디자인 패턴
+## <font color='dodgerblue' size="6">8) 재방문 방문자, 추상 공장 및 공장 디자인 패턴</font>
 - ### a. 디자인 패턴
     디자인 패턴은 소프트웨어 디자인에서 일반적으로 발생하는 문제에 대한 반복 가능한 솔루션입니다. 1994년에 4명의 저자로 구성된 갱단이었기 때문에 이를 GoF(Gang of Four) 디자인 패턴이라고도 합니다. 모든 디자인 패턴은 아래 표 1-1과 같이 세 가지 광범위한 범주로 나뉩니다.
 
@@ -396,7 +389,7 @@ Visual Studio 및 해당 확장은 널리 알려진 디자인 패턴을 광범�
 
 확장 가능한 Visual Studio의 큰 이점은 코드를 다양한 솔루션에 연결하고 이벤트가 발생할 때 조치를 취하도록 이벤트를 빌드할 수 있다는 것입니다. 개발자가 관심을 가질 만한 몇 가지 이벤트는 빌드와 관련이 있습니다. Visual Studio는 백그라운드에서 MSBuild 엔진을 사용하여 코드를 빌드하므로 MSBuild의 기본 사항을 새로 고쳐보겠습니다.
 
-## 1.9 MSBuild Basics
+## <font color='dodgerblue' size="6">9) MSBuild 기초</font>
 MS 빌드에 대해 이야기하기 전에 먼저 컴파일 프로세스와 빌드 프로세스의 차이점을 이해해야 합니다.
 
 - ### a. 코드 컴파일
@@ -425,7 +418,7 @@ MS 빌드에 대해 이야기하기 전에 먼저 컴파일 프로세스와 빌�
 
 현대 프로그래밍에서 비동기는 주류 코딩의 일부이며 나중에 생각해서는 안 됩니다. 확장을 작성하는 것도 다르지 않습니다. 확장을 작성하는 동안 패키지의 비동기 로드를 사용하고 스레드를 더 효율적이고 효율적으로 사용하기 위해 비동기 API를 사용합니다. 이를 위해 async await를 다시 살펴보겠습니다.
 
-## 1.10 비동기 await
+## <font color='dodgerblue' size="6">10) 비동기 await</font>
 Async await는 개발자가 비동기 프로그래밍을 쉽게 수행하는 데 도움이 되는 C# 언어의 언어 기능을 구성합니다. 어떻게? 글쎄, C#은 키워드 async 및 await를 도입하여 개발자가 비동기 메서드를 직접 작성할 수 있도록 했습니다. 키워드를 통해 노출되는 언어 기능이기 때문에 복잡한 코드의 부담은 개발자에서 컴파일러로 전가됩니다. async await 키워드를 사용하여 개발자는 비동기 메서드를 작성할 수 있으며 컴파일러는 배후에서 복잡한 코드를 작성하고 최적화하는 책임을 집니다. 따라서 비동기 대기는 "구문 설탕"이라고도 합니다. async await 키워드를 사용하여 첫 번째 비동기 메서드를 만들고 작동 방식을 이해해 보겠습니다. 그렇게 하려면 먼저 동기 코드를 작성한 다음 비동기 메서드로 변환합니다.
 
 ```cs
@@ -558,7 +551,7 @@ URL에서 다운로드한 데이터가 있으므로 이 데이터를 파일 경�
 
 DownloadDataAsync 메서드는 첫 번째 await 문을 만날 때까지 기본 스레드에서 실행됩니다. 이것은 Thread.CurrentThread를 인쇄하여 볼 수 있습니다. Main 및 DownloadDataAsync 메서드에서 await 문 전후의 ManagedThreadId입니다. await 문, await 클라이언트 DownloadDataTaskAsync가 발생하면 Task 개체가 생성되어 DownloadDataAsync 메서드로 다시 반환됩니다. await 키워드는 Task 개체의 콜백 메서드 ContinueWith를 연결하고 스레드는 DownloadDataAsync로 다시 돌아갑니다. 얼마 후 HttpClient는 URL에서 데이터 다운로드를 완료하고 ThreadPool 스레드는 Task 개체에 알립니다. 그러면 콜백 메서드 ContinueWith가 활성화되고 스레드는 await 문에서 메서드를 다시 시작합니다. 이제 HttpClient의 DownloadDataTaskAsync 메서드가 작업을 성공적으로 완료했거나 네트워크 오류가 발생했을 수 있습니다. 이러한 모든 상태 검사는 뒤에서 컴파일러 생성 코드에 의해 수행되며 메서드 실행은 ThreadPool 스레드에서 계속되며, 이 스레드는 FileStream을 만들고 해당 WriteAsync 메서드를 호출합니다. 다시 await 연산자는 메서드를 재개하기 위해 콜백 메서드 이름을 전달하는 WriteAsync 메서드에서 반환된 작업 개체에 대해 ContinueWith를 호출하고 스레드는 DownloadDataAsync 메서드에서 다시 반환됩니다. 잠시 후 쓰기 작업이 완료됩니다. ThreadPool 스레드는 완료를 알리고 스레드는 완료될 때까지 DownloadDataAsync 메서드를 재개하고 Main 메서드로 돌아갑니다. 컴파일러는 Main 메서드가 DownloadDataAsync 메서드가 이제 완료되었고 더 이상 await 문이 없다는 것을 알도록 코드를 생성합니다. 이것은 DownloadDataAsync 메서드에서 반환된 Task의 상태를 Completed로 표시하여 수행됩니다. 그런 다음 스레드는 콘솔에서 기다립니다. 사용자가 콘솔을 종료하기 위해 입력하기를 기다리는 ReadLine(). 이것으로 async wait에 대한 빠른 리프레시를 마칩니다. 다음 섹션에서는 .NET Compiler 플랫폼(6장에서 사용할)을 다시 살펴보고 이 장을 마무리합니다.
 
-## 1.11 .NET 컴파일러 플랫폼(로슬린)
+## <font color='dodgerblue' size="6">11) .NET 컴파일러 플랫폼(로슬린)</font>
 얼마 전까지만 해도 C# 및 VB 컴파일러는 개발자를 위한 블랙박스였습니다. .NET 컴파일러 플랫폼(Roslyn)의 출현으로 이것이 변경되었으며 이제 개발자는 서비스로서의 컴파일러를 갖게 되었으며, 이를 사용하여 컴파일러를 확장하고 사용자 지정 경고 및 오류를 표시하고 놀라운 개발자 도구를 빌드할 수 있습니다. .NET 컴파일러 플랫폼은 여러 API 및 서비스를 기반으로 합니다. 코드 수정, 리팩토링 및 전구 스타일 코드 작업을 위한 Visual Studio 확장성은 .NET 컴파일러 플랫폼에서 제공됩니다.
 
 ![01_17_NetCompilerPlatformArch](image/01/01_17_NetCompilerPlatformArch.png)   
@@ -635,7 +628,7 @@ Roslyn에 대해 알아가기 위한 좋은 리소스는 문서입니다.
 
 독자들에게 SyntaxTree 및 SemanticModel API를 사용하여 코드 분석기, 코드 수정 및 리팩토링을 편안하게 개발할 수 있도록 적극 권장합니다.
 
-## 1.12 챕터 요약
+## <font color='dodgerblue' size="6">12) 챕터 요약</font>
 이 장에서는 Visual Studio 확장에 관심을 가져야 하는 이유를 이해하여 Visual Studio 확장성을 이해하고 개발하는 여정을 시작했습니다. 다음으로, 재방문 퀘스트를 시작하고 컴파일러, SDK, 트리 데이터 구조, 순회, MEF, Visual Studio, XML, JSON, 직렬화, 역직렬화, 디자인 패턴, MSBuild, async await 및 .NET 컴파일러 플랫폼(Roslyn ). 
 
 다음 장에서는 Visual Studio 확장의 구조를 배우고 확장이 어떻게 검색되고 로드되는지 알아봅니다.
