@@ -3,12 +3,15 @@ sort: 2
 ---
 
 # 시작하기
-이 장에서는 Visual Studio 확장성의 기초부터 시작합니다. 아무 작업도 수행하지 않는 최초의 Visual Studio 2019 확장을 만드는 것으로 시작합니다. 그런 다음 이 생성된 확장을 분석하고 구조, 형식 및 Visual Studio 확장을 구성하는 파일을 이해합니다. 다음으로 샘플 Visual Studio 확장의 코드 연습을 보고 기본 Visual Studio 상용구 템플릿 코드와 함께 제공되는 각 파일의 목적을 이해합니다. Visual Studio에서 확장을 검색하고 로드하는 방법을 확인하여 이 장을 마무리합니다. 다루어야 할 것이 많으니 공을 굴려봅시다!
+이 장에서는 Visual Studio 확장성의 기초부터 시작합니다.  
+
+아무 작업도 수행하지 않는 최초의 Visual Studio 2019 확장을 만드는 것으로 시작합니다. 그런 다음 이 생성된 확장을 분석하고 구조, 형식 및 Visual Studio 확장을 구성하는 파일을 이해합니다. 다음으로 샘플 Visual Studio 확장의 코드 연습을 보고 기본 Visual Studio 상용구 템플릿 코드와 함께 제공되는 각 파일의 목적을 이해합니다. Visual Studio에서 확장을 검색하고 로드하는 방법을 확인하여 이 장을 마무리합니다. 다루어야 할 것이 많으니 공을 굴려봅시다!
 
 
 ## <font color='dodgerblue' size="6">1) 첫 번째 Visual Studio 2019 확장 만들기</font>
 
-Visual Studio 확장을 개발 및 빌드하기 위해 선택한 필수 워크로드와 함께 Visual Studio 2019가 설치되어 있습니다. 그림 2-1을 참조하여 Visual Studio 설치에 대해 원하는 워크로드를 선택할 수 있습니다. "Workloads" 탭의 "Other Toolsets" 섹션에서 찾을 수 있습니다.
+Visual Studio 확장을 개발 및 빌드하기 위해 선택한 필수 워크로드와 함께 Visual Studio 2019가 설치되어 있습니다.  
+그림 2-1을 참조하여 Visual Studio 설치에 대해 원하는 워크로드를 선택할 수 있습니다. "Workloads" 탭의 "Other Toolsets" 섹션에서 찾을 수 있습니다.
 
 
 ![02_01_VsInstall](image/02/02_01_VsInstall.png)   
@@ -59,7 +62,7 @@ Visual Studio 확장을 개발 및 빌드하기 위해 선택한 필수 워크�
     ![02_06_VsixInstall](image/02/02_06_VsixInstall.png)   
     그림 2-06 VSIX 설치
 
-    VSIX 설치 프로그램은 이름에서 알 수 있듯이 컴퓨터에 VSIX를 설치(제거 및 제거)하므로 Visual Studio가 다음에 시작될 때 확장을 검색할 수 있습니다. WPF로 개발되었으며 수년에 걸쳐 개선되어 정교해졌습니다. Visual Studio가 시작되면 실행하고 작업을 수행하기 위해 수많은 서비스를 시작하고 호스팅합니다. 이러한 서비스가 파일 또는 폴더를 잠그면 확장 설치(또는 제거)가 실패하거나 제대로 작동하지 않을 수 있습니다. 이 상황을 피하기 위해 설치 프로그램은 성공적으로 설치하기 위해 종료되어야 하는 프로세스를 표시합니다.
+    VSIX 설치 프로그램은 이름에서 알 수 있듯이 컴퓨터에 VSIX를 설치 및 제거하므로 Visual Studio가 다음에 시작될 때 확장을 검색할 수 있습니다. WPF로 개발되었으며 수년에 걸쳐 개선되어 정교해졌습니다. Visual Studio가 시작되면 실행하고 작업을 수행하기 위해 수많은 서비스를 시작하고 호스팅합니다. 이러한 서비스가 파일 또는 폴더를 잠그면 확장의 설치 및 제거가 실패하거나 제대로 작동하지 않을 수 있습니다. 이 상황을 피하기 위해 설치 프로그램은 성공적인 설치를 위해 종료되어야 하는 프로세스를 표시합니다.
 
 12. VSIX 설치 프로그램 화면에서 설치를 클릭합니다. 제 경우에는 이 확장을 만들고 빌드한 Visual Studio 2019가 여전히 실행 중이므로 확장 설치를 방해할 수 있는 특정 프로세스를 종료하도록 요청하는 그림 2-7의 화면이 표시됩니다.
 
@@ -132,7 +135,7 @@ OPC 파일 자체를 패키지라고 합니다. 이러한 OPC 기반 패키지�
 </Relationships>
 ```
 
-폴더라는 단어에는 document.xml이라는 파일이 포함된 또 다른 _rels 폴더가 있습니다. 관계. 이 파일은 XML 파일이기도 하며 부품 수준 관계를 정의합니다. 이것은 패키지 내부의 관계 구성을 설명합니다. 다음은 파악해야 할 중요한 사항입니다.
+word라는 폴더 안에는  document.xml.rels 파일을 포함하는 파일이 포함된 또 다른 _rels폴더를 가진다. 이 파일은 XML 파일이기도 하며 부품 수준 관계를 정의합니다. 이것은 패키지 내부의 관계 구성을 설명합니다. 다음은 파악해야 할 중요한 사항입니다.
 
 * 관계는 XML 파일에 정의됩니다. 
 * 패키지 수준 관계는 루트 수준 _rels 폴더에 정의됩니다. 
@@ -177,7 +180,7 @@ https://docs.microsoft.com/en-us/previous-versions/windows/desktop/opc/open-pack
 ## <font color='dodgerblue' size="6">3) VSIX</font>
 VSIX는 Visual Studio 통합 확장(Visual Studio Integration Extension)을 나타냅니다.
 
-```info
+```note
 Visual Studio 확장성 팀은 Visual Studio 확장의 약어를 의도하지 않았습니다. 그들은 Visual Studio Installer를 의미하는 VSI를 원하지 않았습니다. 마이크로소프트에서 만든 모든 파일 확장자에 docx, pptx, xlsx 등의 x를 붙이거나 표시하던 시절이라 확장명 vsix가 나왔다. vsx(Visual Studio 확장을 의미할 수 있기 때문에)를 사용할 생각이 있었습니다. 그러나 Visio는 이미 이 파일 확장자를 사용했습니다.
 ```
 
@@ -213,9 +216,10 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
     ```cs
     [ComVisible(true)]
     [PackageRegistration]
-    public abstract class Package : IVsPackage, OLE.Interop.IServiceProvider,IOleCommandTarget, IVsPersistSolutionOpts, IServiceContainer,System.IServiceProvider, IVsUserSettings, IVsUserSettingsMigration,IVsUserSettingsQuery, IVsToolWindowFactory, IVsToolboxItemProvider
+    public abstract class Package : IVsPackage, OLE.Interop.IServiceProvider,IOleCommandTarget, IVsPersistSolutionOpts
+        , IServiceContainer,System.IServiceProvider, IVsUserSettings, IVsUserSettingsMigration,IVsUserSettingsQuery, IVsToolWindowFactory, IVsToolboxItemProvider
     {
-    //// 간결함을 위해 표시되지 않은 생성자, 속성 및 기타 멤버.
+        //// 간결함을 위해 표시되지 않은 생성자, 속성 및 기타 멤버.
     }
     ```
 
@@ -247,29 +251,29 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
     VSIXAnatomy 네임스페이스
     ```cs
     {
-    [PackageRegistration(UseManagedResourcesOnly = true,AllowsBackgroundLoading = true)]
-    [Guid(VSIXAnatomyPackage.PackageGuidString)]
-    public sealed class VSIXAnatomyPackage : AsyncPackage
-    {
-        public const string PackageGuidString = "94eea500-2b7b-4701-bf8e0f6cd169f9ff";
-        /// <summary>
-        /// 패키지 초기화 이 메서드는 패키지가 사이트화된 직후에 호출되므로 VisualStudio에서 제공하는 다.
-        /// 서비스에 의존하는 모든 초기화 코드를 넣을 수 있습니다.
-        /// </summary>
-        /// <param name="cancellationToken">VS가 종료될 때 발생할 수 있는 초기화 취소를 모니터링하기 위한 취소 토큰입니다.</param>
-        /// <param name="progress">진행 상황 업데이트 제공자.</param>
-        /// <returns>패키지 초기화의 비동기 작업을 나타내는 작업 또는 없는 경우 이미 완료된 작업입니다. 이 메서드에서 null을 반환하지 마십시오.</returns>
-        protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
+        [PackageRegistration(UseManagedResourcesOnly = true,AllowsBackgroundLoading = true)]
+        [Guid(VSIXAnatomyPackage.PackageGuidString)]
+        public sealed class VSIXAnatomyPackage : AsyncPackage
         {
-            // 비동기식으로 초기화되면 현재 스레드가 이 시점에서 백그라운드 스레드일 수 있습니다. 응답성을 유지하려면 UI 스레드로 전환하기 전에 백그라운드에서 최대한 많은 작업을 수행하십시오.
-            // UI 스레드로 전환한 후 UI 스레드가 필요한 초기화를 수행하십시오. 이것을 기다립니다.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            //// JoinableTaskFactory 및 Visual Studio와 관련된 기타 스레딩 구성에 대해서는 이후 장에서 논의할 것입니다.
+            public const string PackageGuidString = "94eea500-2b7b-4701-bf8e0f6cd169f9ff";
+            /// <summary>
+            /// 패키지 초기화 이 메서드는 패키지가 사이트화된 직후에 호출되므로 VisualStudio에서 제공한다.
+            /// 서비스에 의존하는 모든 초기화 코드를 넣을 수 있습니다.
+            /// </summary>
+            /// <param name="cancellationToken">VS가 종료될 때 발생할 수 있는 초기화 취소를 모니터링하기 위한 취소 토큰입니다.</param>
+            /// <param name="progress">진행 상황 업데이트 제공자.</param>
+            /// <returns>패키지 초기화의 비동기 작업을 나타내는 작업 또는 없는 경우 이미 완료된 작업입니다. 이 메서드에서 null을 반환하지 마십시오.</returns>
+            protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
+            {
+                // 비동기식으로 초기화되면 현재 스레드가 이 시점에서 백그라운드 스레드일 수 있습니다. 응답성을 유지하려면 UI 스레드로 전환하기 전에 백그라운드에서 최대한 많은 작업을 수행하십시오.
+                // UI 스레드로 전환한 후 UI 스레드가 필요한 초기화를 수행하십시오. 이것을 기다립니다.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                //// JoinableTaskFactory 및 Visual Studio와 관련된 기타 스레딩 구성에 대해서는 이후 장에서 논의할 것입니다.
+            }
         }
-    }}
+    }
     ```
 
-    클래스 상단의 [PackageRegistration] 특성은 Visual Studio Shell에 패키지를 등록하는 역할을 합니다. 이 속성은 또한 pkgdef 생성 유틸리티에 빌드 중에 생성된 결과 .pkgdef에 넣을 데이터를 알려줍니다. AllowBackgroundLoading 플래그를 사용하면 패키지 서비스를 백그라운드에서 로드할 수 있으며 결과 .pkgdef 파일에도 이 정보가 포함됩니다. GUID(Globally Unique Identifier) 특성은 고유 식별자를 패키지에 연결합니다. 클래스에 있을 수 있는 몇 가지 다른 속성이 있으며 확장 및 패키지를 만드는 동안 사용할 때 설명합니다. 상용구에서 생성된 파일
-    분석기와 함께 확장 템플릿은 그림 2-13에 나와 있습니다.
+    클래스 상단의 [PackageRegistration] 특성은 Visual Studio Shell에 패키지를 등록하는 역할을 합니다. 이 속성은 또한 pkgdef 생성 유틸리티에게 빌드 중에 생성된 결과에서 .pkgdef에 넣을 데이터를 알려줍니다. AllowBackgroundLoading 플래그를 사용하면 패키지 서비스를 백그라운드에서 로드할 수 있으며 결과 .pkgdef 파일에도 이 정보가 포함됩니다. GUID(Globally Unique Identifier) 특성은 고유 식별자를 패키지에 연결합니다. 클래스에 있을 수 있는 몇 가지 다른 속성이 있으며 확장 및 패키지를 만드는 동안 사용할 때 설명합니다. 분석기와 함께 상용구 확장 템플릿에서 생성된 파일들은 그림 2-13에 나와 있습니다.
 
 
     ![02_13_BoilerplateSolutionExplorer](image/02/02_13_BoilerplateSolutionExplorer.png)   
@@ -292,7 +296,7 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
 
 - ### d. 속성
     다른 프로젝트와 마찬가지로 속성을 클릭하면 프로젝트 속성이 표시됩니다. 어셈블리 이름, 버전, 회사 이름 등과 같은 어셈블리 정보가 지정된 AssemblyInfo.cs 파일이 있습니다.  
-    코드 연습이 완료되면 이 프로젝트를 빌드하여 생성되는 VSIX를 이해하겠습니다.
+    코드 연습이 완료되면 이 프로젝트를 빌드하여 생성되는 VSIX를 이해해 보겠습니다.
 
 ## <font color='dodgerblue' size="6">5) 확장 해체해보기</font>
 앞에서 설명한 것처럼 VSIX는 OPC를 따르며 파일 확장자를 .vsix에서 .zip으로 변경하여 내용을 볼 수 있으므로 이 장의 앞부분에서 생성된 VSIX 파일에서 이 변경을 수행해 보겠습니다.
@@ -338,15 +342,15 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
                     "type": "Component",
                     "extension": true,
                     "dependencies": {
-                    "VSIXAnatomy.17600b3d-4a32-4f55-b50b-2103571d0d2b": "1.0",
-                    "Microsoft.VisualStudio.Component.CoreEditor": "[16.0,17.0)"
+                        "VSIXAnatomy.17600b3d-4a32-4f55-b50b-2103571d0d2b": "1.0",
+                        "Microsoft.VisualStudio.Component.CoreEditor": "[16.0,17.0)"
                     },
                     "localizedResources": [
-                    {
-                    "language": "en-US",
-                    "title": "VSIXAnatomy",
-                    "description": "Empty VSIX Project." // Put your description here.
-                    }
+                        {
+                            "language": "en-US",
+                            "title": "VSIXAnatomy",
+                            "description": "Empty VSIX Project." // Put your description here.
+                        }
                     ]
                 },
                 {
@@ -354,10 +358,10 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
                 "version": "1.0",
                 "type": "Vsix",
                 "payloads": [
-                {
-                "fileName": "VSIXAnatomy.vsix",
-                "size": 57586
-                }
+                    {
+                        "fileName": "VSIXAnatomy.vsix",
+                        "size": 57586
+                    }
                 ],
                 "vsixId": "VSIXAnatomy.17600b3d-4a32-4f55-b50b-2103571d0d2b",
                 "extensionDir": "[installdir]\\Common7\\IDE\\Extensions\\2ehhvwis.2ng",
@@ -408,20 +412,20 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
             "extensionDir": "[installdir]\\Common7\\IDE\\Extensions\\2ehhvwis.2ng",
             "files": [
                 {
-                "fileName": "/extension.vsixmanifest",
-                "sha256": null
+                    "fileName": "/extension.vsixmanifest",
+                    "sha256": null
                 },
                 {
-                "fileName": "/VSIXAnatomy.dll",
-                "sha256": null
+                    "fileName": "/VSIXAnatomy.dll",
+                    "sha256": null
                 },
                 {
                 "fileName": "/DumpExtensions.dll",
                 "sha256": null
                 },
                 {
-                "fileName": "/VSIXAnatomy.pkgdef",
-                "sha256": null
+                    "fileName": "/VSIXAnatomy.pkgdef",
+                    "sha256": null
                 }
             ],
             "installSizes": { "targetDrive": 52459 },
@@ -431,10 +435,10 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
         ```
 
     - VSIXAnatomy.dll  
-    이것은 VSIX에 의해 노출된 Visual Studio 패키지를 포함하는 바이너리입니다. 여기에는 우리가 코딩하는 모든 기능과 기능이 포함됩니다. Visual Studio용 템플릿이나 도구 상자 항목 또는 기타 확장을 개발할 수 있습니다. 기본 바이너리는 항상 그에 대한 코드를 포함합니다.
+    이것은 VSIX에 의해 노출된 Visual Studio 패키지를 포함하는 바이너리입니다. 여기에는 우리가 코딩하는 모든 기능이 포함됩니다. Visual Studio용 템플릿이나 도구 상자 항목 또는 기타 확장을 개발할 수 있습니다. 기본 바이너리는 항상 그에 대한 코드를 포함합니다.
 
     - VSIXAnatomy.pkgdefs  
-        .pkgdef 파일은 쉽게 편집, 배포 및 배포 가능한 형식으로 구성 정보를 캡슐화합니다. Visual Studio 2008일부터 존재했습니다. 다음은 IDE에서 Visual Studio 패키지로 작성된 VSIXAnatomy 클래스를 등록하는 빌드 중에 생성된 .pkgdef 파일의 스니펫입니다.
+        .pkgdef 파일은 쉽게 편집, 배포 및 배포 가능한 형식으로 구성 정보를 캡슐화합니다. Visual Studio 2008부터 존재했습니다. 다음은 IDE에서 Visual Studio 패키지로 작성된 VSIXAnatomy 클래스를 등록하는 빌드 중에 생성된 .pkgdef 파일의 스니펫입니다.
 
         ```cs
         [$RootKey$\Packages\{94eea500-2b7b-4701-bf8e-0f6cd169f9ff}]
