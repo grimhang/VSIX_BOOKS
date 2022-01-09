@@ -158,21 +158,26 @@ Customizations 바로 오른쪽에는 두 가지 더 이상 사용되지 않고 
 - ### b. 도구 메뉴 확장
     다음 단계에 따라 Visual Studio 도구 메뉴에 대한 확장을 생성하겠습니다. 
 
-    1. 그림 3-5와 같이 VSIX 프로젝트 템플릿을 선택하여 새 Visual Studio 확장성 프로젝트를 생성합니다.
-    ![03_05_VsixProjectTemplate](image/03/03_05_VsixProjectTemplate.png)   
-    그림 3-05 VSIX 프로젝트 템플릿
+    - **1.그림 3-5와 같이 VSIX 프로젝트 템플릿을 선택하여 새 Visual Studio 확장성 프로젝트를 생성**  
+        ![03_05_VsixProjectTemplate](image/03/03_05_VsixProjectTemplate.png)   
+        그림 3-05 VSIX 프로젝트 템플릿
 
-    2. 새로 생성된 프로젝트에는 2장에서 논의한 패키지 클래스와 vsixmanifest 파일만 포함되어 있습니다(그림 3-6 참조).    
+    - **2.새로 생성된 프로젝트 내용**   
+        새 프로젝트에는 2장에서 논의한 패키지 클래스와 vsixmanifest 파일만 포함되어 있습니다(그림 3-6 참조)
+
         ![03_06_FilesInBoilerProject](image/03/03_06_FilesInBoilerProject.png)   
         그림 3-06 보일러플레이트 프로젝트에서의 파일들  
 
         현재 프로젝트에는 Command 클래스가 없습니다.
 
-    3. 새 명령을 추가하려면 프로젝트를 마우스 오른쪽 버튼으로 클릭합니다. 프로젝트 컨텍스트 메뉴가 표시됩니다. 그런 다음 추가 ➤ 새 항목을 클릭하거나 Ctrl Shift A를 직접 눌러 새 항목을 추가합니다. 그러면 그림 3-7과 같이 새 항목 추가 대화 상자가 열립니다.
+    - **3.새 명령어 추가**   
+        새 명령어을 추가하려면 프로젝트를 마우스 오른쪽 버튼으로 클릭합니다. 프로젝트 컨텍스트 메뉴가 표시됩니다. 그런 다음 추가 ➤ 새 항목을 클릭하거나 Ctrl Shift A를 직접 눌러 새 항목을 추가합니다. 그러면 그림 3-7과 같이 새 항목 추가 대화 상자가 열립니다.
         ![03_07_AddNewItem](image/03/03_07_AddNewItem.png)   
         그림 3-04 새 아이템 추가
     
-    4. 왼쪽 패널의 Visual C# 항목 확장성 범주에서 VSPackage를 클릭합니다. 다음 네 가지 항목 템플릿이 표시됩니다.  
+    - **4.새 명령어 추가**   
+        왼쪽 패널의 Visual C# 항목 확장성 범주에서 VSPackage를 클릭합니다. 다음 네 가지 항목 템플릿이 표시됩니다.  
+
         a. 비동기 패키지 - Visual Studio에서 로드할 수 있는 비동기 패키지를 만듭니다.  
         b. 명령 - 도구 메뉴에서 맞춤 명령을 만듭니다.  
         c. 비동기 도구 창 - 도구 창을 비동기식으로 로드하는 명령을 사용하여 Visual Studio에서 호스팅할 수 있는 맞춤 도구 창을 만듭니다.  
@@ -180,89 +185,442 @@ Customizations 바로 오른쪽에는 두 가지 더 이상 사용되지 않고 
         
         프로젝트에 새 명령을 추가하기 위해 명령 템플릿을 선택합니다. 파일 이름을 MyCommand.cs로 지정했습니다. 추가 버튼을 클릭합니다.
 
-    5. 프로젝트에 추가된 파일들을 살펴보자. 새로 추가된 파일이 있는 수정된 프로젝트는 그림 3-8과 같으며, 새로 추가된 파일과 참조는 쉽게 식별할 수 있도록 강조 표시됩니다. Windows 양식을 지원하기 위해 참조가 추가되었습니다.  
+    - **5.추가된 파일 살펴보기**   
+        새로 추가된 파일이 있는 수정된 프로젝트는 그림 3-8과 같으며, 새로 추가된 파일과 참조는 쉽게 식별할 수 있도록 강조 표시됩니다. Windows 양식을 지원하기 위해 참조가 추가되었습니다.  
         
         ![03_08_FilesAddedBy](image/03/03_08_FilesAddedBy.png)   
         그림 3-08 명령어 템플릿에 의해 생성된 파일들
 
         참조 외에도 세 개의 파일이 더 추가됩니다.  
 
-        a. MyCommand.png  
+        - **a. MyCommand.png**  
             리소스 폴더 내에 생성된 생성된 명령어의 이름과 이름이 같은 이미지 스트립 또는 스프라이트(이미지 세트)입니다. 기본 이미지 스프라이트에는 그림 3-9와 같이 6개의 이미지가 포함되어 있습니다. 쉽게 식별할 수 있도록 이미지에 번호를 명시적으로 지정했습니다.
             
-        ![03_09_ImageSpriteContainingSixImages](image/03/03_09_ImageSpriteContainingSixImages.png)   
-        그림 3-09 6개의 이미지가 포함된 이미지 스프라이트 파일
+            ![03_09_ImageSpriteContainingSixImages](image/03/03_09_ImageSpriteContainingSixImages.png)   
+            그림 3-09 6개의 이미지가 포함된 이미지 스프라이트 파일
         
-        b. MyCommand.cs  
+        - **b. MyCommand.cs**  
             새 명령을 추가하기 위해 추가되는 C# 코드 파일이며 명령이 실행될 때 코드를 실행하는 이벤트 핸들러를 포함합니다. 명령 파일을 보면 MyCommand의 인스턴스를 반환하는 Instance라는 공용 정적 속성 외에 세 가지 메서드만 있습니다.
 
-            i. AsyncPackage 및 OleMenuCommandService를 매개 변수로 사용하는 명령의 개인 생성자입니다. 여기에서 명령이 구성되고 명령 서비스에 추가됩니다.
-            ii. AsyncPackage에서 OleMenuCommandService를 확인한 후 명령의 개인 생성자를 호출하여 AsyncPackage를 매개 변수로 사용하고 명령의 단일 인스턴스를 초기화하는 공용 정적 InitializeAsync 메서드입니다. 
-            iii. 메뉴 항목을 클릭할 때 명령을 실행하는 이벤트 처리기인 Execute라는 개인 콜백 메서드입니다.
+            - i. AsyncPackage 및 OleMenuCommandService를 매개 변수로 사용하는 명령의 개인 생성자입니다. 여기에서 명령이 구성되고 명령 서비스에 추가됩니다.  
+            - ii. AsyncPackage에서 OleMenuCommandService를 확인한 후 명령의 개인 생성자를 호출하여 AsyncPackage를 매개 변수로 사용하고 명령의 단일 인스턴스를 초기화하는 공용 정적 InitializeAsync 메서드입니다. 
+            - iii. 메뉴 항목을 클릭할 때 명령을 실행하는 이벤트 처리기인 Execute라는 개인 콜백 메서드입니다.
 
-        그림 3-10은 이 새로 추가된 명령 클래스를 요약한 것입니다.
+            그림 3-10은 이 새로 추가된 명령 클래스를 요약한 것입니다.
 
-        ![03_10_ClasDiagram](image/03/03_10_ClasDiagram.png)   
-        그림 3-10 MyCommand.cs 의 클래스 다이어그램
+            ![03_10_ClasDiagram](image/03/03_10_ClasDiagram.png)   
+            그림 3-10 MyCommand.cs 의 클래스 다이어그램
 
-        c. ToolsMenuCommandPackage.vsct  
+        - **c. ToolsMenuCommandPackage.vsct**  
             파일 확장자 vsct는 Visual Studio 명령 테이블(vsct)을 나타냅니다. 이 파일은 Visual Studio 명령 테이블을 구성하고 VSPackage에 포함된 명령을 설명하는 XML 구성 파일입니다. 또한 명령의 레이아웃과 모양을 제어합니다. 명령은 버튼, 메뉴, 도구 모음 등에 포함될 수 있습니다. 이 구성 파일이 VSCT 컴파일러를 통해 전달되면 Visual Studio에서 이해할 수 있는 바이너리로 변환됩니다. 도구 메뉴에서 명령을 추가하는 코드 스니펫을 확인해보자. 그림 3-11은 vsct 파일의 트리밍된 버전(주석 제거됨)을 보여줍니다. 스니펫에는 vsct 파일의 주요 개념을 논의할 수 있도록 번호가 매겨져 있습니다.
         
-        ![03_11_VsctFileCode](image/03/03_11_VsctFileCode.png)   
-        그림 3-11 vsct 파일 코드
+            ![03_11_VsctFileCode](image/03/03_11_VsctFileCode.png)   
+            그림 3-11 vsct 파일 코드
 
-        vsct 파일의 코드 스니펫에서 다음과 같은 주요 내용을 확인할 수 있습니다.
+            vsct 파일의 코드 스니펫에서 다음과 같은 주요 내용을 확인할 수 있습니다.
 
-    6. CommandTable 요소는 vsct 파일의 루트 노드입니다. vsct의 네임스페이스와 스키마는 이 요소의 속성으로 지정됩니다. 이 요소는 명령을 정의하는 모든 요소의 정의를 포함합니다. 명령은 Visual Studio IDE에 표시되는 메뉴 항목, 도구 모음, 단추 또는 콤보 상자일 수 있습니다. 이 명령 테이블에 정의된 것은 무엇이든 포함하는 VSPackage가 Visual Studio IDE에 노출하는 명령의 UI 또는 레이아웃입니다. CommandTable에는 자식으로 Extern, Commands 및 Symbols가 있습니다. CommandTable의 상위 수준 구조는 다음과 같습니다.
+    - **6.xml 노드 설명**   
+        CommandTable 요소는 vsct 파일의 루트 노드입니다. vsct의 네임스페이스와 스키마는 이 요소의 속성으로 지정됩니다. 이 요소는 명령을 정의하는 모든 요소의 정의를 포함합니다. 명령은 Visual Studio IDE에 표시되는 메뉴 항목, 도구 모음, 단추 또는 콤보 상자일 수 있습니다. 이 명령 테이블에 정의된 것은 무엇이든 포함하는 VSPackage가 Visual Studio IDE에 노출하는 명령의 UI 또는 레이아웃입니다. CommandTable에는 자식으로 Extern, Commands 및 Symbols가 있습니다. CommandTable의 상위 수준 구조는 다음과 같습니다.
 
-    ```xml
-    <CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" 
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" >
-        <Extern>... </Extern>
-        <Include>... </Include>
-        <Define>... </Define>
-        <Commands>... </Commands>
-        <CommandPlacements>... </CommandPlacements>
-        <VisibilityConstraints>... </VisibilityConstraints>
-        <KeyBindings>... </KeyBindings>
-        <UsedCommands... </UsedCommands>
-        <Symbols>... </Symbols>
-    </CommandTable>
-    ```
+        ```xml
+        <CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" 
+        xmlns:xs="http://www.w3.org/2001/XMLSchema" >
+            <Extern>... </Extern>
+            <Include>... </Include>
+            <Define>... </Define>
+            <Commands>... </Commands>
+            <CommandPlacements>... </CommandPlacements>
+            <VisibilityConstraints>... </VisibilityConstraints>
+            <KeyBindings>... </KeyBindings>
+            <UsedCommands... </UsedCommands>
+            <Symbols>... </Symbols>
+        </CommandTable>
+        ```
 
-    다음 섹션에서는 이러한 각 XML 요소의 목적을 요약합니다.
+        다음 섹션에서는 이러한 각 XML 요소의 목적을 요약합니다.
 
-- #### a). Extern
-    선택적 요소이며 일반적으로 vsct 컴파일러에 대한 전처리기 지시문을 포함합니다. 이 요소는 컴파일 시 이 .vsct 파일과 병합될 외부 C 헤더(.h) 또는 .vsct 파일을 나타냅니다. href 속성은 파일을 참조하는 데 사용됩니다. .vsct 파일 코드에서 위에서 언급한 파일 이름이 stdidcmd.h임을 알 수 있습니다.  예를 들어:
-    ```xml
-    <Extern href="stdidcmd.h" />
-    ```
-- #### b). Include
-    이것은 선택적 요소이므로 이전에 표시된 코드 목록에 표시되지 않습니다. 이 요소는 현재 파일에 포함될 수 있는 파일을 지정합니다. href 속성은 파일을 참조하는 데 사용됩니다. 포함 파일에 정의된 모든 기호 및 유형은 컴파일 출력의 일부가 됩니다. 예를 들어:
-    ```xml
-    <Include href="stdidcmd.h" />
-    ```
+        - **a. Extern**  
+            선택적 요소이며 일반적으로 vsct 컴파일러에 대한 전처리기 지시문을 포함합니다. 이 요소는 컴파일 시 이 .vsct 파일과 병합될 외부 C 헤더(.h) 또는 .vsct 파일을 나타냅니다. href 속성은 파일을 참조하는 데 사용됩니다. .vsct 파일 코드에서 위에서 언급한 파일 이름이 stdidcmd.h임을 알 수 있습니다.  예를 들어:
 
-- #### c). Define
-    이것은 다시 선택적 요소입니다. 정의는 이름에서 알 수 있듯이 기호와 해당 값을 정의합니다. 여기에는 두 개의 필수 속성(이름 및 값)과 기호를 평가하는 데 사용할 수 있는 선택적 속성 Condition이 있습니다. 예를 들어:
-    ```xml
-    <Define name="Mode" value="Standard" />
-    ```    
+            ```xml
+            <Extern href="stdidcmd.h" />
+            ```
 
-- #### d). Commands
-    이것은 또한 선택적 요소입니다. 그러나 이것은 VSPackage에 대한 명령을 정의하는 주요 요소입니다. 여기에는 package라는 속성이 있으며 그 값은 . vsct 파일. 그림 3-11에 표시된 .vsct 코드에서 이는 숫자 4(스니펫에서 세 번 사용됨)로 설명됩니다. .vsct 파일에서 위에서 아래로 이동하면 속성 패키지가 guidToolsMenuCommandPackage로 설정된 Commands 요소에서 #4가 먼저 사용되었음을 알 수 있습니다. 다음 #4는 GuidSymbol 요소가 동일한 이름 guidToolsMenuCommandPackage로 정의되고 해당 값이 GUID(Globally Unique Identifier)인 Symbols 요소 내부에서 볼 수 있습니다. 그림의 오른쪽 하단을 향하여 다시 #4를 볼 수 있습니다. 이것은 Package GUID가 정의된 Package 클래스의 스니펫입니다. (.cs) 파일과 .vsct 파일 뒤에 있는 코드의 GUID 값은 동일합니다. 이 GUID 때문에 명령이 패키지와 연결됩니다. Commands 요소는 Commands의 상위 수준 구조에서 아래와 같이 여러 자식을 가질 수 있습니다.
+        - **b. Include**  
+            이것은 선택적 요소이므로 이전에 표시된 코드 목록에 표시되지 않습니다. 이 요소는 현재 파일에 포함될 수 있는 파일을 지정합니다. href 속성은 파일을 참조하는 데 사용됩니다. 포함 파일에 정의된 모든 기호 및 유형은 컴파일 출력의 일부가 됩니다. 예를 들어:
+
+            ```xml
+            <Include href="stdidcmd.h" />
+            ```
+
+        - **c. Define** 
+            이것은 다시 선택적 요소입니다. 정의는 이름에서 알 수 있듯이 기호와 해당 값을 정의합니다. 여기에는 두 개의 필수 속성(이름 및 값)과 기호를 평가하는 데 사용할 수 있는 선택적 속성 Condition이 있습니다. 예를 들어:
+            
+            ```xml
+            <Define name="Mode" value="Standard" />
+            ```    
+
+        - **d. Commands**
+            이것은 또한 선택적 요소입니다. 그러나 이것은 VSPackage에 대한 명령을 정의하는 주요 요소입니다. 여기에는 package라는 속성이 있으며 그 값은 . vsct 파일. 그림 3-11에 표시된 .vsct 코드에서 이는 숫자 4(스니펫에서 세 번 사용됨)로 설명됩니다. .vsct 파일에서 위에서 아래로 이동하면 속성 패키지가 guidToolsMenuCommandPackage로 설정된 Commands 요소에서 #4가 먼저 사용되었음을 알 수 있습니다. 다음 #4는 GuidSymbol 요소가 동일한 이름 guidToolsMenuCommandPackage로 정의되고 해당 값이 GUID(Globally Unique Identifier)인 Symbols 요소 내부에서 볼 수 있습니다. 그림의 오른쪽 하단을 향하여 다시 #4를 볼 수 있습니다. 이것은 Package GUID가 정의된 Package 클래스의 스니펫입니다. (.cs) 파일과 .vsct 파일 뒤에 있는 코드의 GUID 값은 동일합니다. 이 GUID 때문에 명령이 패키지와 연결됩니다. Commands 요소는 Commands의 상위 수준 구조에서 아래와 같이 여러 자식을 가질 수 있습니다.
     
-    ```xml
-    <Commands package="guidToolsMenuPackage" >
-        <Menus>... </Menus>
-        <Groups>... </Groups>
-        <Buttons>... </Buttons>
-        <Combos>... </Combos>
-        <Bitmaps>... </Bitmaps>
-    </Commands>
-    ```    
+            ```xml
+            <Commands package="guidToolsMenuPackage" >
+                <Menus>... </Menus>
+                <Groups>... </Groups>
+                <Buttons>... </Buttons>
+                <Combos>... </Combos>
+                <Bitmaps>... </Bitmaps>
+            </Commands>
+            ```    
 
-    Commands의 자식은 5개일 수 있습니다.
+            Commands의 자식은 5개일 수 있습니다.
 
-- ##### a). Menus
+            - i. Menus  
+                이들은 VSPackage가 구현하는 모든 메뉴와 도구 모음을 정의합니다. 조건에 따라 메뉴를 렌더링하는 데 사용할 수 있는 Condition이라는 선택적 속성이 있습니다. Menus 요소는 Menu 요소의 모음이므로 내부에 여러 Menu 요소가 있을 수 있습니다. 각 Menu 요소는 단일 메뉴 또는 도구 모음을 나타냅니다.
+
+                ```xml
+                <Menus>
+                    <Menu>... </Menu>
+                    <Menu>... </Menu>
+                </Menus>
+                ```
+
+                그림 3-11에서는 우리가 구현한 패키지가 메뉴가 아닌 명령만 생성했기 때문에 이 요소를 볼 수 없습니다. Menu 요소는 단일 메뉴 항목을 정의합니다. Context, Menu, MenuController, MenuControllerLatched, Toolbar 및 ToolWindowToolbar의 6가지 종류의 메뉴가 있습니다. Menu 요소의 구문은 다음과 같습니다.
+                
+                ```xml
+                <Menu guid="guidMyCommandSet" id="MyCommand" priority="0x100" type="Menu">
+                    <Parent>... </Parent>
+                    <CommandFlag>... </CommandFlag>
+                    <Strings>... </Strings>
+                </Menu>
+                ```
+
+                GUID 및 id 속성은 Menu 요소의 필수 속성이며 명령 식별자의 GUID 및 id를 나타냅니다. 우선 순위, 유형 및 조건은 선택적 속성입니다. Priority는 메뉴 그룹에서 메뉴의 상대적 위치를 지정하는 숫자 값이고 type은 요소의 종류를 지정하는 열거 값입니다. 유형이 지정되지 않은 경우 해당 값은 기본적으로 메뉴로 설정됩니다. 가능한 값은 다음과 같습니다.
+
+                * 컨텍스트
+                * 메뉴 
+                * MenuController
+                * MenuControllerLatched 
+                * 도구 모음(Toolbar)
+                * ToolWindowToolbar
+
+                이러한 유형의 자세한 목적과 사용을 위해 독자는 Visual Studio 2019에 대한 자세한 설명서를 읽어야 합니다.
+                https://docs.microsoft.com/en-in/visualstudio/extensibility/menu-element?view=vs-2019  
+
+                Menu 요소의 구문은 세 개의 자식이 있음을 보여줍니다.
+
+                * Parent - 선택적 요소입니다. 지정된 경우 메뉴 항목의 상위 항목을 나타냅니다. 
+                * CommandFlag - 필수 요소입니다. 메뉴에 대한 유효한 CommandFlag 값은 다음과 같습니다.
+                    * AlwaysCreate 
+                    * DefaultDocked 
+                    * DefaultInvisible 
+                    * DontCache 
+                    * DynamicVisibility 
+                    * IconAndText 
+                    * NoCustomize 
+                    * NotInTBList 
+                    * NoToolbarClose 
+                    * TextChanges 
+                    * TextIsAnchorCommand
+
+                    CommandFlag 요소에 대한 자세한 설명서는 Microsoft 설명서를 참조하십시오.                      
+                    https://docs.microsoft.com/en-in/visualstudio/extensibility/command-flag-element?view=vs-2019
+
+                • Strings - 필수 요소입니다. 여러 자녀를 가질 수 있습니다.  
+                ButtonText 요소는 필수적이고 가장 중요한 자식 요소이며 메뉴가 표시하는 텍스트를 정의합니다. 텍스트 문자열의 앰퍼샌드(&)는 명령에 대한 키보드 단축키를 지정합니다. Strings 요소의 구문은 다음과 같습니다.    
+
+                ```xml
+                <Strings>
+                    <ButtonText>... </ButtonText>
+                    <ToolTipText>...</ToolTipText>
+                    <MenuText>...</MenuText>
+                    <CommandName>... </CommandName>
+                    <CanonicalName>...</CanonicalName>
+                    <LocCanonicalName>...</LocCanonicalName>
+                </Strings>
+                ```
+
+                이러한 요소의 목적은 아래에 설명되어 있습니다.
+
+                * ButtonText - 이 요소는 메뉴에 표시되는 텍스트를 지정합니다. 비워둘 수 없습니다. 
+                * ToolTipText - 이 요소는 메뉴 명령에 대해 표시되는 도구 설명 텍스트를 지정합니다.  
+                  툴팁 텍스트를 지정하지 않으면 ButtonText의 텍스트가 툴팁으로 사용됩니다. 
+                * MenuText - 이 요소는 명령이 기본 메뉴, 도구 모음, 바로 가기 메뉴 또는 하위 메뉴에 있는 경우 해당 명령에 대해 표시되는 텍스트를 지정합니다. MenuText 요소가 비어 있으면 IDE는 ButtonText 요소 값을 사용합니다. 이 요소는 현지화에도 사용할 수 있습니다. 
+                * CommandName - 명령의 명령 이름입니다. 이 명령 이름은 모든 명령이 나열되는 도구 ➤ 사용자화 ➤ 명령 섹션에서 볼 수 있습니다. 이 명령은 도구 ➤ 옵션 ➤ 키보드 대화 상자에서도 볼 수 있습니다. 
+                * CanonicalName - 영어 표준 이름 요소입니다. 메뉴 항목을 실행하기 위해 명령 창에 입력할 수 있는 영어 텍스트의 명령 이름을 지정합니다. IDE는 문자, 숫자, 밑줄 또는 포함된 마침표가 아닌 모든 문자를 제거합니다. 그런 다음 이 텍스트를 ButtonText 필드에 연결하여 명령을 정의합니다. 예를 들어, 파일 메뉴의 새 프로젝트는 File.NewProject 명령이 됩니다. 
+                * LocCanonicalName - 현지화를 지원한다는 점을 제외하고 영어 CanonicalName 요소와 동일하게 작동합니다.
+
+            - ii. Groups
+                이 요소는 VSPackage에 의해 노출된 명령 그룹을 나타내는 Group 요소 집합을 정의합니다. Groups 요소의 구문은 다음과 같습니다.                  
+
+                ```xml
+                <Groups>
+                    <Group>... </Group>
+                    <Group>... </Group>
+                </Groups>
+                ```
+
+                Group 요소는 아래 구문을 따르는 단일 명령 그룹을 나타냅니다.
+
+                ```xml
+                <Group guid="guidMyCommandSet" id="MyGroup" priority="0x101">
+                    <Parent>... </Parent>
+                </Group>
+                ```
+
+                GUID 및 id는 필수 속성이며 그룹의 GUID 및 식별자를 지정합니다. 우선 순위(priority)는 명령 그룹의 순서를 지정하는 숫자 값입니다.
+
+            - iii. Buttons
+                Buttons 요소는 사용자가 상호 작용할 수 있는 UI로 명령을 나타내는 Button 요소의 그룹입니다. Buttons 요소의 구문은 다음과 같습니다.
+
+                ```xml
+                <Buttons>
+                    <Button>... </Button>
+                    <Button>... </Button>
+                </Buttons>
+                ```
+
+                명령과 해당 UI를 나타내는 Button 요소는 Button, MenuButton 또는 SplitDropDown의 세 가지 유형일 수 있습니다. Button 요소의 구문은 다음과 같습니다.
+
+                ```xml
+                <Button guid="guidMyCommandSet" id="MyCommand" priority="0x100"type="button">
+                    <Parent>... </Parent>
+                    <Icon>... </Icon>
+                    <CommandFlag>... </CommandFlag>
+                    <Strings>... </Strings>
+                </Button>
+                ```
+
+                반복과 중복을 피하기 위해 앞에서 논의한 속성과 자식 요소에 대해서는 논의하지 않습니다. GUID, id, priority 및 type 속성은 이미 논의되었으며 Button 요소에도 동일한 용도로 사용됩니다. 자식 요소인 Parent, CommandFlags 및 Strings도 논의되었습니다. 아이콘을 명령과 연결하는 데 사용할 수 있는 또 다른 요소 Icon이 있습니다. CommandFlags의 유효한 값 및 Button 요소의 기타 세부 정보를 볼 수 있습니다.  
+                https://docs.microsoft.com/en-in/visualstudio/extensibility/buttonelement?view=vs-2019.
+
+            - iv. Combos
+                이 요소는 Combo 요소를 그룹화합니다. 다음 구문이 있습니다.
+                ```xml
+                <Combos>
+                    <Combo>... </Combo>
+                    <Combo>... </Combo>
+                </Combos>
+                ```
+
+                Combo 요소는 여러 명령을 포함할 수 있는 콤보 상자를 정의합니다. 콤보 상자는 DropDownCombo, DynamicCombo, IndexCombo 또는 MRUCombo 유형 중 하나일 수 있습니다. Combo 요소의 구문은 다음과 같습니다.
+
+                ```xml
+                <combo guid="guidMyCommandSet" id="MyCommand" defaultWidth="20" idCommandList="MyCommandListID" priority="0x102" type="DropDownCombo">
+                    <Parent>... </Parent
+                    <CommandFlag>... </CommandFlag>
+                    <Strings>... </Strings>
+                </combo>
+                ```
+
+            - v. Bitmaps
+                이 요소는 비트맵을 로드하는 Bitmap 요소를 그룹화합니다. Bitmaps 요소의 구문은 다음과 같습니다.
+                ```xml
+                <Bitmaps>
+                    <Bitmap>... </Bitmap>
+                    <Bitmap>... </Bitmap>
+                </Bitmaps>
+                ```
+                
+                Bitmap 요소는 이름에서 알 수 있듯이 파일이나 리소스에서 로드할 수 있는 비트맵을 정의합니다. Bitmap 요소의 구문은 다음과 같습니다.
+
+                ```xml
+                <Bitmap guid="guidImages" href="Resources\MyCommand.png" usedList="img1,img2, img3" />
+                ```
+
+                Bitmap 요소에는 다음과 같은 속성이 있습니다.
+
+                * GUID - 필수 속성이며 비트맵의 고유 식별자입니다. 이 식별자는 VSPackage와 연결되어 있지 않습니다. 
+                * resID - 비트맵의 리소스 식별자입니다. resID 또는 href 속성 중 하나가 필요합니다. 명령 테이블 병합 중에 로드될 비트맵 스트립을 결정하는 정수 리소스 ID입니다. 명령 테이블이 로드될 때 리소스 ID로 지정된 비트맵은 동일한 모듈의 리소스에서 로드됩니다. 
+                * usedList - resID 속성이 사용되는 경우 이 속성이 필요합니다. 이미지 스트립에서 사용할 이미지 목록을 지정합니다. 
+                * href - 이미지 파일의 경로를 지정합니다. resID 또는 href 속성 중 하나가 필요합니다. 이 속성에 지정된 경로는 이미지로 검색되고 vsct 컴파일러의 출력에 포함됩니다. usedList 속성이 없으면 스트립의 모든 이미지를 사용할 수 있습니다. 그렇지 않으면 usedList에 지정된 이미지만 사용됩니다.  
+                이미지는 .bmp, .png, .gif일 수 있지만 .png 형식을 사용하는 것이 좋습니다.
+
+        - **e. Condition 속성**  
+            방금 논의한 대부분의 요소에는 Condition이라는 선택적 속성이 있습니다. 이름에서 알 수 있듯이 이 속성은 출력에 항목을 조건부로 포함하는 데 사용됩니다. 토큰을 테스트하는 데 사용할 수 있는 미리 정의된 함수와 연산자가 있습니다. 조건이 목록 또는 그룹에 적용되면 목록 또는 그룹의 모든 자식 요소에 적용됩니다. 조건이 상위 요소와 하위 요소 모두에 정의된 경우 조건은 AND 연산으로 평가됩니다. 0이 아닌 모든 표현식은 true로 평가됩니다. Condition 속성에 대한 자세한 설명서는 Condition에 대한 공식 Microsoft 설명서를 참조하십시오.  
+            https://docs.microsoft.com/en-in/visualstudio/extensibility/vsct-xml-schema-conditional-attributes?view=vs-2019
+
+        - **f.VSCT 파일 계속**  
+            그림 3-11로 돌아와서:
+
+            - i. vsct 파일에 있는 CommandTable의 처음 두 자식 요소는 Visual Studio에서 제공하는 명령의 모든 ID와 메뉴의 명령 ID를 포함하는 stdidcmd.h 및 vsshlids.h 파일을 참조하는 Extern 노드입니다.
+            - ii. Commands 요소는 Groups, Buttons 및 Bitmaps 요소를 자식으로 포함합니다. 여기에는 중요하고 패키지 GUID로 설정되는 package라는 속성이 있습니다. (그림 3-11의 모든 #4를 참조하십시오.) 
+            - iii. Commands 요소의 package 속성에 사용되는 GUID, GUID는 Symbols 요소에 정의된 GuidSymbol 요소에 정의됩니다. 그리고 Package 클래스에 정의된 패키지 GUID는 동일해야 합니다. 
+            - iv. 그룹(컬렉션)은 내부에 여러 메뉴 그룹을 가질 수 있습니다. 메뉴 그룹은 다른 메뉴 또는 명령에 대한 컨테이너입니다. 각 메뉴 그룹에는 GUID, ID 및 우선 순위가 있습니다.
+            - v. 각 그룹에는 상위 메뉴를 지정하는 상위 요소가 있습니다. id는 IDM_VS_MENU_TOOLS로 설정되어 MyMenuGroup의 상위 메뉴가 최상위 도구 메뉴임을 분명히 합니다. 이 값을 변경하면 이 명령이 다른 메뉴에 표시됩니다. 기본적으로 vsct 파일에 대한 IntelliSense 지원은 없습니다. 그러나 Mads Kristensen은 Visual Studio 2019를 확장하는 데 필요한 여러 가지 필수 확장을 포함하는 Extensibility Essentials 2019라는 확장 팩을 작성했습니다. 이 확장을 사용하여 vsct 파일에서도 IntelliSense 지원을 얻을 수 있습니다. 책 전체에 걸쳐 확장 기능을 개발하는 동안 이 확장 팩이 작동하는 것을 보게 될 것입니다. Visual Studio의 명령 및 메뉴에 대한 GUID 및 id의 자세한 목록은 다음을 참조하십시오.  
+            https://docs.microsoft.com/enin/visualstudio/extensibility/internals/guids-and-idsof-visual-studio-menus?view=vs-2019
+
+            - vi. 버튼(컬렉션)은 내부에 명령의 UI를 나타내는 여러 개의 Button 요소를 가질 수 있습니다. Button은 이 버튼이나 명령을 메뉴에 연결하는 선택적인 자식 요소를 Parent로 가질 수 있습니다. 다른 요소와 마찬가지로 버튼에는 GUID 및 id라는 필수 속성이 있습니다.
+            - vii. Button 요소에는 type이라는 속성이 있으며, 이는 명령의 유형을 정의합니다. Button, MenuButton 또는 SplitDropdown과 같은 값을 가질 수 있습니다. 스니펫은 값을 Button으로 표시합니다.
+            - viii. Icon 요소는 아이콘을 명령과 연결합니다. 이 아이콘은 이 버튼/명령에 해다하는 UI가 표시됩니다. 그림 3-11에서 bmpPic1은 새로 추가된 명령의 아이콘으로 연결됩니다. 이 Icon 요소의 ID를 변경하면 연결된 아이콘이 변경됩니다. 그림에서 #9도 할당된 Bitmaps 요소를 살펴보십시오. Bitmaps 요소는 이미지를 가리키거나 스프라이트 또는 스트립의 usedList 이미지를 정의하는 Bitmap 요소를 그룹화합니다. usedList는 스트립에 있는 아이콘의 서수 위치를 나타냅니다. 여기에 표시된 vsct 파일에는 href와 usedList가 모두 있지만 href가 설정되면 스트립의 모든 이미지가 사용되며 usedList는 선택 사항이 됩니다. 그렇지 않으면 VSCT 컴파일러가 vsct에서 실행될 때 스트립의 이미지만 이러한 아이콘으로 압축됩니다. 아이콘의 서수 위치 매핑은 기호 섹션에서 수행됩니다. #9는 스트립에 있는 이미지의 이름과 위치를 정의하는 많은 IDSymbol 요소를 포함하는 guidImages라는 이름의 GuidSymbol 요소에도 할당됩니다.
+
+            - ix. 이 명령에 대해 UI에 표시될 이름을 포함하는 ButtonText 요소라는 Button의 자식 요소가 있습니다. 현재 샘플에서 표시되는 텍스트는 "Invoke MyCommand"입니다. 
+            - x. Bitmap 요소에는 이미지 파일에 대한 경로가 있는 href 속성이 있습니다. 리소스\MyCommand.png. href 또는 usedList 중 하나는 vsct 파일의 각 요소의 용도를 요약한 표 3-1에서 위에서 언급한 필수 속성입니다.
+
+- ### c. 코드 실행
+    파일(참조, C# 코드, 이미지 png, .vsct 파일)이 추가되면 코드를 실행할 준비가 된 것입니다. 그러나 명령을 클릭하면 의미 있는 일이 발생하지 않습니다. 메시지 상자만 표시됩니다.
+
+    - **1. 실험 인스턴스 실행**  
+        프로젝트를 마우스 오른쪽 버튼으로 클릭한 다음 디버그 ➤ 새 인스턴스 시작을 클릭하여(또는 F5 키를 눌러) 이 프로젝트를 실행해 보겠습니다. 이렇게 하면 프로젝트가 빌드되고(vsix 만들기) 이 확장이 로드될 Visual Studio의 새로운 실험적 인스턴스가 시작됩니다. 새로 시작한 인스턴스의 오른쪽 상단 섹션을 보면 Visual Studio의 새로 시작된 인스턴스가 실험적 인스턴스임을 알 수 있습니다. 그림 3-12는 상단에 Visual Studio의 일반 인스턴스를 보여주고 하단에 Visual Studio의 Experimental 인스턴스를 보여줍니다. 인스턴스를 실험용으로 식별하는 하단 섹션에서 강조 표시된 텍스트 EXP를 확인하십시오.
+        
+        ![03_12_NormalInsAndExpIns](image/03/03_12_NormalInsAndExpIns.png)   
+        그림 3-12 vsct 파일 코드로 실행한 일반 인스턴스와 실험 인스턴스
+
+    - **2. 실험 인스턴스 실행**  
+        Visual Studio IDE의 새 인스턴스에서 도구 메뉴를 확인해 보겠습니다. 그림 3-13과 같이 새로 추가된 명령이 아이콘과 함께 추가된 것을 볼 수 있습니다.
+        
+        ![03_13_InvokeMyCommand](image/03/03_13_InvokeMyCommand.png)   
+        그림 3-13 MyCommand 실행
+
+    - **3. 실행 결과**  
+        이 새 명령을 클릭하면 그림 3-14와 같은 메시지 대화상자가 표시됩니다. 이는 기본 명령 템플릿 코드가 메시지 대화 상자를 표시하는 C# 코드를 추가하기 때문입니다. 이 장의 뒷부분에서 살펴보겠지만 이벤트 핸들러에 연결하려는 코드는 무엇이든 연결할 수 있습니다.
+
+        ![03_14_MessageDialog](image/03/03_14_MessageDialog.png)   
+        그림 3-14 메시지 창 결과
+
+    방금 대화 상자 메시지를 표시하는 사용자 지정 명령을 사용하여 Visual Studio의 도구 메뉴를 확장했습니다. 우리는 모든 상용구 코드를 수행하는 기본 Visual Studio 확장성 프로젝트 항목을 방금 사용했기 때문에 아직 많은 작업을 수행할 필요가 없었습니다. 프로젝트에 새로 추가된 참조 및 파일을 확인하고 vsct 파일이 메뉴 확장에 중요한 역할을 한다는 것을 알게 되었고 올바르게 편집하면 IDE에서 명령과 메뉴를 확장하는 데 도움이 될 수 있습니다. 다음으로 확장성 템플릿에 의해 추가되는 패키지 코드에 대해 설명하겠습니다. 이런 식으로 모든 근거가 처리되고 우리는 무슨 일이 일어나고 있는지 이해합니다.        
+
+- ### d. AsyncPackage 추상 클래스    
+    그림 3-15는 패키지 클래스가 파생되는 AsyncPackage 추상 클래스의 클래스 다이어그램을 보여줍니다.
     
+    ![03_15_AsyncPackageClassDiagram](image/03/03_15_AsyncPackageClassDiagram.png)   
+    그림 3-15 AsyncPackage 클래스 다이어그램
+
+    AsyncPackage는 Package 추상 클래스에서 파생되고 다음 인터페이스를 구현하는 추상 클래스입니다.
+    
+        IAsyncServiceProvider, IAsyncLoadablePackageInitialize, IVsAsyncToolWindowFactory, IVsAsyncToolWindowFactoryProvider.
+
+    클래스의 구성원과 목적은 표 3-2에 나와 있습니다.
+
+    표3-2 AsyncPackage 멤버
+    ```
+    멤버                        설명
+    --------------------------  -----------------------------------------------------------------------------------------
+    DisposalToken               이 속성은 패키지가 삭제되었는지 확인하는 데 사용할 수 있는 CancellationToken 유형입니다.
+                                이것은 Visual Studio가 종료되기 시작하는 동안 백그라운드 스레드에서 실행되는 비동기 작업 
+                                또는 작업에 대해 발생할 수 있습니다.
+    JoinableTaskCollection      이 속성은 JoinableTask의 컬렉션입니다. JoinableTask는 비동기 작업을 추적하고 작업을 완료하기
+                                위해 Main 스레드를 동기적으로 차단하는 동안 교착 상태를 피하기 위해 이러한 작업을 조인하는 
+                                기능을 제공하는 클래스입니다.                                
+    JoinableTaskFactory         JoinableTask를 생성하기 위한 팩토리인 속성입니다.
+    AddService                  현재 패키지에 비동기 서비스를 추가합니다. 서비스는 패키지 외부에서 사용할 수 없습니다.
+    FindToolWindowAsync         지정된 유형 및 ID에 대한 도구 창을 비동기식으로 찾습니다. 창이 발견되면 반환하거나 매개 변수
+                                값에 따라 창을 만들고 반환합니다.
+    FindWindowPaneAsync         지정된 유형 및 ID에 대한 창 창을 비동기적으로 찾습니다. 창이 발견되면 반환하거나 매개변수 
+                                값에 따라 창을 만들고 반환합니다.
+    GetAsyncToolWindowFactory   비동기 도구 창 팩토리 인터페이스가 있는 경우 이를 반환하고 비동기 생성이 지원되거나 null을
+                                반환합니다.
+    GetService                  서비스 유형을 매개변수로 전달하여 패키지에 등록된 서비스를 가져옵니다.
+    GetServiceAsync             서비스 유형을 매개변수로 전달하여 패키지에 등록된 비동기 서비스를 가져옵니다.
+    GetToolWindowTitle          창 제목으로 사용할 제목 문자열을 가져옵니다.
+    Initialize                  교착 상태가 발생할 수 있으므로 일반적으로 이 방법을 사용하지 않는 것이 좋습니다. 
+                                이 메서드는 메인 UI 스레드에서 실행되므로 이 메서드에서 값비싼 작업을 수행하면 사실상
+                                 정지될 수 있습니다.
+    InitializeAsync             이 메서드는 백그라운드 스레드에서 실행되므로 백그라운드 스레드에서 실행할 수 있는 초기화 
+                                코드를 실행하는 데 사용해야 합니다.
+    InitializeToolWindowAsync   비동기적으로 도구 창을 생성하는 코드 작업을 초기화하고 수행합니다.
+    RemoveService               이 패키지에 등록된 비동기 서비스를 제거합니다.
+    ShowToolWindowAsync         주어진 유형과 ID의 도구 창을 비동기적으로 표시합니다.    
+    ```
+
+    이제 메서드, 속성을 알았습니다. AsyncPackage와 그 목적에 의해 구현된 인터페이스와 코드 연습을 수행하면 더 의미 있고 포괄적입니다. 그림 3-16은 ToolsMenuCommandPackage 파일의 코드를 보여줍니다. 코드는 중요한 사항을 논의하기 위해 숫자로 보정됩니다.
+    
+    ![03_16_ToolsMenuCommandPackageCode](image/03/03_16_ToolsMenuCommandPackageCode.png)   
+    그림 3-16 ToolsMenuCommandPackage 코드
+    
+        1. 네임스페이스 참조.
+        2. PackageRegistration 속성을 표시합니다. 이것은 등록을 위해 패키지에 사용됩니다. RegPkg.exe 유틸리티는 리플렉션을 사용하여 등록해야 하는 특성을 결정합니다. UseManagedResourcesOnly 및 AllowsBackgroundLoading이라는 두 가지 속성이 표시됩니다. 이 속성은 패키지가 관리 리소스만 사용하고 백그라운드 스레드에서 패키지를 로드하는 것이 안전함을 알려줍니다.
+        3. GUID를 패키지에 할당합니다. 이전 섹션에서 명령이 이 GUID를 통해 패키지에 연결되는 것을 보았습니다.
+        4. ProvideMenuResource 속성은 등록을 제공합니다.             
+            하드 코딩된 문자열 "Menus.ctmenu"를 통해 패키지에 사용된 메뉴 리소스의 정보를 볼수 있다. 이 속성에 대한 첫 번째 매개변수(변경해서는 안 됨)로, 1을 두 번째 매개변수(버전 번호)로 지정합니다. 확장의 빌드 출력으로 이동하고 justDecompile 또는 다른 역엔지니어링/반사 도구를 사용하여 생성된 dll을 반영하면 이 dll의 리소스 아래에서 리소스의 키 이름이 Menus.ctmenu이고 해당 값은 바이너리입니다. 똑같다. 그림 3-17에 나와 있습니다.
+
+    ![03_17_ReflectiongExtDll](image/03/03_17_ReflectiongExtDll.png)   
+    그림 3-17 확장 dll 리플렉팅
+            
+            확장 프로젝트의 빌드 출력에서 등록에 사용되는 패키지 정의 파일인 generated.pkgdef 파일을 보면 모든 등록 정보가 .pkgdef 파일에 캡슐화되어 있음을 알 수 있습니다. 그림 3-18은 속성에 전달된 등록 정보를 보여줍니다.
+
+    ![03_18_PkgdefFileAndRegInfo](image/03/03_18_PkgdefFileAndRegInfo.png)   
+    그림 3-18 Pkgdef 파일과 등록 정보
+
+        5. ToolsMenuCommandPackage는 이미 논의한 AsyncPackage 추상 클래스에서 파생된 봉인된 클래스임을 보여줍니다.
+        6. 기본 클래스 AsyncPackage의 InitializeAsync 메서드에 대한 재정의 메서드입니다. 취소 토큰을 통해 초기화를 취소하는 옵션을 제공하고 IProgress<ServiceProgressData>를 매개 변수로 전달하여 진행 상황을 보고하는 기능을 제공합니다. 메인 UI 스레드와 백그라운드 스레드의 사용을 이해하려면 주석을 주의 깊게 읽으십시오. UI 스레드가 필요하거나 UI 스레드에서 실행해야 하는 작업 또는 작업의 경우 JoinableTaskFactory의 SwitchToMainThreadAsync 메서드를 사용하는 것이 좋습니다.
+        7. 패키지에서 명령을 초기화하는 방법을 보여줍니다. 패키지의 마지막 줄에서 MyCommand의 InitializeAsync 메서드가 호출되어 명령을 초기화합니다.
+
+## <font color='dodgerblue' size="6">3) FAQs</font>        
+지금쯤이면 vsct, 패키지 및 명령 클래스에 대해 공정하게 이해해야 합니다. 그러나 마음속에 떠오르는 몇 가지 분명한 질문이 있습니다. 논의해 보겠습니다.
+
+- ### 1. vsct와 VSPackage는 어떻게 연결됩니까?
+    패키지 GUID에 의해 패키지와 패키지의 명령이 연관됩니다.
+
+- ### 2. 새로 추가된 명령의 아이콘을 어떻게 변경할 수 있습니까?
+    이것은 아주 간단합니다. 프로젝트에 적절한 크기와 형식의 이미지를 포함하기만 하면 됩니다. 그런 다음 href 또는 resID 속성을 통해 Bitmaps 섹션에 포함하고 명령의 Icon 요소에 동일한 GUID를 지정합니다. 아이콘을 명령에 할당하는 다음 장에서 이 이미지 사용법을 보여주는 샘플 확장을 볼 것입니다.
+
+- ### 3. 추가된 명령어를 키보드 키를 어떻게 바인딩할 수 있습니까?
+    vsct 파일에서 KeyBinding 요소 사용. KeyBinding 요소를 사용하고 실제 확장을 개발하는 후속 장에서 예제를 통해 키보드 단축키를 할당하는 방법을 배웁니다.
+
+- ### 4. 내 사용자 지정 명령의 가시성을 어떻게 제어할 수 있습니까?
+    VisibilityConstraints 및 VisibilityItem 요소 사용. 다음 장에서 이 기능을 보여주는 샘플을 볼 것입니다.
+
+- ### 5. 사용자 지정 명령의 이벤트 처리기에서 아무 작업도 수행하지 않았습니다. 내 확장에서 이미 존재하는 명령이나 서비스를 어떻게 활용할 수 있습니까?
+    AsyncPackage 클래스는 API(GetService, GetServicesAsync)를 노출하여 서비스 유형을 전달하는 것만으로 기존 서비스를 찾고 사용할 수 있습니다. 이것을 사용하면 상태 표시줄, 출력 창에 쓸 수 있고 다른 많은 작업을 수행할 수 있습니다. 또한 vsct는 UsedCommand 요소를 통해 기존 명령을 재사용하는 기능을 제공합니다. 다음 장에서 실제 확장을 개발하는 동안 이 두 구성을 모두 사용하는 확장을 만들 것입니다.    
+
+- ### 6. ToolsWindow 확장(솔루션 탐색기와 같은 창)을 만들려면 어떻게 해야 합니까? 
+    AsyncPackage 추상 클래스는 도구 창을 초기화하고 찾기 위한 API를 노출합니다. AsyncPackage의 이러한 API를 사용하여 ToolWindow를 만들 수 있습니다. ToolWindow의 UI는 WPF 컨트롤처럼 개발할 수 있습니다. 다음 장에서 도구 창 확장을 개발할 것입니다. 
+
+- ### 7. vsct 파일을 편집하는 동안 IntelliSense 지원을 받으려면 어떻게 해야 합니까? 
+    Mads Kristensen은 Extensibility Essentials 2019라는 멋진 확장 팩을 작성했습니다. 이 팩에는 Visual Studio 확장 개발을 쉽게 해주는 멋지고 유용한 확장이 많이 있습니다. 팩의 확장 중 하나는 vsct 파일에 IntelliSense 지원을 제공할 수 있는 VSCT IntelliSense의 확장입니다. 나는 이 확장이 아직 미리보기에 있다는 점을 추가해야 합니다(이 챕터를 작성할 당시).    
+
+- ### 8. 확장 프로젝트 디버깅은 어떻게 새로운 IDE 인스턴스를 시작합니까?
+    Visual Studio 확장은 Visual Studio용으로 개발되었습니다. 오른쪽? 따라서 확장은 Visual Studio에서만 보고 테스트할 수 있습니다. 따라서 확장을 디버그할 때 개발/디버깅 중인 확장을 확인할 수 있는 VS IDE의 인스턴스가 필요합니다. 확장성 프로젝트의 프로젝트 속성을 확인하면 디버그 탭에서 프로젝트의 시작 작업이 외부 프로그램 시작으로 설정되어 있고 devenv.exe(사용자가 실행할 때 실행되는 실행 파일)에 대한 경로가 있습니다. Visual Studio IDE 시작). 또한 명령줄 인수 값은 /rootsuffix Exp로 설정되어 실행 파일이 실험적 인스턴스에서 시작되도록 지시합니다.
+    템플릿에서 이 프로젝트를 생성했기 때문에 기본적으로 이미 설정되어 있습니다. 그러나 확장을 처음부터 디버그해야 하는 경우 동일한 디버그 설정을 사용하여 확장을 디버그할 수 있습니다. 내 Visual Studio Enterprise 설치에서 devenv.exe의 경로는 "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\devenv.exe"입니다.
+
+    그림 3-19는 확장성 프로젝트의 디버그 속성을 보여줍니다.    
+
+    ![03_19_DebugProperty](image/03/03_19_DebugProperty.png)   
+    그림 3-19 확장성 프로젝트의 디버그 속성
+
+- ### 9. 실험적 인스턴스를 사용해야 하는 이유는 무엇입니까? 
+    확장을 개발하거나 디버깅하는 동안 여러 번 확장 코드가 반쯤 구워지거나 버그가 있을 수 있습니다. 일반 인스턴스와 함께 사용하면 Visual Studio IDE에서 문제가 발생할 수 있으며 특정 극단적인 경우에는 Visual Studio의 다른 기능 사용이 중단될 수도 있습니다. 따라서 Visual Studio IDE의 일반 인스턴스의 이러한 "오염" 또는 "손상"을 피하기 위해 Visual Studio SDK는 개발 및 디버깅하는 동안 확장을 디버그하는 데 사용할 수 있는 실험적 인스턴스를 제공합니다. 코드 개발을 위해 Visual Studio의 동일한 일반 인스턴스를 계속 사용할 수 있으므로 변경 사항이 없습니다. 실제로 모든 VSPackage의 개발 및 디버깅을 위해 Visual Studio의 실험적 인스턴스를 사용하는 것이 좋습니다. 이것이 기본 확장성 프로젝트가 디버그 모드에서 Visual Studio의 실험적 인스턴스를 시작하도록 프로젝트 속성을 설정하는 이유입니다. 디버깅하지 않고 실험적 인스턴스를 시작하려면 명령 프롬프트에 아래 명령을 입력할 수 있습니다.    
+    
+        <VSInstallationPath>\Common7\IDE\devenv.exe /Rootsuffix Exp
+
+    여기서 <VSInstallationPath>는 내 컴퓨터에서 "C:\Program Files (x86)\ Microsoft Visual Studio\2019\Enterprise"입니다. 컴퓨터에 설치된 Visual Studio 버전에 따라 경로가 약간 다를 수 있습니다. 실험적 인스턴스는 거의 동일한 Visual Studio입니다. 그림 3-20과 같이 일반 Visual Studio 인스턴스와 다른 레지스트리 하이브 위치에서 구성 및 설정을 읽고 다른 AppData 폴더에서 작동합니다. 실험적 인스턴스는 강조 표시된 대로 Exp 접미사가 있는 폴더에서 작동합니다.
+
+    ![03_20_ExpInstanceFolderVsIde](image/03/03_20_ExpInstanceFolderVsIde.png)   
+    그림 3-20 Visual Studio IDE의 실험적 인스턴스의 폴더 경로
+
+    확장이 배포되면 기본적으로 Visual Studio의 일반 인스턴스에 배포됩니다.
+
+- ### 10. 알았어. 실험적 인스턴스는 Visual Studio의 일반 인스턴스를 보호합니다. 실험적 인스턴스에 문제가 발생하거나 손상되면 어떻게 해야 합니까? 
+    아래의 간단한 단계에 따라 Visual Studio의 실험적 인스턴스를 재설정할 수 있습니다. 
+    
+    1. Windows 키를 누릅니다(또는 Windows 10 운영 체제의 왼쪽 하단에 있는 Windows 아이콘 클릭). 
+    2. "다시 설정" 을 입력합니다. 그러면 Visual Studio 2019 실험적 인스턴스 재설정이 결과 중 하나로 표시됩니다.    
+    3. 클릭하면 앱이 실행됩니다. 
+    4. 콘솔 응용 프로그램이 시작되어 Visual Studio의 실험적 인스턴스를 재설정합니다. 이는 그림 3-21에 나와 있습니다.
+    
+    ![03_21_ResetExpIns](image/03/03_21_ResetExpIns.png)   
+    그림 3-21 실험적 인스턴스 다시 설정
+
+    실험적 인스턴스를 재설정하기 전에 Visual Studio의 모든 인스턴스를 닫는 것이 좋습니다.
+
+
+## <font color='dodgerblue' size="6">4) 요약</font>            
+이 장에서는 Visual Studio 사용자 인터페이스와 확장해야 하고 확장해야 하는 사용자 인터페이스의 구성 요소에 대해 논의했습니다. Visual Studio의 확장성 모델에 대해 배웠고 Visual Studio SDK의 중요한 네임스페이스와 어셈블리에 대해 논의했습니다. 그런 다음 Visual Studio의 도구 메뉴에 사용자 지정 명령을 추가하는 간단한 확장을 만들었습니다. 우리는 파일과 코드를 살펴보고 모든 것이 어떻게 연결되는지 배웠습니다. 몇 가지 시나리오와 처리 방법에 대해 논의했습니다. 다음 장에서는 의미 있는 작업을 수행할 확장 개발을 시작할 것입니다.
+
+***
+연습
+
+다음 활동을 통해 이 장에서 논의한 기본 사항을 깊이 이해할 수 있습니다.
+
+1. 공식 Microsoft Visual Studio 설명서에서 Visual Studio Command Table 및 모든 요소의 설명서와 스키마를 읽으십시오.
+    https://docs.microsoft.com/en-us/visualstudio/extensibility/vsct-xml-schema-reference?view=vs-2019
+
+2. 공식 Microsoft Visual Studio 설명서에서 Visual Studio 2019 SDK에 대해 읽어보십시오.
+    https://docs.microsoft.com/en-us/visualstudio/extensibility/visual-studio-sdkreference?view=vs-2019
+
+3. 코드를 작성하지 않고 Visual Studio의 기본 기능을 사용하여 Visual Studio IDE를 사용자 지정합니다. 어떻게 하시겠습니까? 
+4. JointableTask, JointableTaskFactory 및 JointableTaskCollection이란 무엇입니까? 왜 필요한가요? 
+5. 다음 메뉴에서 사용자 지정 명령을 추가하는 확장을 만듭니다. 프로젝트 컨텍스트 메뉴. 비. 코드 창 컨텍스트 메뉴. 씨. 파일 메뉴. 이러한 각 메뉴에서 명령 단추를 클릭할 때 다른 메시지를 표시해 보십시오. 
+6. 위에서 만든 확장 프로젝트의 코드 연습을 수행하고 배운 내용을 나열합니다. 
+7. 컴퓨터에서 Visual Studio 2019의 실험적 인스턴스가 사용하는 경로와 레지스트리 위치를 식별합니다. Visual Studio의 실험적 인스턴스를 시작할 수 어떻게 있습니까? 
