@@ -420,5 +420,8 @@ sort: 4
     ![04_29_UsingGoogleSearch](image/04/04_29_UsingGoogleSearch.png)   
     그림 4-29 구글 검색 사용하기
 
-이제 확장 기능이 다른 사용자와 공유하기에 충분해 보입니다. 축하합니다! 우리는 다른 사용자와 공유할 준비가 거의 된 작업 확장을 완료했습니다(물론 테스트 후). Microsoft 확장성에는 GitHub(https://github.com/microsoft/VSSDK-Extensibility-Samples/tree/master/Options)에서 볼 수 있는 옵션 페이지 사용법을 보여주는 훌륭한 샘플이 있습니다. 기본 클래스와 모델을 노출하여 옵션 페이지를 만듭니다. 스레드로부터 안전한 방식으로 옵션 페이지의 복잡성을 보여주는 또 다른 샘플은 https://github.com/madskristensen/OptionsSample입니다. 솔루션 탐색기 창이나 속성 창과 같은 일부 사용자 지정 UI를 사용하여 Visual Studio에 창을 표시해야 하는 확장 프로그램을 개발해야 하는 경우가 있습니다. 이를 개발하기 위해 Visual Studio에는 AsyncToolWindow라는 기본 제공 항목 템플릿이 있습니다. 다음 섹션에서는 Visual Studio용 간단한 도구 창 확장을 개발하는 방법을 살펴보겠습니다.
+이제 확장 기능이 다른 사용자와 공유하기에 충분해 보입니다. 축하합니다! 우리는 다른 사용자와 공유할 준비가 거의 된 작업 확장을 완료했습니다(물론 테스트 후).  
+Microsoft 확장성에는 GitHub (https://github.com/microsoft/VSSDK-Extensibility-Samples/tree/master/Options)에서 볼 수 있는 옵션 페이지 사용법을 보여주는 훌륭한 샘플이 있습니다. 
+
+기본 클래스와 모델을 노출하여 옵션 페이지를 만듭니다. 스레드로부터 안전한 방식으로 옵션 페이지의 복잡성을 보여주는 또 다른 샘플은 https://github.com/madskristensen/OptionsSample입니다. 솔루션 탐색기 창이나 속성 창과 같은 일부 사용자 지정 UI를 사용하여 Visual Studio에 창을 표시해야 하는 확장 프로그램을 개발해야 하는 경우가 있습니다. 이를 개발하기 위해 Visual Studio에는 AsyncToolWindow라는 기본 제공 항목 템플릿이 있습니다. 다음 섹션에서는 Visual Studio용 간단한 도구 창 확장을 개발하는 방법을 살펴보겠습니다.
     
