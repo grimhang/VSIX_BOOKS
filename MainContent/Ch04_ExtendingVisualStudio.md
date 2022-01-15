@@ -135,13 +135,13 @@ sort: 4
             ![04_11_IntellisenseSupportVsctFile](image/04/04_11_IntellisenseSupportVsctFile.png)   
             그림 4-11 .vsct파일에서 인텔리센스 지원
 
-        - **b. 명령어 탐색기 확장 사용하기 - 일반적이고 권장**  
+        - **b. 명령어 탐색기 확장 사용하기 - 일반적으로 권장**  
             이것은 Extensibility Essentials 2019 확장 팩의 일부로 설치됩니다. 코드 창 상황에 맞는 메뉴에 명령을 추가하고 싶기 때문에 먼저 코드 창의 상황에 맞는 메뉴에 어떤 명령이 있는지 살펴보겠습니다. 코드 창 컨텍스트 메뉴에 있는 명령은 그림 4-12에서 볼 수 있습니다.
 
             ![04_12_CodeWindowContextMenu](image/04/04_12_CodeWindowContextMenu.png)   
             그림 4-12 코드 창 컨텍스트 메뉴
 
-        - **c. dddd**  
+        - **c. 명령 탐색기 도구 창**  
             그런 다음 Visual Studio 상단 메뉴로 이동하고 탐색 보기 ➤ 기타 창 ➤ 명령 탐색기를 따릅니다. 명령 탐색기 도구 창이 시작됩니다. Visual Studio IDE에서 제공하는 모든 명령을 표시합니다. 명령 이름을 입력하여 명령을 검색하거나 확인란을 선택하여 검사 모드에서 이 확장을 사용할 수 있습니다. 확인란을 선택하면 Ctrl Shift 키를 누른 후 명령을 실행할 수 있습니다. 그러면 그림 4-13과 같이 명령을 가로채서 명령 탐색기 창에 세부정보가 표시됩니다. 여기에서 그룹 섹션에서 컨텍스트 메뉴의 ID를 찾을 수 있습니다.
 
             ![04_13_CommandExplorer](image/04/04_13_CommandExplorer.png)   
@@ -158,8 +158,14 @@ sort: 4
 - ### c. 아이콘과 키보드 지원 추가
     예, 기본 아이콘이 할당되어 있지만 더 잘하고 싶습니다. Visual Studio는 높은 DPI를 지원하고 원활하게 통합되며 Visual Studio IDE의 모든 색상 테마와 잘 어울리는 3,790개 이상의 아이콘 및 이미지와 함께 제공됩니다. 다음으로 확장 프로그램에서 이러한 아이콘을 활용하는 방법을 살펴보겠습니다.
 
-    - **1. ㅏㅏ**       
-        vsct 파일에서 상위 2개의 Extern 요소 바로 뒤에 Include href 속성이 KnownImageIds.vsct로 설정된 새 요소를 추가합니다. href 값에 K를 입력하는 즉시 IntelliSense가 정확한 파일 이름을 표시하므로 정확한 이름을 기억할 필요가 없습니다. 이 파일에는 그림 4-14와 같은 이미지 기호가 포함되어 있습니다.
+    - **1. 이미지 include세팅**       
+        vsct 파일에서 상위 2개의 Extern 요소 바로 뒤에 Include 요소를 추가하고 href 속성이 KnownImageIds.vsct로 되게합니다. href 값에 K를 입력하는 즉시 IntelliSense가 정확한 파일 이름을 표시하므로 정확한 이름을 기억할 필요가 없습니다. 
+        
+        ![04_14_0_AddInclude](image/04/04_14_0_AddInclude.png)   
+        그림 4-14_0 새로Include항목추가
+        
+        
+        이 파일에는 그림 4-14와 같은 이미지 기호가 포함되어 있습니다.
 
         ![04_14_KnownImageIdVsct](image/04/04_14_KnownImageIdVsct.png)   
         그림 4-14 vsct파일중 알려진 이미지 id 
@@ -169,27 +175,30 @@ sort: 4
         ![04_15_EditIcon](image/04/04_15_EditIcon.png)   
         그림 4-15 아이콘 편집 - 인텔리센스 지원과 글리프
 
-        Visual Studio 이미지 카탈로그의 기본 제공 이미지를 사용하고 있으므로 솔루션에 .png 파일이 필요하지 않습니다. 따라서 vsct 파일에 정의된 Bitmaps 요소와 해당 기호가 필요하지 않습니다. vsct 파일에서 이러한 모든 요소를 제거합니다.
+        Visual Studio 이미지 카탈로그의 기본 제공 이미지를 사용하고 있으므로 솔루션에 .png 파일이 필요하지 않습니다. 따라서 vsct 파일에 정의된 Bitmaps 요소와 해당 기호가 필요하지 않습니다. 앞으로 vsct 파일에서 이러한 모든 요소들을 제거할 것입니다.
 
-    - **2. ㅏㅏ**   
-        그러나 이것은 그대로 작동하지 않습니다. CommandFlag 요소(Icon 요소 뒤에)를 추가하고 해당 값을 ImageIsMoniker로 지정하여 아이콘이 명령에 표시되도록 해야 합니다. 위의 단계를 통해 Visual Studio 이미지 카탈로그의 일부로 제공되는 이미지를 사용할 수 있지만 공식 Microsoft Visual에는 Visual Studio의 이미지, 모니커, 이미지 서비스 및 이미지 렌더링 아키텍처에 대한 풍부한 정보가 있습니다. Studio 확장성 문서  
+    - **2. 추가작업**   
+        그러나 이것은 그대로 작동하지 않습니다. Icon 요소 뒤에 CommandFlag 요소를 추가하고 해당 값을 ImageIsMoniker(오타 같음. IconIsMoniker가 맞는거 같음)를 사용하여 명령어에 해당하는 아이콘을 설정 해야 합니다. 위의 단계를 통해 Visual Studio 이미지 카탈로그의 일부로 제공되는 이미지를 사용할 수 있지만 공식 Microsoft Visual Studio 확장성 문서에 Visual Studio의 이미지, 모니커, 이미지 서비스 및 이미지 렌더링 아키텍처에 대한 풍부한 정보가 있습니다. 
         https://docs.microsoft.com/en-us/visualstudio/extensibility/image-service-and-catalog?view=vs-2019
+
+        ![04_15_1_CommandFlag](image/04/04_15_1_CommandFlag.png)   
+        그림 4-15_1 CommandFlag 지정
 
         나는 독자들에게 이 훌륭한 자료를 읽고 이해할 것을 강력히 추천합니다.
 
-    - **3. ㅏㅏ**   
-        다음으로 버튼 텍스트를 검색으로 수정하여 명령이 컨텍스트 메뉴에 검색으로 표시되도록 합니다.
+    - **3. 명령어 표시**   
+        다음으로 ButtonText 요소를 Search으로 수정하여 명령이 컨텍스트 메뉴에 Search 으로 표시되도록 합니다.
 
-    - **4. ㅏㅏ**   
-        명령에 키보드 지원을 추가하기 위해 Commands 노드 바로 뒤에 KeyBindings 노드를 만든 다음 Tab 키를 눌러 KeyBindings의 스니펫을 채웁니다. 이제 이 명령에 대한 키보드 단축키를 지정하려면 먼저 이 명령에 사용하는 키보드 단축키가 이미 사용되고 있지 않은지 확인해야 합니다. 이렇게 하려면 그림 4-16과 같이 도구 ➤ 옵션 ➤ 키보드로 이동합니다. 여기에 도달하려면 옵션 대화 상자에서도 검색하거나 Visual Studio의 상단 검색 텍스트 상자에 키보드를 직접 입력하고 탐색할 수 있습니다.
+    - **4. 단축키 지정**   
+        명령에 키보드 지원을 추가하기 위해 Commands 노드 바로 뒤에 KeyBindings 노드를 만든 다음 Tab 키를 눌러 KeyBindings의 스니펫을 채웁니다. 이제 이 명령에 대한 키보드 단축키를 지정하려면 먼저 이 명령에 사용하는 키보드 단축키가 이미 사용되고 있지 않은지 확인해야 합니다. 이렇게 하려면 그림 4-16과 같이 도구 ➤ 옵션 ➤ 환경 ➤ 키보드로 이동합니다. 여기에 도달하려면 옵션 대화 상자에서도 검색하거나 Visual Studio의 상단 검색 텍스트 상자에 키보드를 직접 입력하고 탐색할 수 있습니다.
 
         ![04_16_KeyboardShortcut](image/04/04_16_KeyboardShortcut.png)   
         그림 4-16 키보드 단축키
 
-    - **5. ㅏㅏ**   
+    - **5. 비어있는 단축키 확인**   
         "Press Shortcut keys" 텍스트 상자(그림 4-16에서 #2로 표시)에서 사용하려는 키 조합을 누르고 사용 중인지 확인합니다. 데모 목적으로 Ctrl S를 눌렀습니다(문서를 저장하는 데 사용한다는 것을 알고 있습니다). 이 키 조합으로 텍스트 상자가 업데이트됩니다. 이 텍스트 상자 바로 아래에는 "현재 사용 중인 바로 가기" 필드가 있으며 이 필드는 업데이트되고 이 키 조합이 File.SaveSelectedItems 명령에서 사용됨을 보여줍니다. 이런 식으로 사용자 지정 명령에 키 조합을 사용할 수 있는지 여부를 확인할 수 있습니다. 같은 연습을 통해 내 Visual Studio의 다른 명령에서 Alt S를 사용하지 않는다고 말할 수 있으므로 검색 명령에 적합한 키 조합인 것 같습니다. 
         
-    - **6. ㅏㅏ**       
+    - **6. 단축키 최종지정**       
         Alt S의 키 조합을 명령에 할당하기 위해 KeyBindings 요소는 그림 4-17과 같이 표시됩니다.
 
         ![04_17_Keybinding](image/04/04_17_Keybinding.png)   
@@ -198,7 +207,7 @@ sort: 4
         IntelliSense는 GUID, id(명령과 일치해야 함), 편집기, key1, key2, mod1 및 mod2에 대한 올바른 값을 제공하는 데 도움이 됩니다. Alt와 S만 키 조합으로 사용하고 있으므로 key2와 mod2를 제거했습니다.
 
 - ### d. 검색 기능 작성
-    위의 단계로 모든 vsct 파일 변경이 완료됩니다. 코드 창 컨텍스트 메뉴에 연결된 새 명령이 있습니다. 명령에는 아이콘이 연결되어 있으며 이 명령에도 키보드 단축키가 할당되어 있습니다.
+    위의 단계로 모든 vsct 파일 변경이 완료되었습니다. 코드 창 컨텍스트 메뉴에 연결된 새 명령어를 가지고 있습니다. 명령에는 아이콘이 연결되어 있으며 이 명령에도 키보드 단축키가 할당되어 있습니다.
 
     이제 이 검색 명령 클릭 이벤트를 처리하는 코드를 작성해야 합니다.
     코드 창에서 텍스트/코드 조각을 선택한 다음 마우스 오른쪽 버튼을 클릭하고 검색 명령을 실행한다는 점을 기억하십시오. 또는 텍스트를 선택하고
@@ -207,8 +216,11 @@ sort: 4
         b. 이 텍스트를 인코딩하여 검색 엔진에 전달하십시오.
         c. 브라우저에 검색 결과를 표시합니다.
 
-    질문은 다음과 같습니다. 이벤트 핸들러에서 선택한 텍스트를 어떻게 얻습니까? 여기서 핵심 Visual Studio 자동화의 최상위 개체인 DTE가 등장합니다.
-    Visual Studio는 Visual Studio 구성 요소 및 확장에서 사용할 수 있는 여러 서비스를 사용하고 노출합니다. DTE a.k.a. 문서 도구 확장성은 문서를 확장하고 자동화하는 데 사용할 수 있는 속성과 API를 제공합니다.
+    질문은 다음과 같습니다. 이벤트 핸들러에서 선택한 텍스트를 어떻게 얻습니까? 
+    
+    여기서 핵심 Visual Studio 자동화의 최상위 개체인 DTE가 등장합니다.
+    Visual Studio는 Visual Studio 구성 요소 및 확장에서 사용할 수 있는 여러 서비스를 사용하고 노출합니다. DTE 또는 문서 도구 확장성이라 불리는 기능은 문서를 확장하고 자동화하는 데 사용할 수 있는 속성과 API를 제공합니다.
+
     프로젝트 등. DTE, 중요한 속성 및 방법을 빠르게 살펴보겠습니다.
     DTE의 클래스 다이어그램은 그림 4-18에 나와 있으며 장의 끝 부분에 있는 "클래스 참조" 섹션에는 DTE의 속성과 메서드가 요약되어 있습니다. 같은 내용을 온라인(https://docs.microsoft.com/en-us/dotnet/api/envdte.dte?view=visualstudiosdk-2017&viewFallbackFrom=visualstudiosdk-2019)에서 볼수 있다.
 
@@ -217,8 +229,8 @@ sort: 4
 
     따라서 DTE가 여러 가지를 달성하는 데 도움이 될 수 있음을 알 수 있습니다. 다음으로 해야 할 일은 DTE에 액세스하는 것입니다.
 
-    - **1. ㅏㅏ**           
-        AsyncPackage 클래스는 유형을 지정하여 서비스에 대한 참조를 가져오는 데 사용할 수 있는 GetServiceAsync라는 이전에 논의한 API를 노출합니다. DTE 개체에 액세스하기 위해 그림 4-19와 같이 이 API를 사용합니다. 이 API는 확장을 개발하는 동안 서비스에 대한 참조를 얻는 데 매우 유용하고 자주 사용됩니다. 이것은 비동기 API이므로 비차단 방식으로 올바르게 사용하기 위해 await 키워드를 사용했습니다. await 키워드를 사용하려면 이벤트 핸들러 메서드 서명에서도 async 키워드를 사용해야 합니다. 그러나 async void 메서드는 권장되지 않으므로 이미 비동기인 InitializeAsync 메서드에서 DTE에 액세스하도록 코드를 이동해야 합니다. 같은 페이지에 있기 위해 이 코드는 SearchCommand.cs 파일로 이동합니다.
+    - **1. DTE 서비스가져오기**           
+        AsyncPackage 클래스는 type을 지정하여 서비스에 대한 참조를 가져오는 데 사용할 수 있는 GetServiceAsync라는 API를 노출합니다. DTE 개체에 액세스하기 위해 그림 4-19와 같이 이 API 사용을 만들것입니다. 이 API는 확장을 개발하는 동안 서비스에 대한 참조를 얻는 데 매우 유용하고 자주 사용됩니다. 이것은 비동기 API이므로 비차단 방식으로 올바르게 사용하기 위해 await 키워드를 사용했습니다. await 키워드를 사용하려면 이벤트 핸들러 메서드 서명에서도 async 키워드를 사용해야 합니다. 그러나 async void 메서드는 권장되지 않으므로 이미 비동기인 InitializeAsync 메서드에서 DTE에 액세스하도록 코드를 이동해야 합니다. 같은 페이지에 있기 위해 이 코드는 SearchCommand.cs 파일로 이동합니다.
         
         ![04_19_GetServiceAsyncUsage](image/04/04_19_GetServiceAsyncUsage.png)   
         그림 4-19 GetServiceAsync 사용
@@ -235,8 +247,8 @@ sort: 4
 
         그러나 이 코드를 변경한 후에도 여전히 Execute 메서드 이름에 물결선이 보입니다. "Execute" 메서드는 이벤트 핸들러이므로 반환 유형이 void인 고정된 미리 정의된 서명이 있기 때문입니다. 비동기 void 메서드는 예외 처리에 문제가 있고 충돌을 일으킬 수 있으므로 권장되지 않습니다. 따라서 이 코드의 올바른 위치는 SearchCommand 클래스의 InitializeAsync 메서드에 있습니다. 이렇게 하면 SwitchToMainThreadAsync API를 사용할 필요가 없습니다.
         
-    - **2. ㅏㅏ**              
-        이제 DTE 개체에 대한 참조가 있지만 선택한 텍스트를 어떻게 얻습니까? 이를 위해 Visual Studio의 활성 문서를 반환하는 DTE의 ActiveDocument라는 속성을 사용해야 합니다. 이 속성은 문서 유형입니다. 이 속성을 사용하기 전에 문서 유형에 의해 노출되는 속성과 메서드를 살펴보겠습니다. Document의 클래스 다이어그램은 그림 4-22와 같다.
+    - **2. 선택한 텍스트 얻기**              
+        이제 DTE 개체에 대한 참조가 있지만 선택한 텍스트를 어떻게 얻습니까? 이를 위해 Visual Studio의 활성 문서를 반환하는 DTE의 ActiveDocument라는 속성을 사용해야 합니다. 이 속성은 Document 유형입니다. 이 속성을 사용하기 전에 Document 유형에 의해 노출되는 속성과 메서드를 살펴보겠습니다. Document의 클래스 다이어그램은 그림 4-22와 같다.
 
         ![04_22_DocumentType](image/04/04_22_DocumentType.png)   
         그림 4-22 문서 타입
@@ -247,7 +259,7 @@ sort: 4
 
         이를 통해 이제 문서 및 텍스트 선택 작업에 사용할 수 있는 API 및 속성을 알게 되었습니다. 이 지식을 행동으로 옮기자.
 
-    - **3. ㅏㅏ**  
+    - **3. 텍스트가공**  
         DTE의 ActiveDocument 속성에서 Selection 속성을 가져온 다음 TextSelection 형식으로 캐스팅할 수 있는지 확인합니다. 텍스트 선택이 null이면 검색할 항목이 없으므로 Visual Studio의 StatusBar 또는 OutputWindow에서 사용자에게 메시지를 표시할 수 있습니다. 텍스트 선택이 있는 경우 브라우저에서 URL을 열어 검색 엔진에서 검색할 URL을 구성할 수 있습니다. 이 전체 코드 흐름은 그림 4-23에 나와 있습니다.
 
         ![04_23_ExeMethod](image/04/04_23_ExeMethod.png)   
@@ -255,7 +267,7 @@ sort: 4
 
         이 코드가 보여주는 몇 가지 두드러진 요점과 개념에 대해 논의해 보겠습니다.
         
-        a. 위에서 설명한 것처럼 DTE 개체에 대한 참조를 가져오는 코드가 InitializeAsync 메서드로 이동되었으므로 정적 DteInstance 속성을 사용하여 DTE를 사용합니다. 우리는 이미 MainThread에서 DTE에 액세스해야 하고 Main 스레드로 전환하는 방법을 보았습니다. 이 스니펫은 실행 중인 스레드가 기본 UI 스레드가 아닌 경우 API가 예외를 throw하는 것을 보여줍니다.  
+        a. 위에서 설명한 것처럼 DTE 개체에 대한 참조를 가져오는 코드가 InitializeAsync 메서드로 이동되었으므로 정적 DteInstance 속성을 사용하여 DTE를 사용합니다. 우리는 이미 MainThread에서 DTE에 액세스해야 하고 Main 스레드로 전환하는 방법을 보았습니다.(ThreadHelper.ThrowIfNotOnUIThread) 이 스니펫은 실행 중인 스레드가 기본 UI 스레드가 아닌 경우 API가 예외를 throw하는 것을 보여줍니다.  
 
         b. DTE에는 Visual Studio 상태 표시줄에 텍스트, 애니메이션, 진행률 등을 표시하는 데 사용할 수 있는 StatusBar 속성이 있습니다. 이 속성을 사용하여 검색하는 동안 또는 선택한 텍스트가 비어 있을 때 사용자에게 짧은 상태 메시지를 표시할 수 있습니다. 
 
@@ -264,7 +276,7 @@ sort: 4
         ![04_24_InitializeAsyncMethod](image/04/04_24_InitializeAsyncMethod.png)   
         그림 4-24 InitializeAsync 메쏘드
 
-        d. 가정은 서비스 인스턴스에 대한 가정을 확인하기 위해 API를 노출하는 정적 도우미 클래스입니다. Present 메서드는 값이 null이 아닌지 확인합니다. 그렇지 않으면 예외가 발생합니다. 
+        d. Assumes은 서비스 인스턴스에 대한 가정을 확인하기 위해 API를 노출하는 정적 도우미 클래스입니다. Present 메서드는 값이 null이 아닌지 확인합니다. 그렇지 않으면 예외가 발생합니다. 
 
         e. DTE에는 파일 작업 및 파일 열기, 파일이 열려 있는지 확인, 프로젝트에 새 항목 추가, 프로젝트에 기존 항목 추가 또는 URL 탐색과 같은 작업을 수행하는 데 사용할 수 있는 ItemOperations라는 속성이 있습니다. ItemOperations의 Navigate 메서드를 사용하여 검색 엔진 URL로 이동했습니다.
 
@@ -286,7 +298,7 @@ sort: 4
         ![04_26_BingSearchInVsBrowser](image/04/04_26_BingSearchInVsBrowser.png)   
         그림 4-26 Visual Studio 브라우저에서 Bing 검색
 
-        이를 통해 Visual Studio 내에서 Bing의 코드/텍스트를 검색하는 데 사용할 수 있는 작동하는 Visual Studio 확장이 있습니다. 그러나 일부 사용자는 Google, StackOverflow, Microsoft 문서 또는 기타 검색 엔진에서 검색하는 것을 선호할 수 있으므로 커뮤니티와 공유할 준비가 되지 않았습니다. 우리의 확장은 사용자에게 이러한 유연성을 제공할 수 있어야 합니다. 어떻게 할 수 있습니까? 구성은 우리의 마음에 오는 것입니다. 내가 사용하고 싶은 검색 엔진을 구성할 수 있다면 이 경우를 해결할 수 있을 것입니다. Visual Studio 확장에는 사용자가 필요에 따라 기능/확장을 사용자 지정하도록 구성할 수 있는 옵션 페이지에 대한 지원이 있습니다. 다음 단계에서는 externalSearch 확장에 대한 옵션 페이지를 활용하여 확장을 구성할 수 있는 방법에 대해 설명합니다.
+        이를 통해 Visual Studio 내에서 Bing으로 검색하는 데 사용할 수 있는 작동하는 Visual Studio 확장을 만들게 되었습니다. 그러나 일부 사용자는 Google, StackOverflow, Microsoft 문서 또는 기타 검색 엔진에서 검색하는 것을 선호할 수 있습니다. 우리의 확장은 사용자에게 이러한 유연성을 제공할 수 있어야 합니다. 어떻게 할 수 있습니까? 구성은 우리의 마음에 오는 것입니다. 내가 사용하고 싶은 검색 엔진을 구성할 수 있다면 이 경우를 해결할 수 있을 것입니다. Visual Studio 확장에는 사용자가 필요에 따라 기능/확장을 사용자 지정하도록 구성할 수 있는 옵션 페이지에 대한 지원이 있습니다. 다음 단계에서는 externalSearch 확장에 대한 옵션 페이지를 활용하여 확장을 구성할 수 있는 방법에 대해 설명합니다.
         
     - **4. 옵션 페이지 추가**              
         옵션 페이지를 추가하려면 먼저 프로젝트에 새 클래스를 추가하고 이름을 ExternalSearchOptionPage.cs로 지정합니다. 
@@ -332,10 +344,11 @@ sort: 4
             [Description("The Search Engine to be used for searching")]
             [TypeConverter(typeof(EnumConverter))]
             public SearchEngines SearchEngine { get; set; } = SearchEngines.Bing;
+
             [DisplayName("Url")]
             [Category("General")]
             [Description("The Search Engine url to be used for searching")]
-            [Browsable(false)]
+            [Browsable(false)]  //이 속성을 보여주지 않음
             public string Url
             {
                 get
@@ -344,6 +357,14 @@ sort: 4
                     return string.IsNullOrWhiteSpace(selectedEngineUrl) ? defaultUrl : selectedEngineUrl;
                 }
             }
+        }
+
+        public enum SearchEngines
+        {
+            Bing = 0,
+            Google,
+            MSDN,
+            StackOverflow
         }
         ```
 
@@ -365,7 +386,9 @@ sort: 4
         Browsable       PropertyGrid에 속성을 표시할지 여부를 지정합니다.
         ```
 
-        외부 브라우저에서 검색 결과를 보고 싶어하는 확장 프로그램 사용자가 있을 수 있습니다. 이를 위해 UseVSBrowser 속성이 추가됩니다. 기본값은 true입니다. 즉, 기본적으로 Visual Studio 브라우저가 사용됩니다. 다른 속성은 최종 사용자가 선택하도록 검색 엔진을 노출하는 SearchEngine의 속성입니다. 따라서 사용자는 Bing, Google, StackOverflow 또는 Microsoft Docs를 유연하게 선택할 수 있습니다. 검색 엔진의 기본값은 Bing이고 TypeConverter 속성은 열거형의 모든 값이 속성 그리드에 드롭다운으로 표시되도록 합니다. 사용자가 검색 엔진을 선택하면 해당 URL을 사용해야 하므로 정적 사전에서 조회를 수행하여 선택한 검색 엔진의 URL을 가져와야 합니다. 이것은 URL 속성에서 수행됩니다. 사용자가 편집하는 것을 원하지 않으므로 읽기 전용입니다(속성만 가져오기). 또한 한 번 검색 엔진이 선택되면 URL을 변경할 수 없으므로 사용자에게 보여 주는 의미가 없습니다. false 매개변수가 있는 Browsable 속성은 이 속성을 숨깁니다. 
+        외부 브라우저에서 검색 결과를 보고 싶어하는 확장 프로그램 사용자가 있을 수 있습니다. 이를 위해 UseVSBrowser 속성이 추가됩니다. 기본값은 true입니다. 즉, 기본적으로 Visual Studio 브라우저가 사용됩니다. 
+        
+        다른 속성은 최종 사용자가 선택하도록 검색 엔진을 노출하는 SearchEngine의 속성입니다. 따라서 사용자는 Bing, Google, StackOverflow 또는 Microsoft Docs를 유연하게 선택할 수 있습니다. 검색 엔진의 기본값은 Bing이고 TypeConverter 속성은 열거형의 모든 값이 속성 그리드에 드롭다운으로 표시되도록 합니다. 사용자가 검색 엔진을 선택하면 해당 URL을 사용해야 하므로 정적 사전에서 조회를 수행하여 선택한 검색 엔진의 URL을 가져와야 합니다. 이것은 URL 속성에서 수행됩니다. 사용자가 편집하는 것을 원하지 않으므로 읽기 전용입니다(속성만 가져오기). 또한 한 번 검색 엔진이 선택되면 URL을 변경할 수 없으므로 사용자에게 보여 주는 의미가 없습니다. false 매개변수가 있는 Browsable 속성은 이 속성을 숨깁니다. 
         
         이것으로 간단한 PropertyGrid 기반 DialogPage에 대한 코딩이 완료되었습니다. DialogPage 인프라가 처리하므로 값을 유지하거나 값을 로드하는 것에 대해 걱정할 필요가 없습니다. 그러나 옵션 페이지에 사용자 정의 UI를 표시해야 하는 경우가 있습니다. UIElementDialogPage(DialogPage 대신)에서 옵션 페이지 클래스를 상속하고 적절한 UI가 있는 UserControl을 만들어 이 사용자 지정 UI 시나리오를 달성할 수 있습니다. 우리가 개발하는 후속 확장에서 이 시나리오가 실제로 실행되는 것을 보게 될 것입니다. 
         
@@ -389,8 +412,7 @@ sort: 4
     private void Execute(object sender, EventArgs e)
     {
         ThreadHelper.ThrowIfNotOnUIThread();
-        var options = this.package.GetDialogPage(typeof(ExternalSearchOptionPage)) as ExternalSearchOptionPage;
-        // 옵션 얻기
+        var options = this.package.GetDialogPage(typeof(ExternalSearchOptionPage)) as ExternalSearchOptionPage;        // 옵션 얻기
         var textSelection = DteInstance?.ActiveDocument?.Selection as TextSelection;
         if (textSelection == null)
         {
@@ -423,7 +445,7 @@ sort: 4
     ```
 
 - **3. 프로젝트 디버그**  
-    이제 프로젝트를 디버그하면 Visual Studio의 새로운 실험적 인스턴스가 열립니다. 도구 ➤ 옵션 페이지로 이동한 다음 외부 검색을 검색합니다. 외부 검색 옵션 대화 상자가 표시됩니다. 외부 검색 옵션 대화 상자는 그림 4-28과 같습니다.
+    이제 프로젝트를 디버그하면 Visual Studio의 새로운 실험적 인스턴스가 열립니다. 도구 ➤ 옵션 페이지로 이동한 다음 "External Search"로 검색합니다. 외부 검색 옵션 대화 상자가 표시됩니다. 외부 검색 옵션 대화 상자는 그림 4-28과 같습니다.
     
     ![04_28_ExternalSearchOptionsPage](image/04/04_28_ExternalSearchOptionsPage.png)   
     그림 4-28 외부 검색 옵션 페이지
@@ -435,7 +457,9 @@ sort: 4
     그림 4-29 구글 검색 사용하기
 
 이제 확장 기능이 다른 사용자와 공유하기에 충분해 보입니다. 축하합니다! 우리는 다른 사용자와 공유할 준비가 거의 된 작업 확장을 완료했습니다(물론 테스트 후).  
-Microsoft 확장성에는 GitHub (https://github.com/microsoft/VSSDK-Extensibility-Samples/tree/master/Options)에서 볼 수 있는 옵션 페이지 사용법을 보여주는 훌륭한 샘플이 있습니다. 
+Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensibility-Samples/tree/master/Options)에서 볼 수 있는 옵션 페이지 사용법을 보여주는 훌륭한 예제들이 있습니다. 
 
-기본 클래스와 모델을 노출하여 옵션 페이지를 만듭니다. 스레드로부터 안전한 방식으로 옵션 페이지의 복잡성을 보여주는 또 다른 샘플은 https://github.com/madskristensen/OptionsSample입니다. 솔루션 탐색기 창이나 속성 창과 같은 일부 사용자 지정 UI를 사용하여 Visual Studio에 창을 표시해야 하는 확장 프로그램을 개발해야 하는 경우가 있습니다. 이를 개발하기 위해 Visual Studio에는 AsyncToolWindow라는 기본 제공 항목 템플릿이 있습니다. 다음 섹션에서는 Visual Studio용 간단한 도구 창 확장을 개발하는 방법을 살펴보겠습니다.
+기본 클래스와 모델을 노출하여 옵션 페이지를 만들어 봤습니다.  
+스레드로부터 안전한 방식으로 옵션 페이지의 복잡성을 보여주는 또 다른 샘플은 https://github.com/madskristensen/OptionsSample입니다. 솔루션 탐색기 창이나 속성 창과 같은 일부 사용자 지정 UI를 사용하여 Visual Studio에 별도 Window를 표시해야 하는 확장 프로그램을 개발해야 하는 경우가 있습니다.  
+이를 개발하기 위해 Visual Studio에는 AsyncToolWindow라는 기본 제공 항목 템플릿이 있습니다. 다음 섹션에서는 Visual Studio용 간단한 도구 창 확장을 개발하는 방법을 살펴보겠습니다.
     
