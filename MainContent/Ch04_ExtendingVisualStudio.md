@@ -462,4 +462,218 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
 기본 클래스와 모델을 노출하여 옵션 페이지를 만들어 봤습니다.  
 스레드로부터 안전한 방식으로 옵션 페이지의 복잡성을 보여주는 또 다른 샘플은 https://github.com/madskristensen/OptionsSample입니다. 솔루션 탐색기 창이나 속성 창과 같은 일부 사용자 지정 UI를 사용하여 Visual Studio에 별도 Window를 표시해야 하는 확장 프로그램을 개발해야 하는 경우가 있습니다.  
 이를 개발하기 위해 Visual Studio에는 AsyncToolWindow라는 기본 제공 항목 템플릿이 있습니다. 다음 섹션에서는 Visual Studio용 간단한 도구 창 확장을 개발하는 방법을 살펴보겠습니다.
+
+## <font color='dodgerblue' size="6">3) DTE 오브젝트 보여주기 위한 도구 윈도우 확장</font>
+마지막 섹션에서 확장에 대한 옵션 페이지를 개발했으며 내부적으로 DialogPage 창이 PropertyGrid 컨트롤을 사용한다는 것을 이해했습니다. 이 섹션에서는 속성 그리드 컨트롤에 DTE 개체를 표시하는 도구 창 확장을 개발할 것입니다. 
+
+도구 창 확장은 Visual Studio IDE에 창을 표시합니다. 이 확장의 구조는 패키지로 시작할 때 사용자 지정 명령 솔루션과 유사합니다. 그런 다음 명령, vsct 파일 및 도구 창을 표시하기 위한 클래스를 추가하는 AsyncToolWindow 클래스를 추가합니다. 이 명령은 도구 창을 시작하는 수단을 제공합니다. 도구 창은 선택한 UI를 표시하도록 디자인할 수 있는 WPF 사용자 정의 컨트롤을 호스팅합니다. 이 확장에서는 사용자 정의 컨트롤에 속성 그리드 컨트롤을 추가하고 Visual Studio IDE에서 DTE 개체의 속성을 표시합니다.
+
+- ### a. 확장 시작하기
+    이 확장을 개발해보자. 단계는 다음과 같다.
+
+    - **1.새 VSIX 프로젝트 생성**      
+        Visual Studio 2019에서 새 VSIX 만들자. 이름은 "PropertiesToolWindow".
     
+    - **2. 업데이트 vsixmanifest**      
+        이 장의 앞부분에서 설명한 대로 적절하고 의미 있는 값으로 vsixmanifest 파일을 업데이트하십시오. 업데이트된 vsixmanifest 파일은 그림 4-30에 나와 있습니다.
+
+        ![04_30_UpdatedVsixmanifest](image/04/04_30_UpdatedVsixmanifest.png)   
+        그림 4-30 업데이트된 vsixmanifest 파일
+
+    - **3. Async Tool Window 템플릿 추가**  
+        이제 도구 창을 추가합니다. 이렇게 하려면 솔루션 탐색기에서 프로젝트를 마우스 오른쪽 버튼으로 클릭한 다음 상황에 맞는 메뉴에서 추가 ➤ 새 항목을 클릭합니다. 그러면 새 항목 추가 대화 상자가 열립니다. 왼쪽 창의 확장성 범주에서 비동기 도구 창을 클릭하고 클래스 이름을 ToolWindow로 지정합니다. 그러면 AsyncPackage에서 호스팅할 수 있는 도구 창과 이 창을 비동기식으로 로드하는 명령이 추가됩니다. 이는 그림 4-31에 나와 있습니다.
+        
+        ![04_31_AsyncToolWindow](image/04/04_31_AsyncToolWindow.png)   
+        그림 4-31 Async Tool Window 템플릿 선택
+
+        그러면 도구 창에 대한 기본 구현이 있는 ToolWindowPane 클래스에서 파생된 ToolWindow 클래스가 추가됩니다. ToolWindowPane 클래스에서 파생하면 ToolWindow 클래스가 도구 창을 만듭니다.
+        
+- ### b. ToolWindwPage 추가
+    ToolWindowPane의 클래스 다이어그램은 속성, 메서드 및 이벤트를 나열하는 그림 4-32에 나와 있습니다. 다이어그램은 또한 ToolWindowPane 자체가 WindowPane 클래스에서 파생되고 IVsWindowSearch 인터페이스를 구현함을 보여줍니다. ToolWindowPane의 속성, 메서드 및 이벤트는 목적과 함께 "클래스 참조" 섹션에 요약되어 있습니다. 전체 문서는 다음에서 온라인으로 읽을 수 있습니다.  
+    https://docs.microsoft.com/en-us/dotnet/api/microsoft.visualstudio.shell.toolwindowpane?view=visualstudiosdk2017&viewFallbackFrom=visualstudiosdk-2019.
+
+    ![04_32_ToolWindowPaneClass](image/04/04_32_ToolWindowPaneClass.png)   
+    그림 4-32 ToolWindowPane 클래스
+
+    이 멤버들을 살펴보면 Search, ToolBar 및 InfoBar와 관련된 몇 가지 멤버를 볼 수 있습니다. 검색 및 도구 모음은 직관적이며 이전에 어느 정도 논의되었습니다. 설명은 이러한 구성원을 포괄적으로 만듭니다. 그러나 우리가 논의하지 않은 InfoBar와 관련된 회원이 거의 없습니다. 중요한 알림이 편집기 상단에 표시되기 때문에 Visual Studio에서 InfoBar를 본 적이 있을 것입니다. Visual Studio에서 성능이 느린 확장을 감지하거나 일부 확장이 충돌하는 경우 Visual Studio는 해당 확장을 비활성화하고 그림 4-33과 같이 확장과 관련된 정보가 InfoBar에 표시됩니다.
+    
+    ![04_33_Infobar](image/04/04_33_Infobar.png)   
+    그림 4-33 인포바
+
+- ### c. 확장 작성
+    다음 장에서 InfoBar를 표시하고 해당 작업을 처리하는 방법을 보여주는 확장 프로그램을 개발할 것입니다.
+
+    - **1. 프로젝트 파일들**       
+        솔루션 탐색기를 보면 프로젝트에 다음 파일(ToolWindow 클래스 제외)이 추가된 것을 볼 수 있습니다.
+
+        - **a. ㅣ**
+        vsct 파일, 도구 창을 로드하는 데 사용할 수 있는 명령을 노출하는 명령 클래스입니다.  
+        - **b. ㅣ**
+        
+        Visual Studio에서 자체적으로 호스팅되는 도구 창에서 호스팅할 WPF 사용자 정의 컨트롤입니다.
+
+        이 단계에서 확장은 이미 작동 상태입니다. 만약 우리가 이 프로젝트를 실행/디버그하면 Visual Studio IDE의 새로운 실험적 인스턴스가 열립니다. 보기 ➤ 기타 창 ➤ 속성 도구 창으로 이동하면 버튼이 있는 도구 창이 표시됩니다. 버튼을 클릭하면 메시지 상자가 표시됩니다. 요구 사항에 맞게 코드를 사용자 지정해야 합니다. 먼저 이미지, 적절한 텍스트 및 키보드 단축키를 명령에 할당하도록 vsct 파일을 수정합니다. 이전 확장에서 vsct 파일을 업데이트하는 단계를 이미 보았습니다. 그림 4-34는 업데이트된 .vsct 파일의 코드 조각을 보여줍니다. 쉽게 식별할 수 있도록 변경 사항이 강조 표시됩니다.   
+
+        ![04_34_UpdatedVsctFile](image/04/04_34_UpdatedVsctFile.png)   
+        그림 4-34 업데이트된 .vsct 파일
+        
+        guidSHLMainMenu id는 Visual Studio 상위 메뉴의 **보기 ➤ 기타 Windows** 메뉴에 해당하는 **IDG_VS_WDO_OTRWNDWS1**로 설정됩니다. 이 위치를 변경하려면 이 장의 앞부분에서 설명한 대로 이 ID를 변경해야 합니다. Shift F2의 키보드 조합이 명령에 할당됩니다.
+
+    - **2. dd**  
+        다음으로, DTE 개체의 속성을 표시하는 속성 그리드를 갖도록 WPF 사용자 정의 컨트롤을 수정합니다. 불행히도 기본 WPF 도구 상자에는 PropertyGrid 컨트롤이 없습니다. Windows 양식에 있습니다. 그러나 WPF용 PropertyGrid 컨트롤이 있는 몇 가지 타사 패키지가 있습니다. PropertyGrid 컨트롤이 있으므로 Exceed의 Extended.WPF.Toolkit을 사용합니다. 이렇게 하려면 프로젝트의 프로젝트 참조를 마우스 오른쪽 버튼으로 클릭한 다음 NuGet 패키지 관리를 클릭합니다. 찾아보기 섹션에서 그림 4-35와 같이 프로젝트의 Extended.WPF.Toolkit 패키지를 검색하여 설치합니다.
+
+        ![04_35_ExtWpfToolkit](image/04/04_35_ExtWpfToolkit.png)   
+        그림 4-35 Extended.Wpf.Toolkit
+        
+    - **3. dd**  
+        패키지가 설치되면 그림 4-36과 같이 사용자 제어 XAML 파일을 수정합니다.
+
+        ![04_35_ExtWpfToolkit](image/04/04_35_ExtWpfToolkit.png)   
+        그림 4-35 Extended.Wpf.Toolkit
+
+        ![04_36_UpdatedXaml](image/04/04_36_UpdatedXaml.png)   
+        그림 4-36 업데이트된 XAML
+
+        다음 변경 사항이 적용됩니다.
+
+        a. UserControl 요소의 툴킷에 대한 xmlns를 추가했습니다.  
+        b. Grid의 행 및 열 정의를 정의했습니다.  
+        c. PropertyGrid 컨트롤이 추가되었습니다.
+
+    - **4. dd**  
+        다음으로 사용자 컨트롤의 파일 뒤에 있는 코드를 업데이트하겠습니다. 사용자 컨트롤의 UI는 간단합니다. PropertyGrid 컨트롤만 있습니다. 따라서 코드 숨김 파일에서 이 컨트롤에 바인딩하려는 데이터를 전달해야 합니다. 엔터티 또는 모델(바인딩할 데이터가 포함된 클래스)을 매개변수로 사용하는 사용자 정의 컨트롤에 대한 새 생성자를 정의해 보겠습니다. 해당 클래스의 이름을 ToolWindowData로 지정하겠습니다. 데이터가 있으면 속성 그리드에 바인딩하기만 하면 됩니다. 이것은 그림 4-37에 나와 있습니다.
+
+        ![04_37_UserControlCodeBehind](image/04/04_37_UserControlCodeBehind.png)   
+        그림 4-37 사용자 컨트롤 코드 비하인드
+
+    - **5. dd**          
+        ToolWindowData에 대한 더미 클래스가 생성되었습니다. 도구 창에 표시할 속성을 추가해 보겠습니다. DTE 개체를 보고 싶으므로 DTE에 대한 속성을 추가해 보겠습니다. AsyncPackage 클래스에 무엇이 있는지 살펴보겠습니다. AsyncPackage에 대한 속성 하나를 추가한 다음 마지막으로 PropertyGrid의 기능을 보기 위해 WPF 컨트롤 중 하나에 대한 속성을 추가합니다. 이전에 옵션 페이지에서 했던 것처럼 속성으로 속성을 장식할 것입니다. ToolWindowData의 코드는 다음과 같습니다.
+
+        ```cs
+        [DisplayName("Tool Window Data")]
+        public class ToolWindowData
+        {
+            [DisplayName("DTE Instance")]
+            [Category("General")]
+            [Description("The DTE Instance")]
+            [EditorBrowsable(EditorBrowsableState.Always)]
+            [TypeConverter(typeof(ExpandableObjectConverter))]
+            public DTE DTE { get; set; }
+
+            [DisplayName("Async Package")]
+            [Category("General")]
+            [Description("The Package")]
+            [EditorBrowsable(EditorBrowsableState.Always)]
+            [TypeConverter(typeof(ExpandableObjectConverter))]
+            public AsyncPackage Package { get; set; }
+
+            [DisplayName("Text Box")]
+            [Category("General")]
+            [Description("The TextBox")]
+            [EditorBrowsable(EditorBrowsableState.Always)]
+            [TypeConverter(typeof(ExpandableObjectConverter))]
+            public TextBox TextBox { get; set; }
+        }
+        ```
+        
+        나는 독자들이 위에서 사용된 속성, 특히 PropertyGrid 컨트롤에서 데이터가 표시되는 방식에서 중추적인 역할을 하는 TypeConverters를 자세히 살펴보기를 적극 권장합니다. 여기에서는 확장 가능 또는 동적 개체를 다른 유형으로 변환하는 데 사용할 수 있는 ExpandableObjectConverter를 사용했습니다.
+
+    - **6. dd**                  
+        AsyncToolWindow 템플릿에서 추가한 코드는 도구 창에서 호스팅하는 WPF 사용자 정의 컨트롤을 추가합니다. 도구 창은 여전히 존재하는 사용자 정의 컨트롤의 매개변수 없는 생성자를 호출합니다. 그러나 ToolWindowData를 매개 변수로 사용하는 생성자를 추가했으며 이 생성자가 도구 창에서 호출되기를 원합니다. 이를 위해 ToolWindow.cs 파일을 수정하고 ToolWindowData를 매개변수로 사용하는 생성자를 추가합니다. ToolWindow의 코드 목록은 다음과 같습니다.
+
+        ```cs
+        [Guid(ToolWindow.ToolWindowId)]
+        public class ToolWindow : ToolWindowPane
+        {
+            internal const string ToolWindowId = "6a7dffcf-9377-4eb4-96b8-540d3179930d";
+            public ToolWindow() : this(null)
+            {
+            }
+
+            // 데이터는 Package 클래스의 InitializeToolWindowAsync 메서드에서 전달되어야 합니다.
+            public ToolWindow(ToolWindowData data) : base()
+            {
+                this.Caption = "Automation Properties";
+                this.BitmapImageMoniker = KnownMonikers.ListProperty;
+                // 이것은 도구 창에서 호스팅하는 사용자 컨트롤입니다. 이 클래스가 IDisposable을 구현하더라도,
+                // 이 개체에 대해 Dispose를 호출하지 않습니다. ToolWindowPane이 Dispose를 호출하기 때문입니다.
+                // Content 속성에서 반환된 개체입니다.
+                this.Content = new ToolWindowControl(data);
+            }
+        }
+        ```
+
+        독자가 주목해야 할 중요한 사항은 굵게 표시되어 있습니다. 각 도구 창은 ToolWindowPane에서 파생되며 고유한 식별자가 할당됩니다. Visual Studio는 이 식별자를 사용하여 설정 저장소에 있는 도구 창의 크기, 위치, 상태 등을 유지합니다. ToolWindows는 탭, 연결, 부동, MDI 등과 같은 여러 상태로 존재할 수 있습니다. 도구 창을 어떤 상태로 만들 것인지는 패키지 클래스에서 설정할 수 있습니다. 이는 향후 단계에서 곧 보게 될 것입니다. 도구 창에 대한 흥미로운 점은 Visual Studio가 닫히지 않는 한 한 번 만들어지면 절대 파괴되지 않는다는 것입니다. 도구 창을 닫아도 실제로는 닫히지 않습니다. 그것은 숨겨져 있습니다. 이는 ToolWindow 생성자에 중단점을 배치하여 확인할 수 있습니다. 생성자는 한 번만 호출됩니다. ToolWindowData를 매개변수로 받는 생성자를 만들었지만 이 매개변수는 여전히 생성자에 전달되어야 합니다. 어떻게 합니까? 전달해야 하는 개체의 인스턴스를 반환하도록 Package 클래스에서 InitializeToolWindowAsync라는 메서드를 재정의해야 합니다. 생성자에서 이미 논의한 Caption, BitmapImageMoniker 및 Content 속성을 설정합니다. 여기서는 문자열을 직접 사용했지만 상수를 사용하는 것이 좋습니다.
+
+    - **7. dd**            
+        이제 Package 클래스로 이동하겠습니다. 도구 창을 호스팅하는 클래스입니다. 무엇보다도 먼저 도구 창이 문서처럼 탭 상태여야 하므로 다음과 같이 Package 클래스에서 ProvideToolWindow 특성(이 패키지가 도구 창을 소유하고 있음을 Visual Studio에 등록하고 알려줌)을 업데이트합니다. 
+
+        ```cs
+        [ProvideToolWindow(typeof(ToolWindow), Style = VsDockStyle.Tabbed, Orientation = ToolWindowOrientation.none, Window="DocumentWell")]
+        ```
+
+        열거형이며 없음, MDI, Float, Linked, Tabbed, AlwaysFloat 값을 가질 수 있는 Style 속성을 추가했습니다. 다음 속성은 다시 열거형이며 없음, 위쪽, 왼쪽, 오른쪽, 아래쪽 값을 가질 수 있는 방향입니다. 창 속성은 도구 창이 모든 문서가 열리는 DocumentWell에서 탭되어야 함을 지정합니다. ProvideToolWindowAttribute는 중요한 속성이며 해당 속성이 도구 창의 운명을 결정하므로 공식 Microsoft 문서에서 이 속성이 노출하는 속성을 이해하도록 합시다. 문서는 온라인으로도 읽을 수 있습니다.  
+        https://docs.microsoft.com/en-us/dotnet/api/microsoft.visualstudio.shell.providetoolwindowattribute?view=visualstudiosdk-2017&viewFallbackFrom=visualstudiosdk-2019
+
+        표4-2 ProvideToolWindowAttribute 속성
+        ```
+        멤버                설명
+        ------------------  ---------------------------------------------------------------------------
+        DockedHeight        도킹된 경우 ToolWindow의 기본 높이를 가져오거나 설정합니다.
+        DockedWidth         도킹된 경우 ToolWindow의 기본 너비를 가져오거나 설정합니다.
+        DocumentLikeTool    동작 및 수명이 문서와 같은 도구 창을 원하는 경우 이 속성을 true로 설정하십시오. 
+                            도구 창은 MDI 또는 부동 상태일 뿐이며 사용자가 수동으로 닫을 때까지 모든 레이아웃 
+                            변경에 걸쳐 해당 위치에 계속 표시됩니다. 
+                            이 플래그는 DontForceCreate 및 파괴적인 다중 인스턴스를 의미합니다.
+        Height              도구 창의 기본 높이를 가져오거나 설정합니다.
+        MultiInstances      도구 창의 여러 인스턴스가 허용되는지 여부를 결정합니다.
+        Orientation         Window 속성으로 지정된 창을 기준으로 도구 창의 기본 방향을 가져오거나 설정합니다.
+        PositionX           도구 창의 왼쪽 상단 모서리의 기본 수평 값을 가져오거나 설정합니다.
+        PositionY           도구 창의 왼쪽 상단 모서리의 수직 값을 가져오거나 설정합니다.
+        Style               도구 창의 기본 도킹 스타일을 가져오거나 설정합니다.
+        ToolType            도구 창의 유형을 가져오거나 설정합니다.
+        Transient           IDE를 다시 시작할 때 도구 창을 다시 열지 않아야 하는지 여부를 가져오거나 설정합니다.
+        TypeId              RegistrationAttribute 파생 클래스가 
+                            System.ComponentModel.TypeDescriptor.GetAttributes(...)와  함께 작동하도록 하려면 
+                            TypeID 속성을 재정의합니다. 이 속성에서 파생된 속성은 클래스에 적용할 수 있는 
+                            인스턴스에 대한 더 나은 제어가 필요한 경우에만 이 속성을 재정의해야 합니다.
+        Width               도구 창의 기본 너비를 가져오거나 설정합니다.
+        Window              도구 창이 도킹되어야 하는 기본 창의 GUID를 가져오거나 설정합니다.
+        ```    
+
+        굵게 표시된 속성은 도구 창의 동작을 크게 변경합니다. 임시 속성은 IDE가 다시 시작될 때 도구 창이 자동으로 열리지 않아야 하는지 여부를 결정합니다. 나는 독자들이 이러한 속성을 가지고 놀고 도구 창의 모양에 어떤 변화를 가져오는 속성을 탐색하도록 권장합니다.
+
+    - **8. dd**  
+        다음으로 패키지 클래스 GetAsyncToolWindowFactory 및 InitializeToolWindowAsync에서 몇 가지 메서드를 재정의해야 합니다. 매개 변수를 허용하도록 도구 창 생성자를 사용자 지정했기 때문에 재정의해야 합니다. 매개변수가 없는 기본 생성자를 사용했다면 이 두 메서드를 재정의할 필요가 없습니다. GetAsyncToolWindowFactory에서 기본 인프라에 현재 Package 클래스를 팩토리로 사용하도록 지시하고 이것이 발생하면 동일한 클래스에서 재정의된 InitializeToolWindowAsync 메서드가 호출됩니다. 여기에서 ToolWindowData 개체를 구성하고 ToolWindow 생성자에 전달되도록 반환합니다. 재정의된 이 두 메서드의 코드는 그림 4-38과 같습니다.
+    
+        
+        ![04_38_OverriddenMethod](image/04/04_38_OverriddenMethod.png)   
+        그림 4-38 ToolWindowData 개체를 ToolWindow 생성자에 전달하는 재정의된 메서드
+
+        이것으로 모든 코드 변경이 이루어집니다. 그러나 프로젝트에 추가된 클래스가 하나 더 있는데 우리가 보거나 수정하지 않았습니다. 이 클래스는 ToolWindowCommand 클래스입니다. 이 클래스의 코드는 사용자 지정 명령을 추가하는 것과 동일하므로 여기서 논의할 새로운 내용은 없습니다. 이 클래스는 실행될 때 도구 창을 시작하는 명령을 노출합니다. 
+        
+        이 명령은 보기 > 기타 Windows 메뉴. 도구 창을 표시하는 역할을 하는 이 클래스의 실행 메소드를 살펴보겠습니다. Execute 메소드의 코드는 다음과 같습니다.
+
+        ```cs
+        private void Execute(object sender, EventArgs e)
+        {
+            this.package.JoinableTaskFactory.RunAsync(async delegate
+            {
+                ToolWindowPane window = await this.package.ShowToolWindowAsync(typeof(ToolWindow), 0, true, 
+                this.package.DisposalToken);
+
+                if ((null == window) || (null == window.Frame))
+                {
+                    throw new NotSupportedException("Cannot create tool window");
+                }
+            });
+        }
+        ```
+
+        굵게 표시된 코드는 도구 창을 표시하는 역할을 합니다. 여기서 주의해야 할 몇 가지 중요한 사항이 있습니다.
+
+        a. Execute는 동기식 이벤트 핸들러 메서드입니다. 도구 창을 표시하는 코드가 RunAsync 블록 안에 래핑되어 있는지 확인하세요. 이것은 동기 메서드에서 비동기 작업을 실행하는 방법을 보여줍니다.
+
+        b. 메서드 호출이 비동기식이므로 도구 창은 비동기식으로 로드됩니다. 이것이 AsyncToolWindow라고 불리는 이유입니다.  
+
+        c. ShowToolWindowAsync 메서드는 4개의 매개변수를 사용합니다. 먼저 생성할 도구 창의 유형입니다. 두 번째는 도구 창의 인스턴스 ID를 지정하는 식별자입니다. 세 번째 매개변수는 도구 창이 존재하지 않는 경우 작성해야 하는지 여부를 결정하는 부울입니다. 이 매개변수가 false이고 도구 창이 존재하지 않으면 창은 null로 설정됩니다. 네 번째 매개변수는 비동기 작업을 취소하는 데 사용할 수 있는 취소 토큰입니다.
