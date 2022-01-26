@@ -488,14 +488,16 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
 
         그러면 도구 창에 대한 기본 구현이 있는 ToolWindowPane 클래스에서 파생된 ToolWindow 클래스가 추가됩니다. ToolWindowPane 클래스에서 파생하면 ToolWindow 클래스가 도구 창을 만듭니다.
         
-- ### b. ToolWindwPage 추가
-    ToolWindowPane의 클래스 다이어그램은 속성, 메서드 및 이벤트를 나열하는 그림 4-32에 나와 있습니다. 다이어그램은 또한 ToolWindowPane 자체가 WindowPane 클래스에서 파생되고 IVsWindowSearch 인터페이스를 구현함을 보여줍니다. ToolWindowPane의 속성, 메서드 및 이벤트는 목적과 함께 "클래스 참조" 섹션에 요약되어 있습니다. 전체 문서는 다음에서 온라인으로 읽을 수 있습니다.  
+- ### b. ToolWindwPane 추가
+    ToolWindowPane의 클래스 다이어그램은 속성, 메서드 및 이벤트를 나열하는 그림 4-32에 나와 있습니다.  
+    다이어그램은 또한 ToolWindowPane 자체가 WindowPane 클래스에서 파생되고 IVsWindowSearch 인터페이스를 구현함을 보여줍니다.  
+    ToolWindowPane의 속성, 메서드 및 이벤트는 목적과 함께 "클래스 참조" 섹션에 요약되어 있습니다. 전체 문서는 다음에서 온라인으로 읽을 수 있습니다.  
     https://docs.microsoft.com/en-us/dotnet/api/microsoft.visualstudio.shell.toolwindowpane?view=visualstudiosdk2017&viewFallbackFrom=visualstudiosdk-2019.
 
     ![04_32_ToolWindowPaneClass](image/04/04_32_ToolWindowPaneClass.png)   
     그림 4-32 ToolWindowPane 클래스
 
-    이 멤버들을 살펴보면 Search, ToolBar 및 InfoBar와 관련된 몇 가지 멤버를 볼 수 있습니다. 검색 및 도구 모음은 직관적이며 이전에 어느 정도 논의되었습니다. 설명은 이러한 구성원을 포괄적으로 만듭니다. 그러나 우리가 논의하지 않은 InfoBar와 관련된 회원이 거의 없습니다. 중요한 알림이 편집기 상단에 표시되기 때문에 Visual Studio에서 InfoBar를 본 적이 있을 것입니다. Visual Studio에서 성능이 느린 확장을 감지하거나 일부 확장이 충돌하는 경우 Visual Studio는 해당 확장을 비활성화하고 그림 4-33과 같이 확장과 관련된 정보가 InfoBar에 표시됩니다.
+    이 멤버들을 살펴보면 Search, ToolBar 및 InfoBar와 관련된 몇 가지 멤버를 볼 수 있습니다. Search 및 Toolbar는 직관적이며 이전에 어느 정도 논의되었습니다. 설명은 이러한 구성원을 포괄적으로 만듭니다. 그러나 우리가 논의하지 않은 InfoBar와 관련된 멤버는 거의 없습니다. 중요한 알림이 편집기 상단에 표시되기 때문에 Visual Studio에서 InfoBar를 본 적이 있을 것입니다. Visual Studio에서 성능이 느린 확장을 감지하거나 일부 확장이 충돌하는 경우 Visual Studio는 해당 확장을 비활성화하고 그림 4-33과 같이 확장과 관련된 정보가 InfoBar에 표시됩니다.
     
     ![04_33_Infobar](image/04/04_33_Infobar.png)   
     그림 4-33 인포바
@@ -506,26 +508,28 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
     - **1. 프로젝트 파일들**       
         솔루션 탐색기를 보면 프로젝트에 다음 파일(ToolWindow 클래스 제외)이 추가된 것을 볼 수 있습니다.
 
-        - **a. ㅣ**
+        - **a. vsct파일**  
         vsct 파일, 도구 창을 로드하는 데 사용할 수 있는 명령을 노출하는 명령 클래스입니다.  
-        - **b. ㅣ**
-        
+
+        - **b. WPF 사용자 정의 컨트롤**        
         Visual Studio에서 자체적으로 호스팅되는 도구 창에서 호스팅할 WPF 사용자 정의 컨트롤입니다.
 
-        이 단계에서 확장은 이미 작동 상태입니다. 만약 우리가 이 프로젝트를 실행/디버그하면 Visual Studio IDE의 새로운 실험적 인스턴스가 열립니다. 보기 ➤ 기타 창 ➤ 속성 도구 창으로 이동하면 버튼이 있는 도구 창이 표시됩니다. 버튼을 클릭하면 메시지 상자가 표시됩니다. 요구 사항에 맞게 코드를 사용자 지정해야 합니다. 먼저 이미지, 적절한 텍스트 및 키보드 단축키를 명령에 할당하도록 vsct 파일을 수정합니다. 이전 확장에서 vsct 파일을 업데이트하는 단계를 이미 보았습니다. 그림 4-34는 업데이트된 .vsct 파일의 코드 조각을 보여줍니다. 쉽게 식별할 수 있도록 변경 사항이 강조 표시됩니다.   
+        이 단계에서 확장은 이미 작동 상태입니다. 만약 우리가 이 프로젝트를 실행/디버그하면 Visual Studio IDE의 새로운 실험적 인스턴스가 열리고 보기 ➤ 기타 창 ➤ 속성 도구 창으로 이동하면 버튼이 있는 도구 창이 표시됩니다. 버튼을 클릭하면 메시지 상자가 표시됩니다. 요구 사항에 맞게 코드를 사용자 지정해야 합니다. 먼저 이미지, 적절한 텍스트 및 키보드 단축키를 명령에 할당하도록 vsct 파일을 수정합니다. 이전 확장에서 vsct 파일을 업데이트하는 단계를 이미 보았습니다. 그림 4-34는 업데이트된 .vsct 파일의 코드 조각을 보여줍니다. 쉽게 식별할 수 있도록 변경 사항이 강조 표시됩니다.   
 
         ![04_34_UpdatedVsctFile](image/04/04_34_UpdatedVsctFile.png)   
         그림 4-34 업데이트된 .vsct 파일
         
         guidSHLMainMenu id는 Visual Studio 상위 메뉴의 **보기 ➤ 기타 Windows** 메뉴에 해당하는 **IDG_VS_WDO_OTRWNDWS1**로 설정됩니다. 이 위치를 변경하려면 이 장의 앞부분에서 설명한 대로 이 ID를 변경해야 합니다. Shift F2의 키보드 조합이 명령에 할당됩니다.
 
-    - **2. dd**  
-        다음으로, DTE 개체의 속성을 표시하는 속성 그리드를 갖도록 WPF 사용자 정의 컨트롤을 수정합니다. 불행히도 기본 WPF 도구 상자에는 PropertyGrid 컨트롤이 없습니다. Windows 양식에 있습니다. 그러나 WPF용 PropertyGrid 컨트롤이 있는 몇 가지 타사 패키지가 있습니다. PropertyGrid 컨트롤이 있으므로 Exceed의 Extended.WPF.Toolkit을 사용합니다. 이렇게 하려면 프로젝트의 프로젝트 참조를 마우스 오른쪽 버튼으로 클릭한 다음 NuGet 패키지 관리를 클릭합니다. 찾아보기 섹션에서 그림 4-35와 같이 프로젝트의 Extended.WPF.Toolkit 패키지를 검색하여 설치합니다.
+    - **2. PropertyGrid 컨트롤 추가**  
+        다음으로, DTE 개체의 속성을 표시하는 속성 그리드를 갖도록 WPF 사용자 정의 컨트롤을 수정합니다.  
+        
+        불행히도 기본 WPF 도구 상자에는 PropertyGrid 컨트롤이 없습니다. Windows Forms에는 있습니다. 그러나 WPF용 PropertyGrid 컨트롤이 있는 몇 가지 타사 패키지가 있습니다. 여기서는 Exceed의 Extended.WPF.Toolkit을 사용합니다. 이렇게 하려면 프로젝트 > 참조를 마우스 오른쪽 버튼으로 클릭한 다음 NuGet 패키지 관리를 클릭합니다. 찾아보기 섹션에서 그림 4-35와 같이 프로젝트의 Extended.WPF.Toolkit 패키지를 검색하여 설치합니다.
 
         ![04_35_ExtWpfToolkit](image/04/04_35_ExtWpfToolkit.png)   
         그림 4-35 Extended.Wpf.Toolkit
         
-    - **3. dd**  
+    - **3. xaml수정**  
         패키지가 설치되면 그림 4-36과 같이 사용자 제어 XAML 파일을 수정합니다.
 
         ![04_35_ExtWpfToolkit](image/04/04_35_ExtWpfToolkit.png)   
@@ -540,7 +544,7 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
         b. Grid의 행 및 열 정의를 정의했습니다.  
         c. PropertyGrid 컨트롤이 추가되었습니다.
 
-    - **4. dd**  
+    - **4. 코드업데이트**  
         다음으로 사용자 컨트롤의 파일 뒤에 있는 코드를 업데이트하겠습니다. 사용자 컨트롤의 UI는 간단합니다. PropertyGrid 컨트롤만 있습니다. 따라서 코드 숨김 파일에서 이 컨트롤에 바인딩하려는 데이터를 전달해야 합니다. 엔터티 또는 모델(바인딩할 데이터가 포함된 클래스)을 매개변수로 사용하는 사용자 정의 컨트롤에 대한 새 생성자를 정의해 보겠습니다. 해당 클래스의 이름을 ToolWindowData로 지정하겠습니다. 데이터가 있으면 속성 그리드에 바인딩하기만 하면 됩니다. 이것은 그림 4-37에 나와 있습니다.
 
         ![04_37_UserControlCodeBehind](image/04/04_37_UserControlCodeBehind.png)   
@@ -650,6 +654,7 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
         ![04_38_OverriddenMethod](image/04/04_38_OverriddenMethod.png)   
         그림 4-38 ToolWindowData 개체를 ToolWindow 생성자에 전달하는 재정의된 메서드
 
+    - **9. dd**  
         이것으로 모든 코드 변경이 이루어집니다. 그러나 프로젝트에 추가된 클래스가 하나 더 있는데 우리가 보거나 수정하지 않았습니다. 이 클래스는 ToolWindowCommand 클래스입니다. 이 클래스의 코드는 사용자 지정 명령을 추가하는 것과 동일하므로 여기서 논의할 새로운 내용은 없습니다. 이 클래스는 실행될 때 도구 창을 시작하는 명령을 노출합니다. 
         
         이 명령은 보기 > 기타 Windows 메뉴. 도구 창을 표시하는 역할을 하는 이 클래스의 실행 메소드를 살펴보겠습니다. Execute 메소드의 코드는 다음과 같습니다.
@@ -677,3 +682,43 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
         b. 메서드 호출이 비동기식이므로 도구 창은 비동기식으로 로드됩니다. 이것이 AsyncToolWindow라고 불리는 이유입니다.  
 
         c. ShowToolWindowAsync 메서드는 4개의 매개변수를 사용합니다. 먼저 생성할 도구 창의 유형입니다. 두 번째는 도구 창의 인스턴스 ID를 지정하는 식별자입니다. 세 번째 매개변수는 도구 창이 존재하지 않는 경우 작성해야 하는지 여부를 결정하는 부울입니다. 이 매개변수가 false이고 도구 창이 존재하지 않으면 창은 null로 설정됩니다. 네 번째 매개변수는 비동기 작업을 취소하는 데 사용할 수 있는 취소 토큰입니다.
+
+- ### d. 확장 실행
+    - **1. dd**     
+        F5 키를 누릅니다. 열리는 새 Visual Studio 인스턴스에서 그림 4-39와 같이 보기 ➤ 기타 창 ➤ 자동화 속성으로 이동합니다.
+
+        ![04_39_NavigationToAutomation](image/04/04_39_NavigationToAutomation.png)   
+        그림 4-39 Automation Properties 확장 탐색하기
+
+    - **2. dd**            
+        그림 4-40에서처럼 한개의 도구창이 열린다.
+
+        PropertyGrid 컨트롤에서 AsyncPackage, DTE 및 Textbox 컨트롤의 속성을 표시하는 작업 도구 창 확장이 있습니다. 확장 정보가 저장되는 ApplicationRegistryRoot 경로, UserDataPath 및 UserRegistryRoot 경로의 값을 확인하는 것이 좋습니다. DTE 개체 속성에서 Edition, 버전, 명령줄 인수 등을 볼 수 있습니다. 또한 XAML을 디자인하는 동안 속성 창에서 보는 것과 같은 방식으로 Textbox 컨트롤의 속성이 표시됩니다. 따라서 도구 창 확장을 개발하는 방법을 배우는 것 외에도 DTE, 패키지 개체 속성 및 해당 라이브 값을 보고 PropertyGrid 컨트롤에 대한 노출도 얻었습니다. 확장 코드의 코드 맵 다이어그램은 그림 4-41에 나와 있습니다.
+        
+        ![04_40_CodemapDiagram](image/04/04_40_CodemapDiagram.png)   
+        그림 4-40 도구창 확장의 코드맵 다이어그램
+
+        이것으로 챕터를 마칩니다. Visual Studio 확장성 팀에는 GitHub의 비동기 도구 창 샘플도 있습니다. 다음 URL에서 볼 수 있습니다.
+
+        https://github.com/microsoft/VSSDK-ExtensibilitySamples/tree/master/AsyncToolWindow
+
+
+## <font color='dodgerblue' size="6">4) 요약</font>        
+이 장에서 우리는 유용하고 의미 있는 몇 가지 확장을 개발하고 그 과정에서 몇 가지 중요한 개념을 배웠습니다. 사용자 지정 명령을 추가하고 이벤트 처리기를 사용자 지정 명령에 연결하는 방법에 대한 그림을 보았습니다. 우리는 명령의 위치를 변경하고, 확장에서 Visual Studio에 의해 노출된 서비스에 액세스하고, 자동화 모델의 속성과 API를 이해하고, 옵션 페이지에 대한 지원을 추가하고 확장에서 사용하는 방법을 배웠습니다. 또한 도구 창 확장을 개발하는 방법과 사용자 지정 WPF UI 기반 사용자 정의 컨트롤을 도구 창에 표시하는 방법을 배웠습니다. 또한 도구 창에 데이터를 전달하는 방법도 배웠습니다. 다음 장에서 우리는 이러한 추진력을 계속해서 코드 생성, 정보 표시줄 및 코드 분석 및 수정을 위한 확장을 개발할 것입니다.
+
+***
+연습
+
+다음 활동을 통해 이 장에서 논의한 기본 사항을 더 깊이 이해할 수 있습니다.
+
+1. 여러 유형의 속성을 가진 클래스를 만듭니다. 이 형식에 대한 사용자 지정 형식 변환기를 만들고 PropertyGrid 컨트롤에 이 개체의 인스턴스를 표시합니다. WinForms 도구 상자에는 PropertyGrid가 있습니다.
+
+2. 사용자 지정 명령의 가시성을 변경하는 방법을 탐색합니다. 어떤 방법을 사용해야 합니까? 힌트: https://docs.microsoft.com/en-us/visualstudio/extensibility/visibilityitemement?view=vs-2019.
+
+3. vsixmanifest 파일의 Assets, Dependencies 및 Prerequisite 섹션을 읽고 탐색하고 배우십시오. https://docs.microsoft.com/en-us/visualstudio/extensibility/vsix-manifestdesigner?view=vs-2019 읽어보세요.
+
+4. 설정 저장소 탐색기 확장을 사용하고 확장 옵션이 저장되는 위치를 찾으십시오.
+
+5. Visual Studio IDE에서 열려 있는 문서 및 창의 속성을 표시하는 도구 창 확장을 만듭니다.
+
+6. 동적 도구 창을 탐색합니다. https://docs.microsoft.com/en-us/visualstudio/extensibility/opening-a-dynamic-toolwindow?view=vs-2019 읽어보세요.
