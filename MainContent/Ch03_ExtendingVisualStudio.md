@@ -529,22 +529,34 @@ Customizations 바로 오른쪽에는 두 가지 더 이상 사용되지 않고 
     그림 3-16 ToolsMenuCommandPackage 코드
     
         1. 네임스페이스 참조.
-        2. PackageRegistration 속성을 표시합니다. 이것은 등록을 위해 패키지에 사용됩니다. RegPkg.exe 유틸리티는 리플렉션을 사용하여 등록해야 하는 특성을 결정합니다. UseManagedResourcesOnly 및 AllowsBackgroundLoading이라는 두 가지 속성이 표시됩니다. 이 속성은 패키지가 관리 리소스만 사용하고 백그라운드 스레드에서 패키지를 로드하는 것이 안전함을 알려줍니다.
+        2. PackageRegistration 속성을 표시합니다. 이것은 등록을 위해 패키지에 사용됩니다. RegPkg.exe 유틸리티는 리플렉션을 사용하여
+           등록해야 하는 특성을 결정합니다. UseManagedResourcesOnly 및 AllowsBackgroundLoading이라는 두 가지 속성이 표시됩니다. 
+           이 속성은 패키지가 관리 리소스만 사용하고 백그라운드 스레드에서 패키지를 로드하는 것이 안전함을 알려줍니다.
         3. GUID를 패키지에 할당합니다. 이전 섹션에서 명령이 이 GUID를 통해 패키지에 연결되는 것을 보았습니다.
         4. ProvideMenuResource 속성은 등록을 제공합니다.             
-            하드 코딩된 문자열 "Menus.ctmenu"를 통해 패키지에 사용된 메뉴 리소스의 정보를 볼수 있다. 이 속성에 대한 첫 번째 매개변수(변경해서는 안 됨)로, 1을 두 번째 매개변수(버전 번호)로 지정합니다. 확장의 빌드 출력으로 이동하고 justDecompile 또는 다른 역엔지니어링/반사 도구를 사용하여 생성된 dll을 반영하면 이 dll의 리소스 아래에서 리소스의 키 이름이 Menus.ctmenu이고 해당 값은 바이너리입니다. 똑같다. 그림 3-17에 나와 있습니다.
-
-    ![03_17_ReflectiongExtDll](image/03/03_17_ReflectiongExtDll.png)   
-    그림 3-17 확장 dll 리플렉팅
-            
-            확장 프로젝트의 빌드 출력에서 등록에 사용되는 패키지 정의 파일인 generated.pkgdef 파일을 보면 모든 등록 정보가 .pkgdef 파일에 캡슐화되어 있음을 알 수 있습니다. 그림 3-18은 속성에 전달된 등록 정보를 보여줍니다.
-
-    ![03_18_PkgdefFileAndRegInfo](image/03/03_18_PkgdefFileAndRegInfo.png)   
-    그림 3-18 Pkgdef 파일과 등록 정보
-
+            하드 코딩된 문자열 "Menus.ctmenu"를 통해 패키지에 사용된 메뉴 리소스의 정보를 볼수 있다. 이 속성에 대한 첫 번째 
+            매개변수(변경해서는 안 됨)로, 1을 두 번째 매개변수(버전 번호)로 지정합니다. 확장의 빌드 출력으로 이동하고 
+            justDecompile 또는 다른 역엔지니어링/반사 도구를 사용하여 생성된 dll을 반영하면 이 dll의 리소스 아래에서 
+            리소스의 키 이름이 Menus.ctmenu이고 해당 값은 바이너리입니다. 똑같다. 그림 3-17에 나와 있습니다.
         5. ToolsMenuCommandPackage는 이미 논의한 AsyncPackage 추상 클래스에서 파생된 봉인된 클래스임을 보여줍니다.
-        6. 기본 클래스 AsyncPackage의 InitializeAsync 메서드에 대한 재정의 메서드입니다. 취소 토큰을 통해 초기화를 취소하는 옵션을 제공하고 IProgress<ServiceProgressData>를 매개 변수로 전달하여 진행 상황을 보고하는 기능을 제공합니다. 메인 UI 스레드와 백그라운드 스레드의 사용을 이해하려면 주석을 주의 깊게 읽으십시오. UI 스레드가 필요하거나 UI 스레드에서 실행해야 하는 작업 또는 작업의 경우 JoinableTaskFactory의 SwitchToMainThreadAsync 메서드를 사용하는 것이 좋습니다.
-        7. 패키지에서 명령을 초기화하는 방법을 보여줍니다. 패키지의 마지막 줄에서 MyCommand의 InitializeAsync 메서드가 호출되어 명령을 초기화합니다.
+        6. 기본 클래스 AsyncPackage의 InitializeAsync 메서드에 대한 재정의 메서드이다. cancellationToken을 통해 초기화 취소 옵션을
+           제공하기도 하고 IProgress<ServiceProgressData>를 매개 변수로 전달하여 진행 상황을 보고하는 기능 또한 제공한다.
+           메인 UI 스레드와 백그라운드 스레드의 사용을 이해하려면 주석을 주의 깊게 읽어라. UI 스레드가 필요하거나 UI 스레드에서 
+           실행해야 하는 작업 또는 연산이 존재한다면 JoinableTaskFactory의 SwitchToMainThreadAsync 메서드를 사용하는 것이 좋다.
+        7. 패키지에서 명령을 초기화하는 방법을 보여준다. 패키지 클래스의 마지막 줄이 MyCommand의 InitializeAsync 메서드가 호출되어
+           명령을 초기화.
+
+    <kbd>
+        <img src="image/03/03_17_ReflectiongExtDll.png">   
+    </kbd>  
+    그림 3-17 justdecompile에서 확장 dll 리플렉션  보기
+        
+    
+    <kbd>
+        <img src="image/03/03_18_PkgdefFileAndRegInfo.png">   
+    </kbd>  
+    그림 3-18 Pkgdef 파일과 등록 정보  
+    확장 프로젝트의 빌드 출력 폴더에는 등록할때 사용되는 패키지 정의 파일 .pkgdef 파일이 만들어지는데 모든 등록 정보가 이 파일에 캡슐화되어 있다.  
 
 ## <font color='dodgerblue' size="6">3) FAQs</font>        
 지금쯤이면 vsct, 패키지 및 명령 클래스에 대해 공정하게 이해해야 합니다. 그러나 마음속에 떠오르는 몇 가지 분명한 질문이 있습니다. 논의해 보겠습니다.
@@ -572,7 +584,12 @@ Customizations 바로 오른쪽에는 두 가지 더 이상 사용되지 않고 
 
 - ### 8. 확장 프로젝트 디버깅은 어떻게 새로운 IDE 인스턴스를 시작합니까?
     Visual Studio 확장은 Visual Studio용으로 개발되었습니다. 오른쪽? 따라서 확장은 Visual Studio에서만 보고 테스트할 수 있습니다. 따라서 확장을 디버그할 때 개발/디버깅 중인 확장을 확인할 수 있는 VS IDE의 인스턴스가 필요합니다. 확장성 프로젝트의 프로젝트 속성을 확인하면 디버그 탭에서 프로젝트의 시작 작업이 외부 프로그램 시작으로 설정되어 있고 devenv.exe(사용자가 실행할 때 실행되는 실행 파일)에 대한 경로가 있습니다. Visual Studio IDE 시작). 또한 명령줄 인수 값은 /rootsuffix Exp로 설정되어 실행 파일이 실험적 인스턴스에서 시작되도록 지시합니다.
-    템플릿에서 이 프로젝트를 생성했기 때문에 기본적으로 이미 설정되어 있습니다. 그러나 확장을 처음부터 디버그해야 하는 경우 동일한 디버그 설정을 사용하여 확장을 디버그할 수 있습니다. 내 Visual Studio Enterprise 설치에서 devenv.exe의 경로는 "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\devenv.exe"입니다.
+    템플릿에서 이 프로젝트를 생성했기 때문에 기본적으로 이미 설정되어 있습니다. 그러나 확장을 처음부터 디버그해야 하는 경우 동일한 디버그 설정을 사용하여 확장을 디버그할 수 있습니다. 
+    
+        내 Visual Studio Community 2019 설치에서 devenv.exe의 경로는  
+            "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.exe"  
+        SSMS 18경로는
+            C:\Program Files (x86)\Microsoft SQL Server Management Studio 18\Common7\IDE\Ssms.exe
 
     그림 3-19는 확장성 프로젝트의 디버그 속성을 보여줍니다.    
 
