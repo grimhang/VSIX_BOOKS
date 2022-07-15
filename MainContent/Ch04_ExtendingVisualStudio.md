@@ -37,7 +37,8 @@ Visual Studio에 사용자 지정 명령을 추가하려면 vsct 파일을 수�
 
 이러한 각 확장에 대한 세부 정보는 Visual Studio Marketplace 사이트(https://marketplace.visualstudio.com/) 의 해당 확장 페이지에서 읽을 수 있습니다.  
 Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 이것은 확장의 프로젝트 세부 정보 섹션에서 볼 수 있으므로 호기심 많은 독자는 이러한 각 확장이 마법을 어떻게 쓰는지 정확히 알 수 있습니다. Visual Studio 2019 확장 개발을 시작하기 전에 독자에게 이 확장 팩을 설치하는 것이 좋습니다.  확장은 Visual Studio Marketplace  
-(https://marketplace.visualstudio.com/items?itemName=MadsKristensen.ExtensibilityEssentials2019)에서 다운로드한 다음 설치할 수 있습니다. 또는 Visual Studio 상위 메뉴 확장 ➤ 확장 관리로 이동할 수 있습니다. 그런 다음 그림 4-1과 같이 Extensibility Essentials 2019를 검색합니다.
+(https://marketplace.visualstudio.com/items?itemName=MadsKristensen.ExtensibilityEssentials2019)에서 다운로드한 다음 설치할 수 있습니다.   
+또는 Visual Studio 상위 메뉴 확장 ➤ 확장 관리로 이동할 수 있습니다. 그런 다음 그림 4-1과 같이 Extensibility Essentials 2019를 검색합니다.
 
 ![04_01_ExtEssential2019](image/04/04_01_ExtEssential2019.png)   
 그림 4-01 Visual Studio 유저 인터페이스
