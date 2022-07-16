@@ -15,7 +15,7 @@ Visual Studio에 사용자 지정 명령을 추가하려면 vsct 파일을 수�
 - **MEF 구성 요소 캐시 정리**  
   캐시 손상 문제를 해결하기 위해 Visual Studio MEF(Managed Extensibility Framework) 구성 요소 캐시를 지웁니다.
 - **명령어 탐색기**  
-  확장 작성자가 원하는 위치에 명령/버튼을 배치할 수 있도록 모든 명령, 그룹 및 메뉴를 탐색할 수 있는 도구 창을 제공
+  확장 작성자가 원하는 위치에 명령/버튼을 배치할 수 있도록 모든 명령, 그룹 및 메뉴를 탐색할 수 있는 ToolWindow을 제공
 - **확장성 로그**  
   확장성 로그를 보는 가장 빠르고 쉬운 방법입니다.
 - **이미지 매니페스트 도구**  
@@ -25,11 +25,11 @@ Visual Studio에 사용자 지정 명령을 추가하려면 vsct 파일을 수�
 - **GUID 삽입**  
   편집기 및 입력 필드에 새 GUID를 매우 쉽게 삽입할 수 있습니다.
 - **알려진 모니커스 탐색기**  
-  Visual Studio 확장 작성자가 KnownMonikers 이미지 컬렉션을 탐색할 수 있는 도구 창입니다.
+  Visual Studio 확장 작성자가 KnownMonikers 이미지 컬렉션을 탐색할 수 있는 ToolWindow입니다.
 - **Pkgdef 언어**  
   .pkgdef 및 pkgundef 파일.
 - **설정 저장소 탐색기**  
-  VS 설정 저장소의 내용을 보고 편집하기 위한 도구 창입니다.
+  VS 설정 저장소의 내용을 보고 편집하기 위한 ToolWindow입니다.
 - **VSCT IntelliSense**  
   Visual Studio 확장 작성자가 사용하는 .vsct 파일에 대한 IntelliSense를 제공합니다.
 - **VSIX 동기화 프로그램**  
@@ -47,27 +47,26 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
 
 ## <font color='dodgerblue' size="6">2) 검색을 수행하는 Visual Studio 확장 만들어보기</font>
 **만들 기능 설명** :  
-많은 경우 새 코드를 작성하거나 기존 코드를 검토/수정하는 동안 인터넷에서 더 자세히 살펴보고 싶어합니다. 따라서 지식 탐색에서 일반적으로 전체 텍스트/코드 조각을 복사하고 선택한 브라우저를 열고 선호하는 검색 엔진(예: Bing)으로 이동한 다음 복사된 콘텐츠를 검색합니다. 우리는 결과를 보고 검색 결과에서 가장 관련성이 높은 링크를 읽은 다음 작업을 재개합니다.
-일반적으로 괜찮지만 Visual Studio에서 브라우저로 화면을 전환 해야 합니다. 
+코드중에서 궁금한 정보를 얻기위해 일반적으로는 코드중의 텍스트를 복사하고 선택한 브라우저를 열고 선호하는 검색 엔진(예: Bing)으로 붙여넣어 복사한 콘텐츠를 검색한다. 우리는 결과를 보고 검색 결과에서 가장 관련성이 높은 링크를 읽어서 결과를 얻는다.  
+일반적으로 괜찮지만 매번 Visual Studio에서 브라우저로 화면을 전환 해야 한다. 
 
-외부 브라우저를 열지 않고도 Visual Studio에서 직접 콘텐츠를 검색하고 결과를 볼 수 있다면 좋지 않을까요? 이것이 바로 우리가 새로운 확장으로 할 일입니다.
+외부 브라우저를 열지 않고도 Visual Studio에서 직접 콘텐츠를 검색하고 결과를 볼 수 있다면 좋지 않을까? 이것이 바로 우리가 새로운 확장으로 할 일이다.
 
-이 섹션에서는 Bing, Google, Microsoft Docs, stackOverflow 등과 같은 검색 엔진에서 Visual Studio의 코드 편집기에 작성된 코드/텍스트를 검색하고 결과를 비주얼 스튜디오 브라우저에 표시하는 데 도움이 되는 Visual Studio 확장을 개발할 것입니다. 이 확장의 목적은 파일 전송을 통해 또는 시장에 업로드하여 다른 사용자에게 제공할 수 있는 확장을 만드는 단계별 절차를 보여 주는 것입니다. 그림 4-2와 같이 코드 창에서 선택한 텍스트를 검색하는 컨텍스트 메뉴 명령이 있는 확장을 상상합니다.
+이 섹션에서는 Bing, Google, Microsoft Docs, stackOverflow 등과 같은 검색 엔진에서 Visual Studio의 코드 편집기에 작성된 코드텍스트를 검색하고 결과를 비주얼 스튜디오내의 인터넷 브라우저에 표시하도록 하는  Visual Studio 확장을 개발할 것이다. 이 확장의 목적은 파일 전송을 통해 또는 시장에 업로드하여 다른 사용자에게 제공할 수 있는 확장을 만드는 단계별 절차를 보여 주는 것입니다. 그림 4-2와 같이 코드 창에서 선택한 텍스트를 검색하는 컨텍스트 메뉴 명령이 있는 확장을 상상해보자.
 
 ![04_02_SearchCommand](image/04/04_02_SearchCommand.png)   
 그림 4-02 Search 명령어
 
 이 확장 기능을 개발하는 것 외에도 다음을 배우게 됩니다.
-* 내 확장에서 Visual Studio에 의해 이미 노출된 서비스/API를 어떻게 사용합니까?
-* 사용자 지정 명령에 아이콘을 추가하려면 어떻게 합니까?
-* 사용자 지정 명령에 키보드 단축키를 할당하려면 어떻게 합니까?
-* 내 확장의 옵션을 어떻게 사용합니까?
-* Visual Studio 자동화 모델을 이해하는 방법을 배우려면 어떻게 해야 합니까?
+* 확장에서 Visual Studio에 의해 이미 노출된 서비스/API를 어떻게 사용하는지
+* 사용자 지정 명령에 아이콘을 추가하려면 어떻게 하는지
+* 사용자 지정 명령에 키보드 단축키를 할당하려면 어떻게 하는지
+* 옵션이 지정할수 있는 경우 어떻게 만드는지
+* Visual Studio 자동화 모델을 이해하는 방법을 배우려면 어떻게 해야 하는지
 
-시작하겠습니다.
 
 - ### A. 확장 시작하기
-    이것이 우리의 첫 번째 실제 확장이기 때문에 각 단계에 대한 근거와 접근 방식을 이해할 수 있도록 단계를 자세히 논의합니다. 이 확장을 만드는 단계는 다음과 같습니다.
+    이것이 우리의 첫 번째 확장이기 때문에 각 단계를 이해할 수 있도록 단계를 자세히 논의한다.
 
     - **1. 새 프로젝트 생성**  
         Visual Studio 2019에서 새 VSIX 프로젝트를 만듭니다. 이름을 "ExternalSearch"로 지정하겠습니다. 이는 그림 4-3에 나와 있습니다.
@@ -129,32 +128,32 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
         그러면 몇 가지 새 파일(.cs, .vsct, .png)과 참조가 추가됩니다. 우리는 이미 지난 장에서 이러한 파일에 대해 논의했습니다.
 
 - ### B. 메뉴에 명령 추가하기        
-    이전 장에서 우리는 또한 명령을 추가한 후 확장을 실행할 수 있고 새 명령이 Visual Studio의 최상위 메뉴중 도구 항목에 추가된다는 것을 알고 있습니다. 코드 창에서 텍스트/코드를 선택한 다음 도구 메뉴로 이동하여 명령을 클릭하는 인체공학적 디자인이 아니므로 이번에는 도구 메뉴에서 이 명령을 원하지 않습니다.  
-    텍스트/코드 조각을 쉽게 선택하고 이 명령을 클릭하여 검색을 수행할 수 있도록 이 명령을 코드 편집기 창의 상황에 맞는 메뉴 항목으로 사용하는 것이 좋습니다. 따라서 이 명령은 코드를 편집하는 코드 편집기 창에 나타나야 합니다. 또한 확장을 사용하는 개발자가 코드 창에서 코드 텍스트를 선택하고 키 조합을 눌러 검색을 수행할 수 있도록 이 명령에 대한 키보드 지원을 원합니다. 
+    이전 장에서 우리는 또한 명령을 추가한 후 확장을 실행할 수 있고 새 명령이 Visual Studio의 최상위 메뉴중 **도구** 항목 아래 추가된다는 것을 알고 있다. 코드편집기에서 텍스트를 선택한 다음 **도구** 메뉴로 이동하여 명령을 클릭하는 것은 인체공학적 디자인이 아니기 때문에 이번에는 도구 메뉴를 원하지 않는다.  
+    텍스트를 선택하고 코드 편집기에서 오른쪽 마우스를 클릭해서 나오는 팝업메뉴를 사용하는 것이 좋다. 또한 코드 텍스트를 선택 후 바로 키 조합을 눌러 검색을 수행할 수 있도록 단축키 키보드 지원도 원한다. 
     
-    새로 추가된 명령어의 위치는 .vsct 파일의 Groups 섹션, 특히 그림 4-10에서와 같이 Parent 요소의 id 속성에 지정되어 있음을 기억하십시오.
+    새로 추가된 명령어의 위치는 .vsct 파일의 Groups 섹션, 특히 그림 4-10에서와 같이 Parent 요소의 id 속성에 지정되어 있음을 기억해라.
 
     ![04_10_ParentId](image/04/04_10_ParentId.png)   
     그림 4-10 Parent Id는 명령어의 위치를 결정한다 
 
     - **1. 어떤 Parent id 값을 넣어야 하나**       
-        이 명령의 위치를 도구 메뉴에서 코드 창으로 변경할 수 있도록 Group 요소 아래에 있는 Parent 요소의 id 속성을 수정해야 합니다. 이제 질문이 떠오릅니다. 이를 달성하려면 어떤 id 값을 업데이트해야 합니까? 이를 위한 몇 가지 접근 방식에 대해 논의할 것입니다. 그러나 마지막 접근 방식은 다른 새로운 시나리오에서도 따를 수 있는 일반적인 접근 방식입니다. 접근 방식은 다음과 같습니다.
+        이 명령의 위치를 도구 메뉴에서 코드 편집기로 변경할 수 있도록 Group 요소 아래에 있는 Parent 요소의 id 속성을 수정해야 한다. 이를 달성하려면 어떤 id 값을 업데이트해야 하나? 이를 위한 몇 가지 접근 방식이 있다. 그러나 마지막 접근 방식은 다른 새로운 시나리오에서도 따를 수 있는 일반적인 접근 방식입니다. 목록은 다음과 같습니다.
 
         - **a. 인텔리센스 확장 사용하기**  
-            이 장의 앞부분에서 Extensibility Essentials 2019 확장 팩을 설치했습니다. 이 팩의 일부인 확장 중 하나는 VSCT IntelliSense입니다. 이렇게 하면 vsct 파일에서 IntelliSense 지원이 활성화됩니다. 이제 vsct 파일에서 id 값을 편집하고 코드(코드 창용)를 입력하면 다음 그림과 같이 코드가 포함된 유효한 id 값 집합이 표시됩니다.  
+            이 장의 앞부분에서 Extensibility Essentials 2019 확장 팩을 설치했습니다. 이 팩의 일부인 확장 중 하나는 VSCT IntelliSense입니다. 이렇게 하면 vsct 파일에서 IntelliSense 지원이 활성화됩니다. 이제 vsct 파일에서 id 값을 편집하고 코드(코드 텍스트용)를 입력하면 다음 그림과 같이 코드가 포함된 유효한 id 값 집합이 표시됩니다.  
             값 그룹에서 IDM_VS_CTXT_CODEWIN은 코드 창의 컨텍스트 메뉴처럼 들리므로 우리 시나리오에 가장 적합합니다. 온라인에서 검색해보니 실제로 코드 창에 대한 올바른 ID입니다. 그러나 이것은 히트 앤 트라이얼 접근 방식이며 다른 시나리오에서는 확장되지 않을 수 있습니다. IntelliSense가 올바른 값을 입력하도록 안내하지만 여전히 올바른 위치에 명령을 배치하도록 안내하지 못할 수 있습니다. 아마도 도구 설명이나 해당 위치 글리프가 도움이 될 것입니다. 그림 4-11을 참조하십시오.
             
             ![04_11_IntellisenseSupportVsctFile](image/04/04_11_IntellisenseSupportVsctFile.png)   
             그림 4-11 .vsct파일에서 인텔리센스 지원
 
-        - **b. 명령어 탐색기 확장 사용하기 - 일반적으로 권장**  
+        - **b. Commander Explorer(명령어 탐색기 확장) 사용하기 - 일반적으로 권장**  
             이것은 Extensibility Essentials 2019 확장 팩의 일부로 설치됩니다. 코드 창 상황에 맞는 메뉴에 명령을 추가하고 싶기 때문에 먼저 코드 창의 상황에 맞는 메뉴에 어떤 명령이 있는지 살펴보겠습니다. 코드 창 컨텍스트 메뉴에 있는 명령은 그림 4-12에서 볼 수 있습니다.
 
             ![04_12_CodeWindowContextMenu](image/04/04_12_CodeWindowContextMenu.png)   
             그림 4-12 코드 창 컨텍스트 메뉴
 
         - **c. 명령 탐색기 도구 창**  
-            그런 다음 Visual Studio 상단 메뉴로 이동하고 탐색 보기 ➤ 기타 창 ➤ 명령 탐색기를 따릅니다. 명령 탐색기 도구 창이 시작됩니다. Visual Studio IDE에서 제공하는 모든 명령을 표시합니다. 명령 이름을 입력하여 명령을 검색하거나 확인란을 선택하여 검사 모드에서 이 확장을 사용할 수 있습니다. 확인란을 선택하면 Ctrl Shift 키를 누른 후 명령을 실행할 수 있습니다. 그러면 그림 4-13과 같이 명령을 가로채서 명령 탐색기 창에 세부정보가 표시됩니다. 여기에서 그룹 섹션에서 컨텍스트 메뉴의 ID를 찾을 수 있습니다.
+            그런 다음 Visual Studio 상단 메뉴로 이동하고 탐색 보기 ➤ 기타 창 ➤ Commander Explorer(명령어 탐색기)를 따릅니다. Visual Studio IDE에서 제공하는 모든 명령을 표시합니다. 명령 이름을 입력하여 명령을 검색하거나 확인란을 선택하여 검사 모드에서 이 확장을 사용할 수 있습니다. 확인란을 선택하면 Ctrl Shift 키를 누른 후 명령을 실행할 수 있습니다. 그러면 그림 4-13과 같이 명령을 가로채서 명령 탐색기 창에 세부정보가 표시됩니다. 여기에서 그룹 섹션에서 컨텍스트 메뉴의 ID를 찾을 수 있습니다.
 
             ![04_13_CommandExplorer](image/04/04_13_CommandExplorer.png)   
             그림 4-13 명령어 탐색기
@@ -190,7 +189,7 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
         Visual Studio 이미지 카탈로그의 기본 제공 이미지를 사용하고 있으므로 솔루션에 .png 파일이 필요하지 않습니다. 따라서 vsct 파일에 정의된 Bitmaps 요소와 해당 기호가 필요하지 않습니다. 앞으로 vsct 파일에서 이러한 모든 요소들을 제거할 것입니다.
 
     - **2. 추가작업**   
-        그러나 이것은 그대로 작동하지 않습니다. Icon 요소 뒤에 CommandFlag 요소를 추가하고 해당 값을 ImageIsMoniker(오타 같음. IconIsMoniker가 맞는거 같음)를 사용하여 명령어에 해당하는 아이콘을 설정 해야 합니다. 위의 단계를 통해 Visual Studio 이미지 카탈로그의 일부로 제공되는 이미지를 사용할 수 있지만 공식 Microsoft Visual Studio 확장성 문서에 Visual Studio의 이미지, 모니커, 이미지 서비스 및 이미지 렌더링 아키텍처에 대한 풍부한 정보가 있습니다. 
+        그러나 이것은 그대로 작동하지 않습니다. Icon 요소 뒤에 CommandFlag 요소를 추가하고 해당 값을 IconIsMoniker를 사용하여 명령어에 해당하는 아이콘을 설정 해야 합니다. 위의 단계를 통해 Visual Studio 이미지 카탈로그의 일부로 제공되는 이미지를 사용할 수 있지만 공식 Microsoft Visual Studio 확장성 문서에 Visual Studio의 이미지, 모니커, 이미지 서비스 및 이미지 렌더링 아키텍처에 대한 풍부한 정보가 있습니다. 
         https://docs.microsoft.com/en-us/visualstudio/extensibility/image-service-and-catalog?view=vs-2019
 
         ![04_15_1_CommandFlag](image/04/04_15_1_CommandFlag.png)   
@@ -222,8 +221,8 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
     위의 단계로 모든 vsct 파일 변경이 완료되었습니다. 코드 창 컨텍스트 메뉴에 연결된 새 명령어를 가지고 있습니다. 명령에는 아이콘이 연결되어 있으며 이 명령에도 키보드 단축키가 할당되어 있습니다.
 
     이제 이 검색 명령 클릭 이벤트를 처리하는 코드를 작성해야 합니다.
-    코드 창에서 텍스트/코드 조각을 선택한 다음 마우스 오른쪽 버튼을 클릭하고 검색 명령을 실행한다는 점을 기억하십시오. 또는 텍스트를 선택하고
-    Alt + S를 눌러 검색을 시작하므로 검색 명령의 이벤트 핸들러에서 다음을 수행해야 합니다.
+    코드 창에서 텍스트를 선택한 후 마우스 오른쪽 버튼을 클릭하고 검색 명령을 실행한다는 점을 기억하십시오.  
+    또는 텍스트를 선택하고 Alt + S를 눌러 검색을 시작하므로 검색 명령의 이벤트 핸들러에서 다음을 수행해야 합니다.
         a. 선택한 텍스트를 가져옵니다.
         b. 이 텍스트를 인코딩하여 검색 엔진에 전달하십시오.
         c. 브라우저에 검색 결과를 표시합니다.
@@ -233,8 +232,8 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
     여기서 핵심 Visual Studio 자동화의 최상위 개체인 DTE가 등장합니다.
     Visual Studio는 Visual Studio 구성 요소 및 확장에서 사용할 수 있는 여러 서비스를 사용하고 노출합니다. DTE 또는 문서 도구 확장성이라 불리는 기능은 문서를 확장하고 자동화하는 데 사용할 수 있는 속성과 API를 제공합니다.
 
-    프로젝트 등. DTE, 중요한 속성 및 방법을 빠르게 살펴보겠습니다.
-    DTE의 클래스 다이어그램은 그림 4-18에 나와 있으며 장의 끝 부분에 있는 "클래스 참조" 섹션에는 DTE의 속성과 메서드가 요약되어 있습니다. 같은 내용을 온라인(https://docs.microsoft.com/en-us/dotnet/api/envdte.dte?view=visualstudiosdk-2017&viewFallbackFrom=visualstudiosdk-2019)에서 볼수 있다.
+    프로젝트의 DTE, 중요한 속성 및 방법을 빠르게 살펴보겠습니다.
+    DTE의 클래스 다이어그램은 그림 4-18에 나와 있으며 이번 장 끝 부분에 있는 "클래스 레퍼런스" 섹션에는 DTE의 속성과 메서드가 요약되어 있다. 같은 내용을 온라인(https://docs.microsoft.com/en-us/dotnet/api/envdte.dte?view=visualstudiosdk-2017&viewFallbackFrom=visualstudiosdk-2019)에서 볼수 있다.
 
     ![04_18_DteClassDiagram](image/04/04_18_DteClassDiagram.png)   
     그림 4-18 DTE 클래스 다이어그램
@@ -380,7 +379,8 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
         }
         ```
 
-        파일에는 하나의 정적 필드와 세 개의 속성만 있습니다. 정적 필드 SearchEngines는 키로 SearchEngines 열거형의 사전이고 값으로 문자열입니다. URL이 있는 다른 검색 엔진이 사전에 추가됩니다. System.ComponentModel 네임스페이스는 속성에 적용할 수 있는 여러 특성을 정의합니다. 이러한 속성은 이전 코드 목록에서 굵게 강조 표시되어 있습니다. 이러한 속성의 목적은 표 4-1에 요약되어 있습니다.
+        파일에는 하나의 정적 필드와 세 개의 속성이 있습니다.  
+        정적 필드 allEngines는 **Dictionary<SearchEngines, string>**형태이며 열거형 SearchEngines가 키, 문자열이 값인 Dictionary입니다. URL에 다른 검색 엔진이  추가됩니다. System.ComponentModel 네임스페이스는 속성에 적용할 수 있는 여러 특성을 정의합니다. 이러한 속성은 이전 코드 목록에서 굵게 강조 표시되어 있습니다. 이러한 속성의 목적은 표 4-1에 요약되어 있습니다.
     
         표4-1 System.ComponentModel에 정의된 속성들
         ```
@@ -398,13 +398,11 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
         Browsable       PropertyGrid에 속성을 표시할지 여부를 지정합니다.
         ```
 
-        외부 브라우저에서 검색 결과를 보고 싶어하는 확장 프로그램 사용자가 있을 수 있습니다. 이를 위해 UseVSBrowser 속성이 추가됩니다. 기본값은 true입니다. 즉, 기본적으로 Visual Studio 브라우저가 사용됩니다. 
+        외부 브라우저에서 검색 결과를 보고 싶어하는 확장 프로그램 사용자가 있을 수 있습니다. 이를 위해 UseVSBrowser 속성이 추가됩니다. 기본값은 true입니다. 즉, 기본적으로 Visual Studio Browser가 사용됩니다. 
         
-        다른 속성은 최종 사용자가 선택하도록 검색 엔진을 노출하는 SearchEngine의 속성입니다. 따라서 사용자는 Bing, Google, StackOverflow 또는 Microsoft Docs를 유연하게 선택할 수 있습니다. 검색 엔진의 기본값은 Bing이고 TypeConverter 속성은 열거형의 모든 값이 속성 그리드에 드롭다운으로 표시되도록 합니다. 사용자가 검색 엔진을 선택하면 해당 URL을 사용해야 하므로 정적 사전에서 조회를 수행하여 선택한 검색 엔진의 URL을 가져와야 합니다. 이것은 URL 속성에서 수행됩니다. 사용자가 편집하는 것을 원하지 않으므로 읽기 전용입니다(속성만 가져오기). 또한 한 번 검색 엔진이 선택되면 URL을 변경할 수 없으므로 사용자에게 보여 주는 의미가 없습니다. false 매개변수가 있는 Browsable 속성은 이 속성을 숨깁니다. 
+        다른 속성은 최종 사용자가 검색 엔진을 선택하도록 노출하는 SearchEngine의 속성입니다. 따라서 사용자는 Bing, Google, StackOverflow 또는 Microsoft Docs중 하나를 선택할 수 있다. 검색 엔진의 기본값은 Bing이고 TypeConverter 속성은 열거형의 모든 값이 속성 그리드에 드롭다운으로 표시되도록 합니다. 사용자가 검색 엔진을 선택하면 해당 URL을 사용해야 하므로 static Dictionary에서 조회를 수행하여 선택한 검색 엔진의 URL을 가져와야 한다. 이것은 Url 속성에서 수행된다. 사용자가 편집하는 것을 원하지 않으므로 읽기 전용(속성만 가져오기). 또한 한 번 검색 엔진이 선택되면 URL을 변경할 수 없으므로 사용자에게 보여 주는 의미가 없다. Browsable 속성에 false를 지정해 이 속성을 숨긴다. 
         
-        이것으로 간단한 PropertyGrid 기반 DialogPage에 대한 코딩이 완료되었습니다. DialogPage 인프라가 처리하므로 값을 유지하거나 값을 로드하는 것에 대해 걱정할 필요가 없습니다. 그러나 옵션 페이지에 사용자 정의 UI를 표시해야 하는 경우가 있습니다. UIElementDialogPage(DialogPage 대신)에서 옵션 페이지 클래스를 상속하고 적절한 UI가 있는 UserControl을 만들어 이 사용자 지정 UI 시나리오를 달성할 수 있습니다. 우리가 개발하는 후속 확장에서 이 시나리오가 실제로 실행되는 것을 보게 될 것입니다. 
-        
-
+        이것으로 간단한 PropertyGrid 기반 DialogPage에 대한 코딩이 완료되었습니다. 값을 유지하거나 값을 로드하는 것에 대해 DialogPage 인프라가 처리하므로 걱정할 필요가 없다. 그러나 옵션 페이지에 사용자 정의 UI를 표시해야 하는 경우가 있습니다. UIElementDialogPage(DialogPage 대신)에서 옵션 페이지 클래스를 상속하고 적절한 UI가 있는 UserControl을 만들어 이 사용자 지정 UI 시나리오를 달성할 수 있다. 우리가 개발하는 후속 확장에서 이 시나리오가 실제로 실행되는 것을 보게 될 것이다. 
 
     현재 확장으로 돌아가서 여전히 패키지와 연결한 다음 확장 코드의 옵션에 액세스하여 사용자가 제공한 값을 존중해야 합니다. 다음 단계에서 이러한 변경을 수행할 것입니다.
 
@@ -424,7 +422,7 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
     private void Execute(object sender, EventArgs e)
     {
         ThreadHelper.ThrowIfNotOnUIThread();
-        var options = this.package.GetDialogPage(typeof(ExternalSearchOptionPage)) as ExternalSearchOptionPage;        // 옵션 얻기
+        var options = this.package.GetDialogPage(typeof(ExternalSearchOptionPage)) as ExternalSearchOptionPage;   // 옵션 얻기
         var textSelection = DteInstance?.ActiveDocument?.Selection as TextSelection;
         if (textSelection == null)
         {
@@ -434,8 +432,7 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
         string textToBeSearched = textSelection?.Text?.Trim();
         if (!string.IsNullOrWhiteSpace(textToBeSearched))
         {
-            var encodedText = HttpUtility.
-            UrlEncode(textToBeSearched);
+            var encodedText = HttpUtility.UrlEncode(textToBeSearched);
             DteInstance.StatusBar.Text = $"Searching{textToBeSearched}";
             OutputWindow.OutputString($"Searching{textToBeSearched}");
             string url = string.Format(options.Url, encodedText);
@@ -468,32 +465,35 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
     ![04_29_UsingGoogleSearch](image/04/04_29_UsingGoogleSearch.png)   
     그림 4-29 구글 검색 사용하기
 
-이제 확장 기능이 다른 사용자와 공유하기에 충분해 보입니다. 축하합니다! 우리는 다른 사용자와 공유할 준비가 거의 된 작업 확장을 완료했습니다(물론 테스트 후).  
+축하합니다! 우리는 다른 사용자와 공유할 준비가 거의 된 확장을 만들었습니다(물론 테스트 후).  
 Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensibility-Samples/tree/master/Options)에서 볼 수 있는 옵션 페이지 사용법을 보여주는 훌륭한 예제들이 있습니다. 
 
 기본 클래스와 모델을 노출하여 옵션 페이지를 만들어 봤습니다.  
-스레드로부터 안전한 방식으로 옵션 페이지의 복잡성을 보여주는 또 다른 샘플은 https://github.com/madskristensen/OptionsSample입니다. 솔루션 탐색기 창이나 속성 창과 같은 일부 사용자 지정 UI를 사용하여 Visual Studio에 별도 Window를 표시해야 하는 확장 프로그램을 개발해야 하는 경우가 있습니다.  
-이를 개발하기 위해 Visual Studio에는 AsyncToolWindow라는 기본 제공 항목 템플릿이 있습니다. 다음 섹션에서는 Visual Studio용 간단한 도구 창 확장을 개발하는 방법을 살펴보겠습니다.
+
+스레드로부터 안전한 방식으로 옵션 페이지의 복잡성을 보여주는 또 다른 샘플은 https://github.com/madskristensen/OptionsSample입니다. 솔루션 탐색기 창이나 속성 창과 같은 일부 사용자 지정 UI를 사용하여 Visual Studio에 별도 Window를 표시해야 하는 확장 프로그램을 개발해야 하는 경우가 있다.  
+이를 개발하기 위해 Visual Studio에는 AsyncToolWindow라는 기본 제공 항목 템플릿이 있다. 다음 섹션에서는 Visual Studio용 간단한 도구 창 확장을 개발하는 방법을 살펴본다.
 
 ## <font color='dodgerblue' size="6">3) DTE 오브젝트 보여주기 위한 도구 윈도우 확장</font>
-마지막 섹션에서 확장에 대한 옵션 페이지를 개발했으며 내부적으로 DialogPage 창이 PropertyGrid 컨트롤을 사용한다는 것을 이해했습니다. 이 섹션에서는 속성 그리드 컨트롤에 DTE 개체를 표시하는 도구 창 확장을 개발할 것입니다. 
+마지막 섹션에서 확장에 대한 옵션 페이지를 개발했으며 내부적으로 DialogPage 창이 PropertyGrid 컨트롤을 사용한다는 것을 이해했다. 이번 섹션에서는 속성 그리드 컨트롤에 DTE 개체를 표시하는 도구 창 확장애드온을 개발할 것이다. 
 
-도구 창 확장은 Visual Studio IDE에 창을 표시합니다. 이 확장의 구조는 패키지로 시작할 때 사용자 지정 명령 솔루션과 유사합니다. 그런 다음 명령, vsct 파일 및 도구 창을 표시하기 위한 클래스를 추가하는 AsyncToolWindow 클래스를 추가합니다. 이 명령은 도구 창을 시작하는 수단을 제공합니다. 도구 창은 선택한 UI를 표시하도록 디자인할 수 있는 WPF 사용자 정의 컨트롤을 호스팅합니다. 이 확장에서는 사용자 정의 컨트롤에 속성 그리드 컨트롤을 추가하고 Visual Studio IDE에서 DTE 개체의 속성을 표시합니다.
+도구 창(Tool Window) 확장애드온은 Visual Studio IDE에 창을 표시한다. 이 확장애드온은  Custom Command가 포함한 솔루션과 패키지 구조가  유사하다. 그런 다음 Command, vsct 파일 및 도구창을 표시하기 위해 AsyncToolWindow 클래스를 추가한다. 이때 Command는 도구창을 시작하는 방법을 제공한다. 도구창은 선택한 UI를 표시하도록 디자인할 수 있는 WPF 사용자 정의 컨트롤을 호스팅한다.  
+이 확장에서는 사용자 정의 컨트롤에 속성 그리드 컨트롤을 추가하고 Visual Studio IDE에서 DTE 개체의 속성을 표시한다.
 
 - ### A. 확장 시작하기
-    이 확장을 개발해보자. 단계는 다음과 같다.
+    개발을 시작해보자. 단계는 다음과 같다.
 
     - **1.새 VSIX 프로젝트 생성**      
         Visual Studio 2019에서 새 VSIX 만들자. 이름은 "PropertiesToolWindow".
     
     - **2. 업데이트 vsixmanifest**      
-        이 장의 앞부분에서 설명한 대로 적절하고 의미 있는 값으로 vsixmanifest 파일을 업데이트하십시오. 업데이트된 vsixmanifest 파일은 그림 4-30에 나와 있습니다.
+        이 장의 앞부분에서 설명한 대로 적절하고 의미 있는 값으로 vsixmanifest 파일을 업데이트해라. 업데이트된 vsixmanifest 파일은 그림 4-30에 나와 있습니다.
 
         ![04_30_UpdatedVsixmanifest](image/04/04_30_UpdatedVsixmanifest.png)   
         그림 4-30 업데이트된 vsixmanifest 파일
 
     - **3. Async Tool Window 템플릿 추가**  
-        이제 도구 창을 추가합니다. 이렇게 하려면 솔루션 탐색기에서 프로젝트를 마우스 오른쪽 버튼으로 클릭한 다음 상황에 맞는 메뉴에서 추가 ➤ 새 항목을 클릭합니다. 그러면 새 항목 추가 대화 상자가 열립니다. 왼쪽 창의 확장성 범주에서 비동기 도구 창을 클릭하고 클래스 이름을 ToolWindow로 지정합니다. 그러면 AsyncPackage에서 호스팅할 수 있는 도구 창과 이 창을 비동기식으로 로드하는 명령이 추가됩니다. 이는 그림 4-31에 나와 있습니다.
+        이제 도구 창을 추가하자. 이렇게 하려면 솔루션 탐색기에서 프로젝트를 마우스 오른쪽 버튼으로 클릭한 다음 상황에 맞는 메뉴에서 추가 ➤ 새 항목을 클릭다. 그러면 새 항목 추가 대화 상자가 열리는데 왼쪽 창의 Extensibility 범주에서 Async Tool Window를 클릭하고 클래스 이름을 ToolWindow로 지정합니다. 그러면 AsyncPackage에서 호스팅할 수 있는 도구 창과 이 창을 비동기식으로 로드하는 명령이 추가된다.  
+        이는 그림 4-31에 나와 있습니다.
         
         ![04_31_AsyncToolWindow](image/04/04_31_AsyncToolWindow.png)   
         그림 4-31 Async Tool Window 템플릿 선택
@@ -526,44 +526,44 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
         - **b. WPF 사용자 정의 컨트롤**        
         Visual Studio에서 자체적으로 호스팅되는 도구 창에서 호스팅할 WPF 사용자 정의 컨트롤입니다.
 
-        이 단계에서 확장은 이미 작동 상태입니다. 만약 우리가 이 프로젝트를 실행/디버그하면 Visual Studio IDE의 새로운 실험적 인스턴스가 열리고 보기 ➤ 기타 창 ➤ 속성 도구 창으로 이동하면 버튼이 있는 도구 창이 표시됩니다. 버튼을 클릭하면 메시지 상자가 표시됩니다. 요구 사항에 맞게 코드를 사용자 지정해야 합니다. 먼저 이미지, 적절한 텍스트 및 키보드 단축키를 명령에 할당하도록 vsct 파일을 수정합니다. 이전 확장에서 vsct 파일을 업데이트하는 단계를 이미 보았습니다. 그림 4-34는 업데이트된 .vsct 파일의 코드 조각을 보여줍니다. 쉽게 식별할 수 있도록 변경 사항이 강조 표시됩니다.   
+        이 단계에서도 확장애드온은 작동 가능하다.  
+        이 프로젝트를 실행/디버그하면 Visual Studio IDE의 새로운 실험 인스턴스가 열리고 보기 ➤ 다른 창 ➤ ToolWindow 창으로 이동하면 버튼이 있는 도구 창이 표시된다. 해당 버튼을 클릭하면 심플한 메시지 상자가 표시된다.  
+        이제부터는 요구 사항에 맞게 코드를 사용자 지정해야 하니 이미지와 적절한 텍스트 및 키보드 단축키를 명령에 할당하도록 vsct 파일을 수정하자.  
+        그림 4-34는 업데이트된 .vsct 파일의 코드 조각이다. 쉽게 식별할 수 있도록 변경 사항이 강조 표시해두었다.   
 
         ![04_34_UpdatedVsctFile](image/04/04_34_UpdatedVsctFile.png)   
         그림 4-34 업데이트된 .vsct 파일
         
-        guidSHLMainMenu id는 Visual Studio 상위 메뉴의 **보기 ➤ 기타 Windows** 메뉴에 해당하는 **IDG_VS_WDO_OTRWNDWS1**로 설정됩니다. 이 위치를 변경하려면 이 장의 앞부분에서 설명한 대로 이 ID를 변경해야 합니다. Shift F2의 키보드 조합이 명령에 할당됩니다.
+        guidSHLMainMenu id는 Visual Studio 상위 메뉴의 **보기 ➤ 기타 Windows** 메뉴에 해당하는 **IDG_VS_WDO_OTRWNDWS1**에 해당하는 기본값 설정됨. 이 위치를 변경하려면 이 장의 앞부분에서 설명한 대로 이 ID를 변경해야 합니다. Shift F2의 키보드 조합이 명령에 할당된다.
 
     - **2. PropertyGrid 컨트롤 추가**  
         다음으로, DTE 개체의 속성을 표시하는 속성 그리드를 갖도록 WPF 사용자 정의 컨트롤을 수정합니다.  
         
-        불행히도 기본 WPF 도구 상자에는 PropertyGrid 컨트롤이 없습니다. Windows Forms에는 있습니다. 그러나 WPF용 PropertyGrid 컨트롤이 있는 몇 가지 타사 패키지가 있습니다. 여기서는 Exceed의 Extended.WPF.Toolkit을 사용합니다. 이렇게 하려면 프로젝트 > 참조를 마우스 오른쪽 버튼으로 클릭한 다음 NuGet 패키지 관리를 클릭합니다. 찾아보기 섹션에서 그림 4-35와 같이 프로젝트의 Extended.WPF.Toolkit 패키지를 검색하여 설치합니다.
+        불행히도 기본 WPF 도구 상자에는 PropertyGrid 컨트롤이 없다. Windows Forms에는 있다. 그러나 WPF용 PropertyGrid 컨트롤이 있는 몇 가지 타사 패키지가 있고 여기서는 Exceed의 Extended.WPF.Toolkit을 사용한다. 프로젝트의 참조에서 마우스 우 클릭한 다음 NuGet 패키지 관리를 클릭하고 찾아보기 섹션에서 그림 4-35와 같이 프로젝트의 Extended.WPF.Toolkit 패키지를 검색하여 설치한다.
 
         ![04_35_ExtWpfToolkit](image/04/04_35_ExtWpfToolkit.png)   
         그림 4-35 Extended.Wpf.Toolkit
         
     - **3. xaml수정**  
-        패키지가 설치되면 그림 4-36과 같이 사용자 제어 XAML 파일을 수정합니다.
-
-        ![04_35_ExtWpfToolkit](image/04/04_35_ExtWpfToolkit.png)   
-        그림 4-35 Extended.Wpf.Toolkit
+        패키지가 설치되면 그림 4-36과 같이 사용자 제어 XAML 파일을 수정한다.
 
         ![04_36_UpdatedXaml](image/04/04_36_UpdatedXaml.png)   
         그림 4-36 업데이트된 XAML
 
-        다음 변경 사항이 적용됩니다.
+        다음 변경 사항이 적용된다.
 
-        a. UserControl 요소의 툴킷에 대한 xmlns를 추가했습니다.  
-        b. Grid의 행 및 열 정의를 정의했습니다.  
-        c. PropertyGrid 컨트롤이 추가되었습니다.
+        a. UserControl 요소의 툴킷에 대한 xmlns를 추가.  
+        b. Grid의 행 및 열 정의를 정의.  
+        c. PropertyGrid 컨트롤이 추가되었다.
 
     - **4. 코드업데이트**  
-        다음으로 사용자 컨트롤의 파일 뒤에 있는 코드를 업데이트하겠습니다. 사용자 컨트롤의 UI는 간단합니다. PropertyGrid 컨트롤만 있습니다. 따라서 코드 숨김 파일에서 이 컨트롤에 바인딩하려는 데이터를 전달해야 합니다. 엔터티 또는 모델(바인딩할 데이터가 포함된 클래스)을 매개변수로 사용하는 사용자 정의 컨트롤에 대한 새 생성자를 정의해 보겠습니다. 해당 클래스의 이름을 ToolWindowData로 지정하겠습니다. 데이터가 있으면 속성 그리드에 바인딩하기만 하면 됩니다. 이것은 그림 4-37에 나와 있습니다.
+        다음으로 사용자 컨트롤의 파일 뒤에 있는 코드를 업데이트하겠습니다. 사용자 컨트롤의 UI는 간단합니다. PropertyGrid 컨트롤만 있다. 따라서 코드 숨김 파일에서 이 컨트롤에 바인딩하려는 데이터를 전달해야 한다. 엔터티 또는 모델(바인딩할 데이터가 포함된 클래스)을 매개변수로 사용하는 사용자 정의 컨트롤에 대한 새 생성자를 정의해 보겠습니다. 해당 클래스의 이름을 ToolWindowData로 지정하겠습니다. 데이터가 있으면 속성 그리드에 바인딩하기만 하면 됩니다. 이것은 그림 4-37에 나와 있습니다.
 
         ![04_37_UserControlCodeBehind](image/04/04_37_UserControlCodeBehind.png)   
         그림 4-37 사용자 컨트롤 코드 비하인드
 
-    - **5. dd**          
-        ToolWindowData에 대한 더미 클래스가 생성되었습니다. 도구 창에 표시할 속성을 추가해 보겠습니다. DTE 개체를 보고 싶으므로 DTE에 대한 속성을 추가해 보겠습니다. AsyncPackage 클래스에 무엇이 있는지 살펴보겠습니다. AsyncPackage에 대한 속성 하나를 추가한 다음 마지막으로 PropertyGrid의 기능을 보기 위해 WPF 컨트롤 중 하나에 대한 속성을 추가합니다. 이전에 옵션 페이지에서 했던 것처럼 속성으로 속성을 장식할 것입니다. ToolWindowData의 코드는 다음과 같습니다.
+    - **5. ToolWindowData 클래스 작성**          
+        ToolWindowData에 대한 더미 클래스가 생성되으니 도구창에 표시할 속성을 추가해 보자. DTE 개체를 보고 싶으므로 DTE에 대한 속성을 추가한다. AsyncPackage 클래스에 무엇이 있는지 살펴보겠습니다. AsyncPackage에 대한 속성 하나를 추가한 다음 마지막으로 PropertyGrid의 기능을 보기 위해 WPF 컨트롤 중 하나에 대한 속성을 추가합니다. 이전에 옵션 페이지에서 했던 것처럼 속성으로 속성을 장식할 것입니다. ToolWindowData의 코드는 다음과 같습니다.
 
         ```cs
         [DisplayName("Tool Window Data")]
@@ -592,43 +592,45 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
         }
         ```
         
-        나는 독자들이 위에서 사용된 속성, 특히 PropertyGrid 컨트롤에서 데이터가 표시되는 방식에서 중추적인 역할을 하는 TypeConverters를 자세히 살펴보기를 적극 권장합니다. 여기에서는 확장 가능 또는 동적 개체를 다른 유형으로 변환하는 데 사용할 수 있는 ExpandableObjectConverter를 사용했습니다.
+        나는 독자들이 위에서 사용된 속성, 특히 PropertyGrid 컨트롤에서 데이터가 표시되는 방식에서 중추적인 역할을 하는 TypeConverters를 자세히 살펴보기를 적극 권장합니다. 여기에서는 확장 가능 또는 동적 개체를 다른 유형으로 변환하는 데 사용할 수 있는 ExpandableObjectConverter를 사용했다.
 
     - **6. dd**                  
-        AsyncToolWindow 템플릿에서 추가한 코드는 도구 창에서 호스팅하는 WPF 사용자 정의 컨트롤을 추가합니다. 도구 창은 여전히 존재하는 사용자 정의 컨트롤의 매개변수 없는 생성자를 호출합니다. 그러나 ToolWindowData를 매개 변수로 사용하는 생성자를 추가했으며 이 생성자가 도구 창에서 호출되기를 원합니다. 이를 위해 ToolWindow.cs 파일을 수정하고 ToolWindowData를 매개변수로 사용하는 생성자를 추가합니다. ToolWindow의 코드 목록은 다음과 같습니다.
+        AsyncToolWindow 템플릿에서 추가한 코드는 도구창에서 호스팅하는 WPF 사용자 정의 컨트롤을 추가한다. 도구창은 여전히 존재하는 사용자 정의 컨트롤의 매개변수 없는 생성자를 호출한다. 
+            
+            ToolWindowPackage.InitializeAsync
+                ToolWindowCommand.InitializeAsync
+                ToolWindowCommand.ToolWindowCommand(package, commandService)
+                ToolWindowCommand.Execute(object sender, EventArgs e)
+                    this.package.FindToolWindow(typeof(ToolWindow), 0, true)    기본 ToolWindow()생성자
+                        Content = new ToolWindowControl()  <-- 여기
+        
+        그러나 ToolWindowData를 매개 변수로 사용하는 생성자를 추가했으며 이 생성자가 도구 창에서 호출되기를 원합니다. 이를 위해 ToolWindow.cs 파일을 수정하고 ToolWindowData를 매개변수로 사용하는 생성자를 추가합니다. ToolWindow의 코드 목록은 다음과 같습니다.
+
+        ![04_37_UserControlCodeBehind](image/04/04_37_2_ToolWindow.png)   
+
+        우리가 주목해야 할 중요한 사항은 굵게 표시되어 있다. 각 도구창은 ToolWindowPane에서 파생되며 고유한 식별자(Guid)가 할당된다. Visual Studio는 이 식별자를 사용하여 설정 저장소에 있는 도구 창의 크기, 위치, 상태 등을 유지한다. ToolWindows는 탭, 연결, 부동, MDI 등과 같은 여러가지 Window 상태로 존재할 수 있다. 도구창을 어떤 상태로 만들 것인지는 패키지 클래스에서 설정할 수 있다. 이는 향후 단계에서 곧 보게 될 것이다. 
+        
+        도구창에 대한 흥미로운 점은 Visual Studio가 닫히지 않는 한 한 번 만들어지면 절대 파괴되지 않는다는 것이다. 도구 창을 닫아도 실제로는 닫히지 않고 숨겨져 있다. 이는 ToolWindow 생성자에 중단점을 지정하여 확인해봐도 생성자는 한 번만 호출된다.
+        
+        ToolWindowData를 매개변수로 받는 생성자를 만들었지만 이 생성자에게 매개변수와 함께 호출이 되어야 한다. 어떻게 합니까? 전달해야 하는 개체의 인스턴스를 반환하도록 Package 클래스에서 InitializeToolWindowAsync라는 메서드를 재정의해야 합니다. 생성자에서 이미 논의한 Caption, BitmapImageMoniker 및 Content 속성을 설정합니다. 여기서는 문자열을 직접 사용했지만 상수를 사용하는 것이 좋습니다.
+
+    - **7. ToolWindow 특성 수정**            
+        이제 Package 클래스로 이동하겠습니다. ToolWindow를 호스팅하는 클래스입니다. 무엇보다도 먼저 ToolWindow가 문서처럼 탭 상태여야 하므로 다음과 같이 Package 클래스에서 ProvideToolWindow 특성(이 패키지가 도구 창을 소유하고 있음을 Visual Studio에 등록하고 알려줌)을 업데이트합니다. 
 
         ```cs
-        [Guid(ToolWindow.ToolWindowId)]
-        public class ToolWindow : ToolWindowPane
-        {
-            internal const string ToolWindowId = "6a7dffcf-9377-4eb4-96b8-540d3179930d";
-            public ToolWindow() : this(null)
-            {
-            }
-
-            // 데이터는 Package 클래스의 InitializeToolWindowAsync 메서드에서 전달되어야 합니다.
-            public ToolWindow(ToolWindowData data) : base()
-            {
-                this.Caption = "Automation Properties";
-                this.BitmapImageMoniker = KnownMonikers.ListProperty;
-                // 이것은 도구 창에서 호스팅하는 사용자 컨트롤입니다. 이 클래스가 IDisposable을 구현하더라도,
-                // 이 개체에 대해 Dispose를 호출하지 않습니다. ToolWindowPane이 Dispose를 호출하기 때문입니다.
-                // Content 속성에서 반환된 개체입니다.
-                this.Content = new ToolWindowControl(data);
-            }
-        }
+        [ProvideToolWindow(typeof(ToolWindow), Style = VsDockStyle.Tabbed, Orientation = ToolWindowOrientation.none, 
+            Window="DocumentWell")]
         ```
 
-        독자가 주목해야 할 중요한 사항은 굵게 표시되어 있습니다. 각 도구 창은 ToolWindowPane에서 파생되며 고유한 식별자가 할당됩니다. Visual Studio는 이 식별자를 사용하여 설정 저장소에 있는 도구 창의 크기, 위치, 상태 등을 유지합니다. ToolWindows는 탭, 연결, 부동, MDI 등과 같은 여러 상태로 존재할 수 있습니다. 도구 창을 어떤 상태로 만들 것인지는 패키지 클래스에서 설정할 수 있습니다. 이는 향후 단계에서 곧 보게 될 것입니다. 도구 창에 대한 흥미로운 점은 Visual Studio가 닫히지 않는 한 한 번 만들어지면 절대 파괴되지 않는다는 것입니다. 도구 창을 닫아도 실제로는 닫히지 않습니다. 그것은 숨겨져 있습니다. 이는 ToolWindow 생성자에 중단점을 배치하여 확인할 수 있습니다. 생성자는 한 번만 호출됩니다. ToolWindowData를 매개변수로 받는 생성자를 만들었지만 이 매개변수는 여전히 생성자에 전달되어야 합니다. 어떻게 합니까? 전달해야 하는 개체의 인스턴스를 반환하도록 Package 클래스에서 InitializeToolWindowAsync라는 메서드를 재정의해야 합니다. 생성자에서 이미 논의한 Caption, BitmapImageMoniker 및 Content 속성을 설정합니다. 여기서는 문자열을 직접 사용했지만 상수를 사용하는 것이 좋습니다.
+        우리는 스타일 특성을 추가했다. 그것은 enum이며 다음값을 가질수 있다.  
+            none, MDI, Float, Linked, Tabbed, AlwaysFloat 
 
-    - **7. dd**            
-        이제 Package 클래스로 이동하겠습니다. 도구 창을 호스팅하는 클래스입니다. 무엇보다도 먼저 도구 창이 문서처럼 탭 상태여야 하므로 다음과 같이 Package 클래스에서 ProvideToolWindow 특성(이 패키지가 도구 창을 소유하고 있음을 Visual Studio에 등록하고 알려줌)을 업데이트합니다. 
+        다음 속성은 Orientation이며 열거형이고 다음 값 가능  
+            none, Top, Left, Right, Bottom
 
-        ```cs
-        [ProvideToolWindow(typeof(ToolWindow), Style = VsDockStyle.Tabbed, Orientation = ToolWindowOrientation.none, Window="DocumentWell")]
-        ```
-
-        열거형이며 없음, MDI, Float, Linked, Tabbed, AlwaysFloat 값을 가질 수 있는 Style 속성을 추가했습니다. 다음 속성은 다시 열거형이며 없음, 위쪽, 왼쪽, 오른쪽, 아래쪽 값을 가질 수 있는 방향입니다. 창 속성은 도구 창이 모든 문서가 열리는 DocumentWell에서 탭되어야 함을 지정합니다. ProvideToolWindowAttribute는 중요한 속성이며 해당 속성이 도구 창의 운명을 결정하므로 공식 Microsoft 문서에서 이 속성이 노출하는 속성을 이해하도록 합시다. 문서는 온라인으로도 읽을 수 있습니다.  
+        Window특성은 모든 문서가 열림을 나타내는 DocumentWell로 탭형태가 되어야 함을 지정한다.
+        
+        ProvideToolWindowAttribute는 중요한 속성이며 해당 속성이 ToolWindow의 운명을 결정하므로 공식 Microsoft 문서에서 이 속성이 노출하는 속성을 이해하도록 합시다. 문서는 온라인으로도 읽을 수 있습니다.  
         https://docs.microsoft.com/en-us/dotnet/api/microsoft.visualstudio.shell.providetoolwindowattribute?view=visualstudiosdk-2017&viewFallbackFrom=visualstudiosdk-2019
 
         표4-2 ProvideToolWindowAttribute 속성
@@ -637,39 +639,43 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
         ------------------  ---------------------------------------------------------------------------
         DockedHeight        도킹된 경우 ToolWindow의 기본 높이를 가져오거나 설정합니다.
         DockedWidth         도킹된 경우 ToolWindow의 기본 너비를 가져오거나 설정합니다.
-        DocumentLikeTool    동작 및 수명이 문서와 같은 도구 창을 원하는 경우 이 속성을 true로 설정하십시오. 
-                            도구 창은 MDI 또는 부동 상태일 뿐이며 사용자가 수동으로 닫을 때까지 모든 레이아웃 
+        DocumentLikeTool    동작 및 수명이 문서와 같은 ToolWindow을 원하는 경우 이 속성을 true로 설정하십시오. 
+                            ToolWindow은 MDI 또는 부동 상태일 뿐이며 사용자가 수동으로 닫을 때까지 모든 레이아웃 
                             변경에 걸쳐 해당 위치에 계속 표시됩니다. 
                             이 플래그는 DontForceCreate 및 파괴적인 다중 인스턴스를 의미합니다.
-        Height              도구 창의 기본 높이를 가져오거나 설정합니다.
-        MultiInstances      도구 창의 여러 인스턴스가 허용되는지 여부를 결정합니다.
-        Orientation         Window 속성으로 지정된 창을 기준으로 도구 창의 기본 방향을 가져오거나 설정합니다.
-        PositionX           도구 창의 왼쪽 상단 모서리의 기본 수평 값을 가져오거나 설정합니다.
-        PositionY           도구 창의 왼쪽 상단 모서리의 수직 값을 가져오거나 설정합니다.
-        Style               도구 창의 기본 도킹 스타일을 가져오거나 설정합니다.
-        ToolType            도구 창의 유형을 가져오거나 설정합니다.
-        Transient           IDE를 다시 시작할 때 도구 창을 다시 열지 않아야 하는지 여부를 가져오거나 설정합니다.
+        Height              ToolWindow의 기본 높이를 가져오거나 설정합니다.
+
+        MultiInstance**       ToolWindow의 여러 인스턴스가 허용되는지 여부를 결정합니다.
+        
+        Orientation         Window 속성으로 지정된 창을 기준으로 ToolWindow의 기본 방향을 가져오거나 설정합니다.
+        PositionX           ToolWindow의 왼쪽 상단 모서리의 기본 수평 값을 가져오거나 설정합니다.
+        PositionY           ToolWindow의 왼쪽 상단 모서리의 수직 값을 가져오거나 설정합니다.
+        Style               ToolWindow의 기본 도킹 스타일을 가져오거나 설정합니다.
+        ToolType            ToolWindow의 유형을 가져오거나 설정합니다.
+        
+        Transient**            IDE를 다시 시작할 때 ToolWindow을 다시 열지 않아야 하는지 여부를 가져오거나 설정합니다.
+        
         TypeId              RegistrationAttribute 파생 클래스가 
                             System.ComponentModel.TypeDescriptor.GetAttributes(...)와  함께 작동하도록 하려면 
                             TypeID 속성을 재정의합니다. 이 속성에서 파생된 속성은 클래스에 적용할 수 있는 
                             인스턴스에 대한 더 나은 제어가 필요한 경우에만 이 속성을 재정의해야 합니다.
-        Width               도구 창의 기본 너비를 가져오거나 설정합니다.
-        Window              도구 창이 도킹되어야 하는 기본 창의 GUID를 가져오거나 설정합니다.
+        Width               ToolWindow의 기본 너비를 가져오거나 설정합니다.
+        Window              ToolWindow이 도킹되어야 하는 기본 창의 GUID를 가져오거나 설정합니다.
         ```    
 
-        굵게 표시된 속성은 도구 창의 동작을 크게 변경합니다. 임시 속성은 IDE가 다시 시작될 때 도구 창이 자동으로 열리지 않아야 하는지 여부를 결정합니다. 나는 독자들이 이러한 속성을 가지고 놀고 도구 창의 모양에 어떤 변화를 가져오는 속성을 탐색하도록 권장합니다.
+        중요 표시된 속성(**)은 ToolWindow의 동작을 크게 변경한다. Transient(임시) 속성은 IDE가 다시 시작될 때 ToolWindow이 자동으로 열리지 않아야 하는지 여부를 결정. 독자들이 이러한 속성을 가지고 놀고 ToolWindow의 모양에 어떤 변화를 가져오는 속성을 탐색하도록 권장한다.
 
-    - **8. dd**  
-        다음으로 패키지 클래스 GetAsyncToolWindowFactory 및 InitializeToolWindowAsync에서 몇 가지 메서드를 재정의해야 합니다. 매개 변수를 허용하도록 도구 창 생성자를 사용자 지정했기 때문에 재정의해야 합니다. 매개변수가 없는 기본 생성자를 사용했다면 이 두 메서드를 재정의할 필요가 없습니다. GetAsyncToolWindowFactory에서 기본 인프라에 현재 Package 클래스를 팩토리로 사용하도록 지시하고 이것이 발생하면 동일한 클래스에서 재정의된 InitializeToolWindowAsync 메서드가 호출됩니다. 여기에서 ToolWindowData 개체를 구성하고 ToolWindow 생성자에 전달되도록 반환합니다. 재정의된 이 두 메서드의 코드는 그림 4-38과 같습니다.
+    - **8. 메서드 재정의**  
+        다음으로 Package 클래스에서 GetAsyncToolWindowFactory 및 InitializeToolWindowAsync등 몇 가지 메서드를 재정의해야 한다. 매개 변수를 허용하도록 ToolWindow 생성자를 사용자 지정했기 때문에 재정의해야 합니다. 매개변수가 없는 기본 생성자를 사용했다면 이 두 메서드를 재정의할 필요가 없습니다. GetAsyncToolWindowFactory에서 기본 인프라에 현재 Package 클래스를 팩토리로 사용하도록 지시하고 이것이 발생하면 동일한 클래스에서 재정의된 InitializeToolWindowAsync 메서드가 호출됩니다. 여기에서 ToolWindowData 개체를 구성하고 ToolWindow 생성자에 전달되도록 반환합니다. 재정의된 이 두 메서드의 코드는 그림 4-38과 같습니다.
     
         
         ![04_38_OverriddenMethod](image/04/04_38_OverriddenMethod.png)   
         그림 4-38 ToolWindowData 개체를 ToolWindow 생성자에 전달하는 재정의된 메서드
 
     - **9. dd**  
-        이것으로 모든 코드 변경이 이루어집니다. 그러나 프로젝트에 추가된 클래스가 하나 더 있는데 우리가 보거나 수정하지 않았습니다. 이 클래스는 ToolWindowCommand 클래스입니다. 이 클래스의 코드는 사용자 지정 명령을 추가하는 것과 동일하므로 여기서 논의할 새로운 내용은 없습니다. 이 클래스는 실행될 때 도구 창을 시작하는 명령을 노출합니다. 
+        이것으로 모든 코드 변경이 이루어집니다. 그러나 프로젝트에 추가된 클래스가 하나 더 있는데 우리가 보거나 수정하지 않았습니다. 이 클래스는 ToolWindowCommand 클래스입니다. 이 클래스의 코드는 사용자 지정 명령을 추가하는 것과 동일하므로 여기서 논의할 새로운 내용은 없습니다. 이 클래스는 실행될 때 ToolWindow을 시작하는 명령을 노출합니다. 
         
-        이 명령은 보기 > 기타 Windows 메뉴. 도구 창을 표시하는 역할을 하는 이 클래스의 실행 메소드를 살펴보겠습니다. Execute 메소드의 코드는 다음과 같습니다.
+        이 명령은 보기 > 기타 Windows 메뉴. ToolWindow을 표시하는 역할을 하는 이 클래스의 실행 메소드를 살펴보겠습니다. Execute 메소드의 코드는 다음과 같습니다.
 
         ```cs
         private void Execute(object sender, EventArgs e)
@@ -687,16 +693,16 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
         }
         ```
 
-        굵게 표시된 코드는 도구 창을 표시하는 역할을 합니다. 여기서 주의해야 할 몇 가지 중요한 사항이 있습니다.
+        ToolWindowPane window로 시작하는 줄은 ToolWindow을 표시하는 역할을 합니다. 여기서 주의해야 할 몇 가지 중요한 사항이 있습니다.
 
-        a. Execute는 동기식 이벤트 핸들러 메서드입니다. 도구 창을 표시하는 코드가 RunAsync 블록 안에 래핑되어 있는지 확인하세요. 이것은 동기 메서드에서 비동기 작업을 실행하는 방법을 보여줍니다.
+        a. Execute는 동기식 이벤트 핸들러 메서드입니다. ToolWindow을 표시하는 코드가 RunAsync 블록 안에 래핑되어 있는지 확인하세요. 이것은 동기 메서드에서 비동기 작업을 실행하는 방법을 보여줍니다.
 
-        b. 메서드 호출이 비동기식이므로 도구 창은 비동기식으로 로드됩니다. 이것이 AsyncToolWindow라고 불리는 이유입니다.  
+        b. 메서드 호출이 비동기식이므로 ToolWindow은 비동기식으로 로드됩니다. 이것이 AsyncToolWindow라고 불리는 이유입니다.  
 
-        c. ShowToolWindowAsync 메서드는 4개의 매개변수를 사용합니다. 먼저 생성할 도구 창의 유형입니다. 두 번째는 도구 창의 인스턴스 ID를 지정하는 식별자입니다. 세 번째 매개변수는 도구 창이 존재하지 않는 경우 작성해야 하는지 여부를 결정하는 부울입니다. 이 매개변수가 false이고 도구 창이 존재하지 않으면 창은 null로 설정됩니다. 네 번째 매개변수는 비동기 작업을 취소하는 데 사용할 수 있는 취소 토큰입니다.
+        c. ShowToolWindowAsync 메서드는 4개의 매개변수를 사용합니다. 먼저 생성할 ToolWindow의 유형입니다. 두 번째는 ToolWindow의 인스턴스 ID를 지정하는 식별자입니다. 세 번째 매개변수는 ToolWindow이 존재하지 않는 경우 작성해야 하는지 여부를 결정하는 부울입니다. 이 매개변수가 false이고 ToolWindow이 존재하지 않으면 창은 null로 설정됩니다. 네 번째 매개변수는 비동기 작업을 취소하는 데 사용할 수 있는 취소 토큰입니다.
 
 - ### D. 확장 실행
-    - **1. dd**     
+    - **1. 실행해보기**     
         F5 키를 누릅니다. 열리는 새 Visual Studio 인스턴스에서 그림 4-39와 같이 보기 ➤ 기타 창 ➤ 자동화 속성으로 이동합니다.
 
         ![04_39_NavigationToAutomation](image/04/04_39_NavigationToAutomation.png)   
@@ -705,18 +711,18 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
     - **2. dd**            
         그림 4-40에서처럼 한개의 도구창이 열린다.
 
-        PropertyGrid 컨트롤에서 AsyncPackage, DTE 및 Textbox 컨트롤의 속성을 표시하는 작업 도구 창 확장이 있습니다. 확장 정보가 저장되는 ApplicationRegistryRoot 경로, UserDataPath 및 UserRegistryRoot 경로의 값을 확인하는 것이 좋습니다. DTE 개체 속성에서 Edition, 버전, 명령줄 인수 등을 볼 수 있습니다. 또한 XAML을 디자인하는 동안 속성 창에서 보는 것과 같은 방식으로 Textbox 컨트롤의 속성이 표시됩니다. 따라서 도구 창 확장을 개발하는 방법을 배우는 것 외에도 DTE, 패키지 개체 속성 및 해당 라이브 값을 보고 PropertyGrid 컨트롤에 대한 노출도 얻었습니다. 확장 코드의 코드 맵 다이어그램은 그림 4-41에 나와 있습니다.
+        PropertyGrid 컨트롤에서 AsyncPackage, DTE 및 Textbox 컨트롤의 속성을 표시하는 작업 ToolWindow 확장이 있습니다. 확장 정보가 저장되는 ApplicationRegistryRoot 경로, UserDataPath 및 UserRegistryRoot 경로의 값을 확인하는 것이 좋습니다. DTE 개체 속성에서 Edition, 버전, 명령줄 인수 등을 볼 수 있습니다. 또한 XAML을 디자인하는 동안 속성 창에서 보는 것과 같은 방식으로 Textbox 컨트롤의 속성이 표시됩니다. 따라서 ToolWindow 확장을 개발하는 방법을 배우는 것 외에도 DTE, 패키지 개체 속성 및 해당 라이브 값을 보고 PropertyGrid 컨트롤에 대한 노출도 얻었습니다. 확장 코드의 코드 맵 다이어그램은 그림 4-41에 나와 있습니다.
         
         ![04_40_CodemapDiagram](image/04/04_40_CodemapDiagram.png)   
         그림 4-40 도구창 확장의 코드맵 다이어그램
 
-        이것으로 챕터를 마칩니다. Visual Studio 확장성 팀에는 GitHub의 비동기 도구 창 샘플도 있습니다. 다음 URL에서 볼 수 있습니다.
+        이것으로 챕터를 마칩니다. Visual Studio 확장성 팀에는 GitHub의 비동기 ToolWindow 샘플도 있습니다. 다음 URL에서 볼 수 있습니다.
 
         https://github.com/microsoft/VSSDK-ExtensibilitySamples/tree/master/AsyncToolWindow
 
 
 ## <font color='dodgerblue' size="6">4) 요약</font>        
-이 장에서 우리는 유용하고 의미 있는 몇 가지 확장을 개발하고 그 과정에서 몇 가지 중요한 개념을 배웠습니다. 사용자 지정 명령을 추가하고 이벤트 처리기를 사용자 지정 명령에 연결하는 방법에 대한 그림을 보았습니다. 우리는 명령의 위치를 변경하고, 확장에서 Visual Studio에 의해 노출된 서비스에 액세스하고, 자동화 모델의 속성과 API를 이해하고, 옵션 페이지에 대한 지원을 추가하고 확장에서 사용하는 방법을 배웠습니다. 또한 도구 창 확장을 개발하는 방법과 사용자 지정 WPF UI 기반 사용자 정의 컨트롤을 도구 창에 표시하는 방법을 배웠습니다. 또한 도구 창에 데이터를 전달하는 방법도 배웠습니다. 다음 장에서 우리는 이러한 추진력을 계속해서 코드 생성, 정보 표시줄 및 코드 분석 및 수정을 위한 확장을 개발할 것입니다.
+이 장에서 우리는 유용하고 의미 있는 몇 가지 확장을 개발하고 그 과정에서 몇 가지 중요한 개념을 배웠습니다. 사용자 지정 명령을 추가하고 이벤트 처리기를 사용자 지정 명령에 연결하는 방법에 대한 그림을 보았습니다. 우리는 명령의 위치를 변경하고, 확장에서 Visual Studio에 의해 노출된 서비스에 액세스하고, 자동화 모델의 속성과 API를 이해하고, 옵션 페이지에 대한 지원을 추가하고 확장에서 사용하는 방법을 배웠습니다. 또한 ToolWindow 확장을 개발하는 방법과 사용자 지정 WPF UI 기반 사용자 정의 컨트롤을 ToolWindow에 표시하는 방법을 배웠습니다. 또한 ToolWindow에 데이터를 전달하는 방법도 배웠습니다. 다음 장에서 우리는 이러한 추진력을 계속해서 코드 생성, 정보 표시줄 및 코드 분석 및 수정을 위한 확장을 개발할 것입니다.
 
 ***
 연습
@@ -731,6 +737,6 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
 
 4. 설정 저장소 탐색기 확장을 사용하고 확장 옵션이 저장되는 위치를 찾으십시오.
 
-5. Visual Studio IDE에서 열려 있는 문서 및 창의 속성을 표시하는 도구 창 확장을 만듭니다.
+5. Visual Studio IDE에서 열려 있는 문서 및 창의 속성을 표시하는 ToolWindow 확장을 만듭니다.
 
-6. 동적 도구 창을 탐색합니다. https://docs.microsoft.com/en-us/visualstudio/extensibility/opening-a-dynamic-toolwindow?view=vs-2019 읽어보세요.
+6. 동적 ToolWindow을 탐색합니다. https://docs.microsoft.com/en-us/visualstudio/extensibility/opening-a-dynamic-toolwindow?view=vs-2019 읽어보세요.
