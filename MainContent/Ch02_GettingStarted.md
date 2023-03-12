@@ -215,10 +215,11 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
 
     다음은 패키지 클래스가 정의되는 방법입니다.
     
-    [ComVisible(true)]
-    [PackageRegistration]
-    public abstract class Package : IVsPackage, OLE.Interop.IServiceProvider,IOleCommandTarget, IVsPersistSolutionOpts
-        , IServiceContainer,System.IServiceProvider, IVsUserSettings, IVsUserSettingsMigration,IVsUserSettingsQuery
+    [ComVisible(true)]  
+    [PackageRegistration]  
+    public **abstract** class **Package** : **IVsPackage**, OLE.Interop.IServiceProvider,IOleCommandTarget,  
+        IVsPersistSolutionOpts, IServiceContainer,System.IServiceProvider, IVsUserSettings, 
+        IVsUserSettingsMigration,IVsUserSettingsQuery
         , IVsToolWindowFactory, IVsToolboxItemProvider
     {
         //// 간결함을 위해 표시되지 않은 생성자, 속성 및 기타 멤버.
