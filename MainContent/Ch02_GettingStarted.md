@@ -17,11 +17,11 @@ Visual Studio 확장을 개발 및 빌드하기 위해 선택한 필수 워크�
 ![02_01_VsInstall](image/02/02_01_VsInstall.png)   
 그림 2-01 Visual Studio 설치 화면
 
-우측 창에 보이는 'IntelliCode' 컴포넌트를 체크하는 것을 권장합니다. 첫 번째 확장을 만들어 보겠습니다. 이것은 "시작하기" 확장 프로그램이므로 이 확장으로 달성한 것이 아니라 기본 사항을 배우는 것이 목적입니다. 첫 번째 Visual Studio 2019 확장을 만드는 단계별 프로세스를 살펴보겠습니다.
+우측 창에 보이는 'IntelliCode' 컴포넌트를 체크하는 것을 권장합니다. 첫 번째 확장을 만들어 보자. 이것은 첫단계인 "시작해보기" 확장 프로그램이므로 완전한 기능의 확장이 아닌 기본 사항을 배우는 것이 목적. 첫 번째 Visual Studio 2019 확장을 만드는 단계별 프로세스를 살펴본다.
 
 1. Visual Studio 2019를 엽니다. 
 2. 새 프로젝트를 만듭니다. 
-3. 그러면 새 프로젝트를 만드는 데 활용할 수 있는 모든 프로젝트 템플릿이 표시됩니다. 우리는 C#으로 작업할 것이기 때문에 언어를 C#으로 선택합니다. 그러나 VB에 익숙하다면 VB(Visual Basic)를 선택할 수도 있습니다. 
+3. 그러면 새 프로젝트를 만드는 데 활용할 수 있는 모든 프로젝트 템플릿이 표시됩니다. 우리는 C#으로 작업할 것이기 때문에 언어를 C#으로 선택합니다. 그러나 VB에 익숙하다면 VB(Visual Basic)를 선택할 수도 있다. 
 4. 프로젝트 유형 드롭다운 값을 "확장"으로 선택합니다. 그러면 그림 2-2와 같이 프로젝트 템플릿이 필터링됩니다.
 
     ![02_02_CreateNewProject](image/02/02_02_CreateNewProject.png)   
@@ -42,7 +42,7 @@ Visual Studio 확장을 개발 및 빌드하기 위해 선택한 필수 워크�
     ![02_04_SolutionExplorerView](image/02/02_04_SolutionExplorerView.png)   
     그림 2-04 솔루션 탐색기 뷰
 
-8. 프로젝트를 빌드합니다. 성공적으로 빌드해야 합니다. 이것은 VSIX 프로젝트 템플릿과 함께 패키지로 제공되는 상용구 코드이므로 설치가 올바르게 완료되면 제대로 빌드될 것입니다. 이 책의 뒷부분에서 프로젝트 및 항목 템플릿을 만드는 방법을 배웁니다.
+8. 프로젝트를 빌드해본다. 성공적으로 빌드되어야 하고 이것은 VSIX 프로젝트 템플릿과 함께 패키지로 제공되는 기본 구조이므로 설치가 올바르게 완료되면 제대로 빌드될 것이다. 이 책의 뒷부분에서 프로젝트 및 항목 템플릿을 만드는 방법을 배웁니다.
 
     ```tip
     위에서 논의한 화면의 흐름은 Visual Studio 2019에만 해당됩니다. Microsoft는 사용자 피드백을 진지하게 받아들이고 최종 사용자의 요구 사항에 맞게 사용자 인터페이스를 실험하고 수정할 수 있습니다. 따라서 위에서 논의한 화면 흐름과 화면은 향후 변경될 수 있지만 기본 단계는 동일하게 유지됩니다.
@@ -50,7 +50,7 @@ Visual Studio 확장을 개발 및 빌드하기 위해 선택한 필수 워크�
 
 9. 이제 솔루션 탐색기 보기에서 프로젝트 속성을 확인하여 확장 출력이 생성될 출력 디렉터리를 알아보겠습니다. 이를 보려면 속성 ➤ 빌드를 클릭하고 출력 경로에서 값을 확인하십시오. 프로젝트를 빌드한 후 Visual Studio의 출력 창을 보면 출력 디렉터리를 볼 수도 있습니다. Visual Studio의 출력 창은 보기 ➤ 출력을 클릭하거나 Ctrl Alt O의 키 조합을 사용하여 키보드로 시작할 수 있습니다.
 
-10. 이제 출력 디렉토리를 알았으므로 확장의 빌드 출력을 확인하겠습니다. 그림 2-5는 내 컴퓨터에서 어떻게 보이는지입니다.
+10. 이제 출력 디렉토리를 알았으므로 확장의 빌드 출력을 확인해보자. 그림 2-5는 내 컴퓨터에서 어떻게 보이는지입니다.
 
     ![02_05_Output](image/02/02_05_Output.png)   
     그림 2-05 출력 결과
@@ -196,34 +196,47 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
 ```
 
 ## <font color='dodgerblue' size="6">4) 보일러 플레이트 확장의 구조 그로킹</font>
-이제 VSIX의 기본 사항을 알았으므로 기본 VSIX 템플릿과 함께 제공되는 상용구 코드와 해당 구조를 설명하겠습니다. 기본 VSIX 프로젝트 템플릿의 솔루션 구조에는 다음 파일이 포함되어 있습니다.
+이제 VSIX의 기본 사항을 알았으므로 기본 VSIX 템플릿과 함께 제공되는 초기 코드와 해당 구조를 설명한다. 기본 VSIX 프로젝트 템플릿의 솔루션 구조에는 다음 파일이 포함되어 있습니다.
 
 - ### a. VSIXAnatomyPackage.cs 파일
-    이 파일의 이름은 {ProjectName}Package.cs 형식입니다. 이 클래스는 이 프로젝트를 빌드하여 만든 어셈블리에 의해 노출될 패키지를 구현합니다.
-    이제 유효한 Visual Studio 패키지를 구성하는 요소에 대한 질문이 떠오릅니다. IVsPackage 인터페이스를 구현하고 Visual Studio 셸에 등록하는 모든 클래스는 유효한 Visual Studio 패키지로 간주되는 최소 기준을 충족합니다.
-    Microsoft.VisualStudio.Shell.Package는 유효한 패키지를 만들기 위해 파생된 추상 클래스였습니다. 패키지를 로드하고 초기화하면 디스크 I/O가 발생할 수 있으며, 이것이 UI 스레드에서 발생하면 메인 UI 스레드가 UI 응답성을 유지하는 대신 I/O를 수행하므로 응답성 문제가 발생할 수 있습니다. 이것은 이 클래스의 단점이며 자동 로드 확장에 대한 Visual Studio의 시작 성능을 저하시킵니다.
+    이 파일의 이름은 {프로젝트이름}Package.cs 형식이다. 이 클래스는 이 프로젝트를 빌드하여 만든 어셈블리에 의해 노출될 패키지를 구현한다.
 
-    이를 개선하기 위해 Visual Studio 2015에서 Package클래스에서 파생된 Microsoft.VisualStudio.Shell.AsyncPackage 추상 클래스를 도입했습니다.  
-    이 클래스를 활용하여 확장의 비동기식 로드를 선택하고 성능 비용을 줄이고 UI의 응답성을 유지할 수 있습니다. Visual Studio 2019에서는 UI 스레드가 덜 엄격하게 사용되므로 Visual Studio가 더 빨리 시작되고 실행 중에 더 잘 수행되도록 확장의 동기 로드가 기본적으로 해제되어 있습니다.  
-    그러나 이전 확장을 작동 상태로 유지하려면 그림 2-12와 같이 확장의 동기 로드를 항상 활성화할 수 있습니다.
+    이제 유효한 Visual Studio 패키지를 구성하는 요소에 대한 질문이 떠오른다. IVsPackage 인터페이스를 구현하고 Visual Studio 셸에 등록하는 모든 클래스는 유효한 Visual Studio 패키지로 간주되는 최소 기준을 충족한다.  
+    Microsoft.VisualStudio.Shell.Package는 유효한 패키지를 만들기 위해 파생된 추상 클래스였다. 패키지를 로드하고 초기화하면 디스크 I/O가 발생할 수 있으며, 이것이 UI 스레드에서 발생하면 메인 UI 스레드가 UI 응답성을 유지하는 대신 I/O를 수행하므로 응답성 문제가 발생할 수 있다. 이것은 이 클래스의 단점이며 자동 로드 확장에 대한 Visual Studio의 시작 성능을 저하시킨다.
+
+    이를 개선하기 위해 Visual Studio 2015에서 Package클래스에서 파생된 Microsoft.VisualStudio.Shell.AsyncPackage 추상 클래스를 도입했다.  
+    이 클래스를 활용하여 확장의 비동기식 로드를 선택하고 성능 비용을 줄이고 UI의 응답성을 유지할 수 있게 되었다. Visual Studio 2019에서는 UI 스레드가 덜 엄격하게 사용되므로 Visual Studio가 더 빨리 시작되고 실행 중에 더 잘 수행되도록 확장의 동기 로드가 기본적으로 해제되어 있다.  
+    그러나 이전 확장을 작동 상태로 유지하려면 그림 2-12와 같이 확장의 동기 로드를 항상 활성화할 수 있다.
 
     ![02_12_AllowSyncLoading](image/02/02_12_AllowSyncLoading.png)   
     그림 2-12 동기로딩 허용
 
-    그러나 비동기 로딩을 사용하도록 확장을 업데이트해야 하므로 개발자가 개발하거나 유지 관리하는 확장에 대해 이 옵션을 사용하지 않는 것이 좋습니다. 또한 확장은 사용자별로 또는 모든 사용자에 대해 설치할 수 있으므로 "사용자별 확장" 및 "모든 사용자 확장"에 대한 두 개의 작은 섹션을 관찰하십시오.
+    그러나 비동기 로딩을 사용하도록 확장을 개발/업데이트해야 하므로 이 옵션을 사용하지 않는 것이 좋다. 또한 확장은 사용자별로 또는 모든 사용자에 대해 설치할 수 있으므로 "사용자별 확장" 및 "모든 사용자 확장"에 대한 두 개의 작은 섹션에 대해 유의하자.
 
     다음은 패키지 클래스가 정의되는 방법입니다.
+    
+    [ComVisible(true)]
+    [PackageRegistration]
+    public abstract class Package : IVsPackage, OLE.Interop.IServiceProvider,IOleCommandTarget, IVsPersistSolutionOpts
+        , IServiceContainer,System.IServiceProvider, IVsUserSettings, IVsUserSettingsMigration,IVsUserSettingsQuery
+        , IVsToolWindowFactory, IVsToolboxItemProvider
+    {
+        //// 간결함을 위해 표시되지 않은 생성자, 속성 및 기타 멤버.
+    }
+    
+
     ```cs
     [ComVisible(true)]
     [PackageRegistration]
     public abstract class Package : IVsPackage, OLE.Interop.IServiceProvider,IOleCommandTarget, IVsPersistSolutionOpts
-        , IServiceContainer,System.IServiceProvider, IVsUserSettings, IVsUserSettingsMigration,IVsUserSettingsQuery, IVsToolWindowFactory, IVsToolboxItemProvider
+        , IServiceContainer,System.IServiceProvider, IVsUserSettings, IVsUserSettingsMigration,IVsUserSettingsQuery
+        , IVsToolWindowFactory, IVsToolboxItemProvider
     {
         //// 간결함을 위해 표시되지 않은 생성자, 속성 및 기타 멤버.
     }
     ```
 
-    AsyncPackage의 정의 및 중요 멤버는 다음과 같이 정의됩니다.
+    AsyncPackage의 정의 및 중요 멤버는 다음과 같이 정의된다.
 
     ```cs
     [ComVisible(true)]
