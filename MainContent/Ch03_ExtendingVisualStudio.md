@@ -451,14 +451,14 @@ Customizations 바로 오른쪽에는 두 가지 더 이상 사용되지 않고 
             방금 논의한 대부분의 요소에는 Condition이라는 선택적 속성이 있습니다. 이름에서 알 수 있듯이 이 속성은 출력에 항목을 조건부로 포함하는 데 사용됩니다. 토큰을 테스트하는 데 사용할 수 있는 미리 정의된 함수와 연산자가 있습니다. 조건이 목록 또는 그룹에 적용되면 목록 또는 그룹의 모든 자식 요소에 적용됩니다. 조건이 상위 요소와 하위 요소 모두에 정의된 경우 조건은 AND 연산으로 평가됩니다. 0이 아닌 모든 표현식은 true로 평가됩니다. Condition 속성에 대한 자세한 설명서는 Condition에 대한 공식 Microsoft 설명서를 참조하십시오.  
             https://docs.microsoft.com/en-in/visualstudio/extensibility/vsct-xml-schema-conditional-attributes?view=vs-2019
 
-        - **f.VSCT 파일 계속**  
+        - **f. VSCT 파일 계속**  
             그림 3-11로 돌아와서:
 
             - i. vsct 파일에 있는 CommandTable의 처음 두 자식 요소는 Visual Studio에서 제공하는 명령의 모든 ID와 메뉴의 명령 ID를 포함하는 stdidcmd.h 및 vsshlids.h 파일을 참조하는 Extern 노드입니다.
-            - ii. Commands 요소는 Groups, Buttons 및 Bitmaps 요소를 자식으로 포함합니다. 여기에는 중요하고 패키지 GUID로 설정되는 package라는 속성이 있습니다. (그림 3-11의 모든 #4를 참조하십시오.) 
+            - ii. Commands 요소는 Groups, Buttons 및 Bitmaps 요소를 자식으로 포함합니다. 여기에는 중요하고 패키지 GUID로 설정되는 package라는 속성이 있습니다. (그림 3-11의 모든 숫자4를 참조.) 
             - iii. Commands 요소의 package 속성에 사용되는 GUID, GUID는 Symbols 요소에 정의된 GuidSymbol 요소에 정의됩니다. 그리고 Package 클래스에 정의된 패키지 GUID는 동일해야 합니다. 
             - iv. 그룹(컬렉션)은 내부에 여러 메뉴 그룹을 가질 수 있습니다. 메뉴 그룹은 다른 메뉴 또는 명령에 대한 컨테이너입니다. 각 메뉴 그룹에는 GUID, ID 및 우선 순위가 있습니다.
-            - v. 각 그룹에는 상위 메뉴를 지정하는 상위 요소가 있습니다. id는 IDM_VS_MENU_TOOLS로 설정되어 MyMenuGroup의 상위 메뉴가 최상위 도구 메뉴임을 분명히 합니다. 이 값을 변경하면 이 명령이 다른 메뉴에 표시됩니다. 기본적으로 vsct 파일에 대한 IntelliSense 지원은 없습니다. 그러나 Mads Kristensen은 Visual Studio 2019를 확장하는 데 필요한 여러 가지 필수 확장을 포함하는 Extensibility Essentials 2019라는 확장 팩을 작성했습니다. 이 확장을 사용하여 vsct 파일에서도 IntelliSense 지원을 얻을 수 있습니다. 책 전체에 걸쳐 확장 기능을 개발하는 동안 이 확장 팩이 작동하는 것을 보게 될 것입니다. Visual Studio의 명령 및 메뉴에 대한 GUID 및 id의 자세한 목록은 다음을 참조하십시오.  
+            - v. 각 그룹에는 상위 메뉴를 지정하는 상위 요소가 있습니다. id는 IDM_VS_MENU_TOOLS로 설정되어 MyMenuGroup의 상위 메뉴가 Visual Studio의 메뉴바중 도구에 해당하는 메뉴임을 분명히 합니다. 이 값을 변경하면 이 명령이 다른 메뉴에 표시됩니다. 기본적으로 vsct 파일에 대한 IntelliSense 지원은 없습니다. 그러나 Mads Kristensen은 Visual Studio 2019를 확장하는 데 필요한 여러 가지 필수 확장을 포함하는 Extensibility Essentials 2019라는 확장 팩을 작성했습니다. 이 확장을 사용하여 vsct 파일에서도 IntelliSense 지원을 얻을 수 있습니다. 책 전체에 걸쳐 확장 기능을 개발하는 동안 이 확장 팩이 작동하는 것을 보게 될 것입니다. Visual Studio의 명령 및 메뉴에 대한 GUID 및 id의 자세한 목록은 다음을 참조하십시오.  
             https://docs.microsoft.com/enin/visualstudio/extensibility/internals/guids-and-idsof-visual-studio-menus?view=vs-2019
 
             - vi. 버튼(컬렉션)은 내부에 명령의 UI를 나타내는 여러 개의 Button 요소를 가질 수 있습니다. Button은 이 버튼이나 명령을 메뉴에 연결하는 선택적인 자식 요소를 Parent로 가질 수 있습니다. 다른 요소와 마찬가지로 버튼에는 GUID 및 id라는 필수 속성이 있습니다.
@@ -489,7 +489,7 @@ Customizations 바로 오른쪽에는 두 가지 더 이상 사용되지 않고 
         ![03_14_MessageDialog](image/03/03_14_MessageDialog.png)   
         그림 3-14 메시지 창 결과
 
-    방금 대화 상자 메시지를 표시하는 사용자 지정 명령을 사용하여 Visual Studio의 도구 메뉴를 확장했습니다. 우리는 모든 상용구 코드를 수행하는 기본 Visual Studio 확장성 프로젝트 항목을 방금 사용했기 때문에 아직 많은 작업을 수행할 필요가 없었습니다. 프로젝트에 새로 추가된 참조 및 파일을 확인하고 vsct 파일이 메뉴 확장에 중요한 역할을 한다는 것을 알게 되었고 올바르게 편집하면 IDE에서 명령과 메뉴를 확장하는 데 도움이 될 수 있습니다. 다음으로 확장성 템플릿에 의해 추가되는 패키지 코드에 대해 설명하겠습니다. 이런 식으로 모든 근거가 처리되고 우리는 무슨 일이 일어나고 있는지 이해합니다.        
+    방금 대화 상자 메시지를 표시하는 사용자 지정 명령을 사용하여 Visual Studio의 도구 메뉴를 확장했습니다. 우리는 모든 초기생성 코드를 수행하는 기본 Visual Studio 확장성 프로젝트 항목을 방금 사용했기 때문에 아직 많은 작업을 수행할 필요가 없었습니다. 프로젝트에 새로 추가된 참조 및 파일을 확인하고 vsct 파일이 메뉴 확장에 중요한 역할을 한다는 것을 알게 되었고 올바르게 편집하면 IDE에서 명령과 메뉴를 확장하는 데 도움이 될 수 있습니다. 다음으로 확장성 템플릿에 의해 추가되는 패키지 코드에 대해 설명하겠습니다. 이런 식으로 모든 근거가 처리되고 우리는 무슨 일이 일어나고 있는지 이해합니다.        
 
 - ### d. AsyncPackage 추상 클래스    
     그림 3-15는 패키지 클래스가 파생되는 AsyncPackage 추상 클래스의 클래스 다이어그램을 보여줍니다.
