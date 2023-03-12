@@ -404,7 +404,7 @@ Customizations 바로 오른쪽에는 두 가지 더 이상 사용되지 않고 
                 반복과 중복을 피하기 위해 앞에서 논의한 속성과 자식 요소에 대해서는 논의하지 않습니다. GUID, id, priority 및 type 속성은 이미 논의되었으며 Button 요소에도 동일한 용도로 사용됩니다. 자식 요소인 Parent, CommandFlags 및 Strings도 논의되었습니다. 아이콘을 명령과 연결하는 데 사용할 수 있는 또 다른 요소 Icon이 있습니다. CommandFlags의 유효한 값 및 Button 요소의 기타 세부 정보를 볼 수 있습니다.  
                 https://docs.microsoft.com/en-in/visualstudio/extensibility/buttonelement?view=vs-2019.
 
-            - iv. Combos
+            - iv. Combos  
                 이 요소는 Combo 요소를 그룹화합니다. 다음 구문이 있습니다.
                 ```xml
                 <Combos>
@@ -416,15 +416,16 @@ Customizations 바로 오른쪽에는 두 가지 더 이상 사용되지 않고 
                 Combo 요소는 여러 명령을 포함할 수 있는 콤보 상자를 정의합니다. 콤보 상자는 DropDownCombo, DynamicCombo, IndexCombo 또는 MRUCombo 유형 중 하나일 수 있습니다. Combo 요소의 구문은 다음과 같습니다.
 
                 ```xml
-                <combo guid="guidMyCommandSet" id="MyCommand" defaultWidth="20" idCommandList="MyCommandListID" priority="0x102" type="DropDownCombo">
+                <combo guid="guidMyCommandSet" id="MyCommand" defaultWidth="20" idCommandList="MyCommandListID" 
+                    priority="0x102" type="DropDownCombo">
                     <Parent>... </Parent
                     <CommandFlag>... </CommandFlag>
                     <Strings>... </Strings>
                 </combo>
                 ```
 
-            - v. Bitmaps
-                이 요소는 비트맵을 로드하는 Bitmap 요소를 그룹화합니다. Bitmaps 요소의 구문은 다음과 같습니다.
+            - v. Bitmaps  
+                비트맵을 로드하는 Bitmap 요소를 그룹화. Bitmaps 요소의 구문은 다음과 같다.
                 ```xml
                 <Bitmaps>
                     <Bitmap>... </Bitmap>
