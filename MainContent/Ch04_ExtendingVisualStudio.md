@@ -99,7 +99,7 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
             ![04_05_KnownMonikersExplorer](image/04/04_05_KnownMonikersExplorer.png)   
             그림 4-05 모니커 탐색기
             
-        - **d. 업데이트된 vsixmanifest** 
+        - **d. 업데이트된 vsixmanifest**  
             태그, 릴리스 정보, 시작 안내서 등과 같은 다른 필드는 간단하며 필요에 따라 업데이트할 수 있습니다. 이러한 세부 정보를 입력한 후 vsixmanifest는 그림 4-6에 표시된 것과 같습니다.
 
             ![04_06_UpdatedVsixmanifest](image/04/04_06_UpdatedVsixmanifest.png)   
