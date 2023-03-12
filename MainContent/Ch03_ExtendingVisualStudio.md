@@ -261,15 +261,18 @@ Customizations 바로 오른쪽에는 두 가지 더 이상 사용되지 않고 
             <Include href="stdidcmd.h" />
             ```
 
-        - **c. Define** 
+        - **c. Define**  
             이것은 다시 선택적 요소입니다. 정의는 이름에서 알 수 있듯이 기호와 해당 값을 정의합니다. 여기에는 두 개의 필수 속성(이름 및 값)과 기호를 평가하는 데 사용할 수 있는 선택적 속성 Condition이 있습니다. 예를 들어:
             
             ```xml
             <Define name="Mode" value="Standard" />
             ```    
 
-        - **d. Commands**
-            이것은 또한 선택적 요소입니다. 그러나 이것은 VSPackage에 대한 명령을 정의하는 주요 요소입니다. 여기에는 package라는 속성이 있으며 그 값은 . vsct 파일. 그림 3-11에 표시된 .vsct 코드에서 이는 숫자 4(스니펫에서 세 번 사용됨)로 설명됩니다. .vsct 파일에서 위에서 아래로 이동하면 속성 패키지가 guidToolsMenuCommandPackage로 설정된 Commands 요소에서 #4가 먼저 사용되었음을 알 수 있습니다. 다음 #4는 GuidSymbol 요소가 동일한 이름 guidToolsMenuCommandPackage로 정의되고 해당 값이 GUID(Globally Unique Identifier)인 Symbols 요소 내부에서 볼 수 있습니다. 그림의 오른쪽 하단을 향하여 다시 #4를 볼 수 있습니다. 이것은 Package GUID가 정의된 Package 클래스의 스니펫입니다. (.cs) 파일과 .vsct 파일 뒤에 있는 코드의 GUID 값은 동일합니다. 이 GUID 때문에 명령이 패키지와 연결됩니다. Commands 요소는 Commands의 상위 수준 구조에서 아래와 같이 여러 자식을 가질 수 있습니다.
+        - **d. Commands**  
+            이것은 또한 선택적 요소입니다. 그러나 이것은 VSPackage에 대한 명령을 정의하는 주요 요소입니다. 여기에는 package라는 속성이 있으며 그 값은 .vsct 파일의 캡처본인 그림 3-11에 표시된 숫자 4로 표시된 것이다.(그림에 세 번 나옴). 
+            
+            vsct 파일에서 위에서 아래로 이동하면 문자열인 guidToolsMenuCommandPackage은 Commands의 package 속성에서 먼저 사용되었음을 알 수 있다. 다음에는 Symbols/GuidSymbol 요소의 name값에도 사용되고 해당 값은 GUID(Globally Unique Identifier)인 것을 볼 수 있다. 그림의 오른쪽 하단에서도 다시 숫자4를 볼 수 있다. 이것은 guidToolsMenuCommandPackage 패키지는 내부 식별자로 GUID 값을 가지며 실제로는 .cs에서 package 클래스를 나타낸다.  
+            vsct 파일 뒤에 있는 코드의 GUID 값은 동일하다. 이 GUID 때문에 Command가 패키지와 연결된다. Commands 요소는 Commands의 상위 수준 구조에서 아래와 같이 여러 자식을 가질 수 있습니다.
     
             ```xml
             <Commands package="guidToolsMenuPackage" >
