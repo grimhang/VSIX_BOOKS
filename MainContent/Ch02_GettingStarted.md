@@ -388,7 +388,8 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
         ```xml
         <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011">
             <Metadata>
-                <Identity Id="VSIXAnatomy.17600b3d-4a32-4f55-b50b-2103571d0d2b" Version="1.0" Language="en-US" Publisher="Rishabh Verma" />
+                <Identity Id="VSIXAnatomy.17600b3d-4a32-4f55-b50b-2103571d0d2b" Version="1.0" Language="en-US"
+                    Publisher="Rishabh Verma" />
                 <DisplayName>VSIXAnatomy</DisplayName>
                 <Description>Empty VSIX Project.</Description>
             </Metadata>
@@ -399,7 +400,8 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
                 <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" Version="[4.5,)" />
             </Dependencies>
             <Prerequisites>
-                <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[16.0,17.0)" DisplayName="Visual Studio core editor" />
+                <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[16.0,17.0)" 
+                    DisplayName="Visual Studio core editor" />
             </Prerequisites>
             <Assets>
                 <Asset Type="Microsoft.VisualStudio.VsPackage" Path="VSIXAnatomy.pkgdef" />
