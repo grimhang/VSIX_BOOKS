@@ -269,9 +269,9 @@ Customizations 바로 오른쪽에는 두 가지 더 이상 사용되지 않고 
             ```    
 
         - **d. Commands**  
-            이것은 또한 선택적 요소입니다. 그러나 이것은 VSPackage에 대한 명령을 정의하는 주요 요소입니다. 여기에는 package라는 속성이 있으며 그 값은 .vsct 파일의 캡처본인 그림 3-11에 표시된 숫자 4로 표시된 것이다.(그림에 세 번 나옴). 
+            이것은 또한 선택적 요소입니다. 그러나 이것은 VSPackage에 대한 명령을 정의하는 주요 요소입니다. 여기에는 package라는 속성이 있으며 그 값은 그림 3-11(vsct파일 캡처본)에 표시된 숫자4로 표시된 항목이다.(그림에 세 번 나옴). 
             
-            vsct 파일에서 위에서 아래로 이동하면 문자열인 guidToolsMenuCommandPackage은 Commands의 package 속성에서 먼저 사용되었음을 알 수 있다. 다음에는 Symbols/GuidSymbol 요소의 name값에도 사용되고 해당 값은 GUID(Globally Unique Identifier)인 것을 볼 수 있다. 그림의 오른쪽 하단에서도 다시 숫자4를 볼 수 있다. 이것은 guidToolsMenuCommandPackage 패키지는 내부 식별자로 GUID 값을 가지며 실제로는 .cs에서 package 클래스를 나타낸다.  
+            vsct 파일에서 위에서 아래로 이동하면 문자열 guidToolsMenuCommandPackage은 Commands의 package 속성에서 먼저 사용되었고 다음에는 Symbols/GuidSymbol 요소의 name값에도 사용되고 해당 값은 GUID(Globally Unique Identifier)인 것을 볼 수 있다. 그림의 오른쪽 하단에서도 다시 숫자4를 볼 수 있는데 이것은 guidToolsMenuCommandPackage 패키지는 내부 식별자로 GUID 값을 가지며 실제로는 guid{프로젝트명}Package.cs의 package 클래스를 나타낸다.  vs2017에서는 guid{커맨드파일명}Package.cs  
             vsct 파일 뒤에 있는 코드의 GUID 값은 동일하다. 이 GUID 때문에 Command가 패키지와 연결된다. Commands 요소는 Commands의 상위 수준 구조에서 아래와 같이 여러 자식을 가질 수 있습니다.
     
             ```xml
@@ -286,8 +286,8 @@ Customizations 바로 오른쪽에는 두 가지 더 이상 사용되지 않고 
 
             Commands의 자식은 5개일 수 있습니다.
 
-            - i. Menus  
-                이들은 VSPackage가 구현하는 모든 메뉴와 도구 모음을 정의합니다. 조건에 따라 메뉴를 렌더링하는 데 사용할 수 있는 Condition이라는 선택적 속성이 있습니다. Menus 요소는 Menu 요소의 모음이므로 내부에 여러 Menu 요소가 있을 수 있습니다. 각 Menu 요소는 단일 메뉴 또는 도구 모음을 나타냅니다.
+            - i. Menus                 
+                VSPackage가 구현하는 모든 메뉴와 Toolbar(도구 모음)을 정의한다. 조건에 따라 Condition이라는 선택적 속성을 가지는데 이는 어떤 조건에 따라 메뉴를 렌더링하기 위해 사용된다. Menus는 하위 Menu 요소의 집합이므로 내부에 여러 Menu 요소가 있을 수 있다. 각 Menu 요소는 단일 Menu이거나 Toolbar(도구 모음)을 나타냅니다.
 
                 ```xml
                 <Menus>
@@ -295,8 +295,7 @@ Customizations 바로 오른쪽에는 두 가지 더 이상 사용되지 않고 
                     <Menu>... </Menu>
                 </Menus>
                 ```
-
-                그림 3-11에서는 우리가 구현한 패키지가 메뉴가 아닌 명령만 생성했기 때문에 이 요소를 볼 수 없습니다. Menu 요소는 단일 메뉴 항목을 정의합니다. Context, Menu, MenuController, MenuControllerLatched, Toolbar 및 ToolWindowToolbar의 6가지 종류의 메뉴가 있습니다. Menu 요소의 구문은 다음과 같습니다.
+                위 그림 3-11에서는 우리가 구현한 패키지가 Menu가 아닌 Command만 생성했기 때문에 이 요소를 볼 수 없다. Menu 요소는 단일 메뉴 항목을 정의하고 Context, Menu, MenuController, MenuControllerLatched, Toolbar 및 ToolWindowToolbar의 6가지 종류가 있다. Menu 요소의 구문은 다음과 같습니다.
                 
                 ```xml
                 <Menu guid="guidMyCommandSet" id="MyCommand" priority="0x100" type="Menu">
@@ -306,22 +305,22 @@ Customizations 바로 오른쪽에는 두 가지 더 이상 사용되지 않고 
                 </Menu>
                 ```
 
-                GUID 및 id 속성은 Menu 요소의 필수 속성이며 명령 식별자의 GUID 및 id를 나타냅니다. 우선 순위, 유형 및 조건은 선택적 속성입니다. Priority는 메뉴 그룹에서 메뉴의 상대적 위치를 지정하는 숫자 값이고 type은 요소의 종류를 지정하는 열거 값입니다. 유형이 지정되지 않은 경우 해당 값은 기본적으로 메뉴로 설정됩니다. 가능한 값은 다음과 같습니다.
+                GUID 및 id 속성은 Menu 요소의 필수 속성이며 명령 식별자의 GUID 및 id를 나타냅니다. 우선 순위, 유형 및 조건은 선택적 속성입니다. Priority는 메뉴 그룹에서 메뉴의 상대적 위치를 지정하는 숫자 값이고 type은 요소의 종류를 지정하는 열거 값입니다. 유형이 지정되지 않은 경우 해당 값은 기본적으로 메뉴로 설정되며 가능한 값은 다음과 같다.
 
-                * 컨텍스트
-                * 메뉴 
+                * Context
+                * Menu
                 * MenuController
                 * MenuControllerLatched 
-                * 도구 모음(Toolbar)
+                * Toolbar(도구 모음)
                 * ToolWindowToolbar
 
                 이러한 유형의 자세한 목적과 사용을 위해 독자는 Visual Studio 2019에 대한 자세한 설명서를 읽어야 합니다.
                 https://docs.microsoft.com/en-in/visualstudio/extensibility/menu-element?view=vs-2019  
 
-                Menu 요소의 구문은 세 개의 자식이 있음을 보여줍니다.
+                Menu 요소의 구문은 세 개의 자식 항목이 있다.
 
-                * Parent - 선택적 요소입니다. 지정된 경우 메뉴 항목의 상위 항목을 나타냅니다. 
-                * CommandFlag - 필수 요소입니다. 메뉴에 대한 유효한 CommandFlag 값은 다음과 같습니다.
+                * Parent - 선택적. 지정된 경우 메뉴 항목의 상위 항목을 나타냅니다. 
+                * CommandFlag - 필수 요소. 메뉴에 대한 유효한 CommandFlag 값은 다음과 같습니다.
                     * AlwaysCreate 
                     * DefaultDocked 
                     * DefaultInvisible 
@@ -337,32 +336,32 @@ Customizations 바로 오른쪽에는 두 가지 더 이상 사용되지 않고 
                     CommandFlag 요소에 대한 자세한 설명서는 Microsoft 설명서를 참조하십시오.                      
                     https://docs.microsoft.com/en-in/visualstudio/extensibility/command-flag-element?view=vs-2019
 
-                • Strings - 필수 요소입니다. 여러 자녀를 가질 수 있습니다.  
-                ButtonText 요소는 필수적이고 가장 중요한 자식 요소이며 메뉴가 표시하는 텍스트를 정의합니다. 텍스트 문자열의 앰퍼샌드(&)는 명령에 대한 키보드 단축키를 지정합니다. Strings 요소의 구문은 다음과 같습니다.    
+                • Strings - 필수 요소입니다. 여러 자식을 가질 수 있다.  
+                    ButtonText 요소는 필수적이고 가장 중요한 자식 요소이며 메뉴가 표시하는 텍스트를 정의. 텍스트 문자열의 앰퍼샌드(&)는 명령에 대한 키보드 단축키를 지정합니다. Strings 요소의 구문은 다음과 같습니다.    
 
-                ```xml
-                <Strings>
-                    <ButtonText>... </ButtonText>
-                    <ToolTipText>...</ToolTipText>
-                    <MenuText>...</MenuText>
-                    <CommandName>... </CommandName>
-                    <CanonicalName>...</CanonicalName>
-                    <LocCanonicalName>...</LocCanonicalName>
-                </Strings>
-                ```
+                    ```xml
+                    <Strings>
+                        <ButtonText>... </ButtonText>
+                        <ToolTipText>...</ToolTipText>
+                        <MenuText>...</MenuText>
+                        <CommandName>... </CommandName>
+                        <CanonicalName>...</CanonicalName>
+                        <LocCanonicalName>...</LocCanonicalName>
+                    </Strings>
+                    ```
 
-                이러한 요소의 목적은 아래에 설명되어 있습니다.
+                    이러한 요소의 목적은 아래에.
 
-                * ButtonText - 이 요소는 메뉴에 표시되는 텍스트를 지정합니다. 비워둘 수 없습니다. 
-                * ToolTipText - 이 요소는 메뉴 명령에 대해 표시되는 도구 설명 텍스트를 지정합니다.  
-                  툴팁 텍스트를 지정하지 않으면 ButtonText의 텍스트가 툴팁으로 사용됩니다. 
-                * MenuText - 이 요소는 명령이 기본 메뉴, 도구 모음, 바로 가기 메뉴 또는 하위 메뉴에 있는 경우 해당 명령에 대해 표시되는 텍스트를 지정합니다. MenuText 요소가 비어 있으면 IDE는 ButtonText 요소 값을 사용합니다. 이 요소는 현지화에도 사용할 수 있습니다. 
-                * CommandName - 명령의 명령 이름입니다. 이 명령 이름은 모든 명령이 나열되는 도구 ➤ 사용자화 ➤ 명령 섹션에서 볼 수 있습니다. 이 명령은 도구 ➤ 옵션 ➤ 키보드 대화 상자에서도 볼 수 있습니다. 
-                * CanonicalName - 영어 표준 이름 요소입니다. 메뉴 항목을 실행하기 위해 명령 창에 입력할 수 있는 영어 텍스트의 명령 이름을 지정합니다. IDE는 문자, 숫자, 밑줄 또는 포함된 마침표가 아닌 모든 문자를 제거합니다. 그런 다음 이 텍스트를 ButtonText 필드에 연결하여 명령을 정의합니다. 예를 들어, 파일 메뉴의 새 프로젝트는 File.NewProject 명령이 됩니다. 
-                * LocCanonicalName - 현지화를 지원한다는 점을 제외하고 영어 CanonicalName 요소와 동일하게 작동합니다.
+                    * ButtonText - 메뉴에 표시되는 텍스트 지정. 필수. 
+                    * ToolTipText - 메뉴 명령에 대해 표시되는 도구 설명 텍스트 지정.  
+                        툴팁 텍스트를 지정하지 않으면 ButtonText의 텍스트가 툴팁으로 사용. 
+                    * MenuText - 이 요소는 Command가 기본 메뉴, 도구 모음, 바로 가기 메뉴 또는 하위 메뉴에 있는 경우 해당 명령에 대해 표시되는 텍스트를 지정. MenuText 요소가 비어 있으면 IDE는 ButtonText 요소 값을 사용. 이 요소는 현지화에도 사용할 수 있습니다. 
+                    * CommandName - 명령의 명령 이름입니다. 이 명령 이름은 모든 명령이 나열되는 도구 ➤ 사용자화 ➤ 명령 섹션에서 볼 수 있습니다. 이 명령은 도구 ➤ 옵션 ➤ 키보드 대화 상자에서도 볼 수 있습니다. 
+                    * CanonicalName - 영어 표준 이름 요소입니다. 메뉴 항목을 실행하기 위해 명령 창에 입력할 수 있는 영어 텍스트의 명령 이름을 지정합니다. IDE는 문자, 숫자, 밑줄 또는 포함된 마침표가 아닌 모든 문자를 제거합니다. 그런 다음 이 텍스트를 ButtonText 필드에 연결하여 명령을 정의합니다. 예를 들어, 파일 메뉴의 새 프로젝트는 File.NewProject 명령이 됩니다. 
+                    * LocCanonicalName - 현지화를 지원한다는 점을 제외하고 영어 CanonicalName 요소와 동일하게 작동합니다.
 
-            - ii. Groups
-                이 요소는 VSPackage에 의해 노출된 명령 그룹을 나타내는 Group 요소 집합을 정의합니다. Groups 요소의 구문은 다음과 같습니다.                  
+            - ii. Groups  
+                이 요소는 VSPackage에 의해 노출된 명령 그룹을 나타내는 Group 요소 집합을 정의. Groups 요소의 구문은 다음과 같습니다.                  
 
                 ```xml
                 <Groups>
@@ -381,7 +380,7 @@ Customizations 바로 오른쪽에는 두 가지 더 이상 사용되지 않고 
 
                 GUID 및 id는 필수 속성이며 그룹의 GUID 및 식별자를 지정합니다. 우선 순위(priority)는 명령 그룹의 순서를 지정하는 숫자 값입니다.
 
-            - iii. Buttons
+            - iii. Buttons  
                 Buttons 요소는 사용자가 상호 작용할 수 있는 UI로 명령을 나타내는 Button 요소의 그룹입니다. Buttons 요소의 구문은 다음과 같습니다.
 
                 ```xml
