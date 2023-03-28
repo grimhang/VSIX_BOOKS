@@ -773,9 +773,222 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
     ----------------------  -----------------------------------------------------------------------------------------
     ActiveDocument          활성 창을 가져온다
     ActiveSolutionProjects  현재 선택된 프로젝트들의 배열을 가져온다.
-    ActiveWindow
-
-    작업중
+    ActiveWindow            현재 활성화 창을 가져오기. 만약 활성 창이 없다면 최상위 창을 가져온다
+    AddIns                  사용 가능한 AddIns 컬렉션을 가져오기. 하지만 사용만료 기능이므로 AddIns 및 매크로가 더 이상 사용되지 않으므로 
+                            NotImplementedexception이 발생.
+    Application             Microsoft 내부 사용 전용
+    CommandBars             개발환경 명령 바에 대한 참조 얻기
+    CommandLineArguments    명령줄 인수를 나타내는 문자열을 가져오기.
+    Commands                명령어 컬렉션 가져오기
+    ContextAttributes       자동화 클라이언트가 동적 도움말 창에서 현재 선택된 항목에 새 속성을 추가하고 추가 속성에 대한 상황별 
+                            도움말을 제공할 수 있도록 하는 속성 모음을 가져옵니다.
+    Debugger                디버거 객체 가져오기
+    DisplayMode             MDI 또는 탭 문서의 표시 모드를 가져옵니다.
+    Documents               IDE에서 열려 있는 문서 모음을 가져옵니다.
+    DTE                     탑레벨 확장성 객체 가져오기
+    Edition                 환경의 에디션에 대한 설명을 가져옵니다.
+    Events                  이벤트 객체에 대한 참조 가져오기
+    FileName                내부적으로 Microsoft 전용 사용
+    Find                    전역 텍스트 찾기 작업을 나타내는 Find 개체를 가져옵니다.
+    FullName                개체 파일의 전체 경로와 이름을 가져옵니다.
+    Globals                 솔루션(.sln)파일, 프로젝트 파일 또는 사용자 프로필 데이터에 저장할 수 있는 값이 포함된 Globals 개체를 가져옴.
+                            Globals 개체는 Visual Studio 환경의 각 세션 기간과 VariablePersists 속성을 사용하는 세션 간에 데이터를
+                            저장하기 위한 캐시.
+    IsOpenFile              내부적으로 Microsoft 전용 사용
+    ItemOperations          일반적인 파일 작업을 수행하기 위한 개체를 가져옵니다.
+    LocaleID                개발 환경이 실행 중인 로케일의 ID를 가져옵니다.
+    Macros                  매크로 개체를 가져옵니다. 
+                            Visual Studio 2019에서는 매크로 및 추가 기능이 더 이상 사용되지 않으므로 NotImplementedException이 발생.
+    MacrosIDE               Macros IDE 자동화 모델의 루트를 가져옵니다.
+    MainWindow              기본 개발 환경 창을 나타내는 창 개체를 가져옵니다.
+    Mode                    개발 환경의 모드(디버그 또는 디자인)를 가져옵니다.
+    Name                    최상위 자동화 개체의 이름을 가져오거나 설정합니다.
+    ObjectExtenders         자동화 개체에 대한 액세스를 제공하는 개체를 가져옵니다.
+    Properties              도구 메뉴의 옵션 대화 상자에 포함된 사용 가능한 모든 범주 및 하위 범주를 나타내는 속성 컬렉션을 반환.
+        [String,String]
+    RegistryRoot            Visual Studio 레지스트리 설정의 루트에 대한 경로가 있는 문자열을 가져옵니다.
+    SelectedItems           환경에서 현재 선택된 항목을 포함하는 컬렉션을 가져옵니다.
+    Solution                환경의 현재 인스턴스에서 열려 있는 모든 프로젝트를 나타내고 빌드 개체에 대한 액세스를 
+                            허용하는 솔루션 개체를 가져옵니다.
+    SourceControl           개체 뒤에 있는 파일의 소스 코드 제어 상태를 조작할 수 있는 SourceControl 개체를 가져옵니다.
+    StatusBar               기본 개발 환경 창의 상태 표시줄을 나타내는 StatusBar 개체를 가져옵니다.
+    SuppressUI              자동화 코드 실행 중에 UI를 표시할지 여부를 가져오거나 설정합니다.
+    UndoContext             Visual Studio에서 열려 있는 모든 참가 문서에서 수행되는 모든 작업을 단일 트랜잭션으로 나타내는 
+                            전역 UndoContext 개체를 가져온다. SetAborted() 메서드가 호출되면 개체를 연 이후의 모든 변경 사항이 삭제됨.
+    UserControl             환경이 사용자 또는 자동화에 의해 시작되었는지 여부를 나타내는 값을 설정하거나 가져옵니다.
+    Version                 호스트 응용 프로그램의 버전 번호를 가져옵니다.
+    WindowConfigurations    환경을 위해 생성된 모든 사용 가능한 명명된 창 구성을 나타내는 컬렉션을 가져온다.
+    Windows                 개체에 표시되는 창을 포함하는 Windows 컬렉션을 가져옵니다.
     ```
 
+    ```
+    메쏘드 이름             설명
+    ----------------------  -----------------------------------------------------------------------------------------
+    ExecuteCommand          지정된 명령을 실행. 이 방법은 확장 개발자 툴킷의 맨 위 서랍에서 위치를 쉽게 찾을 수 있다. 
+        (String, String)    이 메서드는 실행 중에 명령을 적용할 수 있는 경우 Visual Studio의 기존 명령을 실행하기 위해 확장에서 
+                            사용 가능. 또한 휠을 재발견하는 대신 이미 사용 가능한 명령을 기반으로 하여 많은 기능을 달성하는 데 도움이 됨.
+    GetObject(String)       DTE 개체에 늦게 바인딩되며 런타임 중 이름으로 액세스할 수 있는 인터페이스 또는 개체를 가져옵니다.
+    LaunchWizard            제공된 파라메터로 마법사 실행
+        (String,Object[])
+    OpenFile(String,String) Microsoft 내부 전용        
+    Quit()                  환경 닫기
+    SatelliteDllPath        지역화된 리소스를 포함하는 DLL의 설치 디렉터리 및 파일 이름이 제공되면 위성 DLL에 대한 계산된 경로를 반환.
+        (String,String)
+    ```
+
+- ### B. Document 인터페이스
+
+    ```
+    프로퍼티 이름             설명
+    ----------------------  -----------------------------------------------------------------------------------------
+    ActiveDocument          현재 활성 창을 가져오거나 다른 창이 활성화되어 있지 않으면 최상위 창을 가져옴. 
+                            열려 있는 창이 없으면 null을 반환.
+    Collection              편집을 위해 열린 환경에서 문서를 나타내는 개체를 포함하는 컬렉션을 가져옵니다.
+    DTE                     최상위 확장성 객체 가져오기
+    Extender                이 개체에 사용할 수 있는 경우 요청된 Extender를 반환합니다.
+    ExtenderCATID           개체의 Extender 카테고리 ID(CATID)를 가져옵니다.
+    ExtenderNames           개체의 사용가능한 Extender 카테고리 리스트 가져옵니다.
+    FullName                개첵의 파일 명과 전체 경로 가져오기
+    IndentSize              Microsoft 내부 전용
+    Kind                    개체의 종류 또는 유형을 나타내는 GUID 문자열을 가져옵니다.
+    Language                Microsoft 내부 전용
+    Name                    문서의 이름 가져오기
+    Path                    파일명이 제외된 Document 디렉토리의 경로 가져오기.
+    ProjectItem             Document 개체와 연결된 ProjectItem 개체를 가져옵니다.
+    ReadOnly                Microsoft 내부 전용
+    Saved                   객체가 마지막으로 저장되거나 열린 이후 수정되지 않은 경우 true를 반환합니다.
+    Selection*              문서에서 현재 선택 항목을 나타내는 개체를 가져옵니다.
+    TabSize                 Microsoft 내부 전용
+    Type                    Microsoft 내부 전용
+    Windows                 개체에 표시되는 창을 포함하는 Windows 컬렉션을 가져옵니다.
+    ```
+
+    ```
+    메쏘드 이름              설명
+    ---------------------   -------------------------------------------------------------------------------
+    Activate                현재 항목으로 포커스를 이동합니다.
+    ClearBookmarks          Microsoft 내부 전용
+    Close                   열려 있는 문서를 닫고 선택적으로 저장하거나 창을 닫고 제거합니다.
+    MarkText                Microsoft 내부 전용
+    NewWindow               문서를 볼 수 있는 새 창을 만듭니다.
+    Object                  런타임에 이름으로 액세스할 수 있는 인터페이스 또는 개체를 반환합니다.
+    PrintOut                Microsoft 내부 전용
+    Redo                    Undo() 메서드 또는 사용자에 의해 실행 취소된 마지막 작업을 다시 실행합니다.
+    ReplaceText             Microsoft 내부 전용
+    Save                    document 저장.
+    Undo                    문서 사용자가 마지막으로 수행한 작업을 되돌립니다.
+    ```
+
+- ### C. TextSelection
+
+    ```
+    프로퍼티 이름             설명
+    ----------------------  -----------------------------------------------------------------------------------------
+    ActivePoint             선택 항목의 현재 끝점을 가져옵니다.
+    AnchorColumn            Microsoft 내부 전용
+    AnchorPoint             선택의 원점을 가져옵니다.
+    BottomLine              Microsoft 내부 전용
+    BottomPoint             선택의 끝에서 점을 가져옵니다.
+    CurrentColumn           Microsoft 내부 전용
+    CurrentLine             Microsoft 내부 전용
+    DTE                     최상위 확장성 객체 가져오기
+    IsActiveEndGreater      활성 포인트가 하단 포인트와 같은지 여부를 가져옵니다.
+    IsEmpty                 앵커 포인트가 활성 포인트와 같은지 여부를 가져옵니다.
+    Mode                    마우스 끌기가 스트림 또는 블록 모드에서 선택하는지 여부를 결정하는 값을
+                            가져오거나 설정.
+    Parent                  TextSelection 개체의 바로 위 부모 개체를 가져옵니다.
+    Text                    TextSelection을 가져오거나 설정
+    Textpane                TextSelection을 포함하는 텍스트 영역을 가져옵니다.
+    TextRanges              선택 항목의 각 행 또는 부분 행에 대해 하나의 TextRange 객체가 있는 TextRanges 컬렉션을 가져온다.
+    TopLine                 Microsoft 내부 전용
+    TopPoint                선택 항목의 상단을 가져옵니다.
+    ```
+
+    ```
+    메쏘드 이름              설명
+    ---------------------   -------------------------------------------------------------------------------
+    Backspace               Microsoft 내부 전용
+    Cancel                  Microsoft 내부 전용
+    ChangeCase              선택된 텍스트 대소문자 변경
+    CharLeft                개체를 지정된 문자 수만큼 왼쪽으로 이동.
+    CharRight               개체를 지정된 문자 수만큼 오른쪽으로 이동.
+    ClearBookmark           현재 텍스트 버퍼 라인에서 이름이 지정되지 않은 책갈피를 지웁니다.
+    Collapse                텍스트 선택을 활성 지점으로 축소합니다.
+    Copy                    선택된 텍스트 클립보드에 복사
+    Cut                     선택된 텍스트 클립보드에 복사하고 원래위치에서 삭제
+    Delete                  선택 텍스트 삭제
+    DeleteLeft              활성 포인트의 왼쪽에 지정된 수의 문자를 삭제합니다.
+    DeleteWhitespace        텍스트 버퍼의 현재 위치 주변의 빈 문자(공백)를 수평 또는 수직으로 삭제합니다.
+    DestructiveInsert       텍스트를 삽입하여 기존 텍스트를 덮어씁니다.
+    EndOfDocument           개체를 문서의 끝으로 이동.
+    EndOfLine               개체를 현재 라인의 끝으로 이동.
+    FindPattern             활성 지점에서 문서 끝까지 지정된 패턴을 검색합니다.
+    FindText                활성 지점에서 문서 끝까지 주어진 텍스트를 검색합니다.
+    GotoLine                표시된 줄의 시작 부분으로 이동하고 요청 시 해당 줄을 선택합니다.
+    Indent                  지정된 들여쓰기 수준만큼 선택한 줄을 들여씁니다.
+    Insert                  현재 삽입 지점에 지정된 문자열을 삽입합니다.
+    InsertFromFile          지정된 파일의 내용을 버퍼의 현재 위치에 삽입합니다.
+    LineDown                텍스트 선택 영역의 삽입점을 지정된 줄 수만큼 아래로 이동.
+    LineUp                  텍스트 선택 영역의 삽입점을 지정된 줄 수만큼 위로 이동.
+    MoveTo                  Microsoft 내부 전용
+    MoveToAbsoluteOffset    활성 포인트를 지정된 1 기반의 절대 문자 오프셋으로 이동.
+    MoveToDisplayColumn     활성 지점을 표시된 표시 열로 이동합니다.
+    MoveToLineAndOffset     활성 포인트를 지정된 위치로 이동합니다.
+    MoveToPoint             활성 포인트를 지정된 위치로 이동합니다.
+    NewLine                 활성 지점에 줄 바꿈 문자를 삽입합니다.
+    NextBookmark            문서의 다음 책갈피 위치로 이동합니다.
+    OutlineSection          현재 선택을 기반으로 개요 섹션을 만듭니다.
+    PadToColumn             버퍼의 현재 행을 빈 문자(공백)로 지정된 열까지 채웁니다.
+    PageDown                보기를 스크롤하면서 문서에서 지정된 페이지 수만큼 활성 지점을 아래로 이동합니다.
+    PageUp                  보기를 스크롤하면서 문서에서 지정된 페이지 위로 활성 지점을 이동합니다.
+    Paste                   현재 위치에 클립보드 내용을 삽입합니다.
+    PreviousBookmark        텍스트 선택을 문서의 이전 책갈피 위치로 이동합니다.
+    ReplacePattern          전체 텍스트 문서에서 일치하는 텍스트를 바꿉니다.
+    ReplaceText             Microsoft 내부 전용
+    SelectAll               전체 문서를 선택.
+    SelectLine              활성 지점이 포함된 줄 선택.
+    SelectBookmark          버퍼의 현재 줄에 이름 없는 책갈피를 설정합니다.
+    SmartFormat             현재 언어를 기반으로 선택한 텍스트 줄의 서식을 지정합니다.
+    StartOfDocument         삽입 지점을 문서의 시작 부분으로 이동합니다.
+    StartOfLine             개체를 현재 줄의 시작 부분으로 이동합니다.
+    SwapAnchor              활성 및 앵커 포인트의 위치를 교체.
+    Tabify                  탭 설정에 따라 선택 항목의 공백을 탭으로 변환합니다.
+    Unindent                지정된 들여쓰기 수준 수만큼 텍스트 선택 항목에서 들여쓰기를 제거합니다.
+    Untabify                사용자의 탭 설정에 따라 선택 항목의 탭을 공백으로 변환합니다.
+    WordLeft                텍스트 선택 영역을 지정된 단어 수만큼 왼쪽으로 이동합니다.
+    WordRight               텍스트 선택 영역을 지정된 단어 수만큼 오른쪽으로 이동합니다.
+    ```
+
+- ### D. DialogPage
+
+    ```
+    프로퍼티 이름             설명
+    ----------------------  -----------------------------------------------------------------------------------------
     
+    ```    
+
+    ```
+    메쏘드 이름              설명
+    ---------------------   -------------------------------------------------------------------------------
+    
+    ```
+
+- ### E. ToolWindowPane
+
+    ```
+    프로퍼티 이름             설명
+    ----------------------  -----------------------------------------------------------------------------------------
+    
+    ```    
+
+    ```
+    메쏘드 이름              설명
+    ---------------------   -------------------------------------------------------------------------------
+    
+    ```    
+
+    ```
+    이벤트 이름                  설명
+    ------------------------    -------------------------------------------------------------------------------
+    InfoBarActionItemClicked    정보 표시줄의 버튼 또는 하이퍼링크가 이 ToolWindowPane과 연결될 때 발생하는 이벤트.
+    ```
