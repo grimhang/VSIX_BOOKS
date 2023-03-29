@@ -7,7 +7,7 @@ sort: 4
 
 ***
 ## <font color='dodgerblue' size="6">1) VS 확장 프로그램 개발을 지원하는 확장 프로그램</font>
-Visual Studio에 사용자 지정 명령을 추가하려면 vsct 파일을 수정해야 한다는 것을 알수 있었다.  
+Visual Studio에 사용자 지정 명령을 추가하려면 vsct 파일을 수정해야 한다.  
 하지만 Visual Studio에는 vsct 파일 편집에 대한 IntelliSense 지원이 없기에 불편하다. 마찬가지로 확장 기능을 개발하는 동안 Visual Studio에 이미 있는 명령어을 사용해야 할 수도 있지만 정확한 명령을 모르기도 하다. Visual Studio는 확장애드온 작성자가 사용할 수 있는 수천 개의 이미지와 함께 제공된다. 그러나 우리는 확장 기능에서 이 역시 사용하는 방법을 모른다.  
 고맙게도 Mads Kristensen은 Visual Studio 확장 작성자가 더 빠르고 쉽고 만들기 위한 Extensibility Essentials 2019라는 확장기능 팩을 개발했다.  
 이 확장 팩에는 겉보기에 어려운 작업을 쉽게 수행할 수 있는 확장 기능 모음이 포함되어 있고 이 책을 집필하는 현재 이 확장 팩에는 아래의 확장이 포함되어 있다.
@@ -35,10 +35,10 @@ Visual Studio에 사용자 지정 명령을 추가하려면 vsct 파일을 수�
 - **VSIX 동기화 프로그램**  
   관리 코드에서 .vsixmanfest 및 .vsct 파일에 대한 코드 숨김 파일을 생성하여 나머지 확장 프로그램에서 정보를 쉽게 사용할 수 있도록 하는 기능을 제공
 
-이러한 각 확장에 대한 세부 정보는 Visual Studio Marketplace 사이트(https://marketplace.visualstudio.com/) 의 해당 확장 페이지에서 읽을 수 있습니다.  
-Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 이것은 확장의 프로젝트 세부 정보 섹션에서 볼 수 있으므로 호기심 많은 독자는 이러한 각 확장이 마법을 어떻게 쓰는지 정확히 알 수 있습니다. Visual Studio 2019 확장 개발을 시작하기 전에 독자에게 이 확장 팩을 설치하는 것이 좋습니다.  확장은 Visual Studio Marketplace  
-(https://marketplace.visualstudio.com/items?itemName=MadsKristensen.ExtensibilityEssentials2019)에서 다운로드한 다음 설치할 수 있습니다.   
-또는 Visual Studio 상위 메뉴 확장 ➤ 확장 관리로 이동할 수 있습니다. 그런 다음 그림 4-1과 같이 Extensibility Essentials 2019를 검색합니다.
+이러한 각 확장에 대한 세부 정보는 <a href="https://marketplace.visualstudio.com/" target="_blank">Visual Studio Marketplace 사이트</a>의 해당 확장 페이지에서 읽을 수 있다.  
+Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했다. Visual Studio 2019 확장 개발을 시작하기 전에 독자에게 이 확장 팩을 설치하는 것을 권장.  확장은 <a href="https://marketplace.visualstudio.com/items?itemName=MadsKristensen.ExtensibilityEssentials2019" target="_blank">Visual Studio Marketplace 사이트</a>
+에서 다운로드한 다음 설치할 수 있다.   
+또는 Visual Studio 상위 메뉴 확장 ➤ 확장 관리로 이동할 수 있습니다. 그런 다음 그림 4-1과 같이 Extensibility Essentials 2019를 검색.
 
 ![04_01_ExtEssential2019](image/04/04_01_ExtEssential2019.png)   
 그림 4-01 Visual Studio 유저 인터페이스
@@ -48,8 +48,6 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
 ## <font color='dodgerblue' size="6">2) 검색을 수행하는 Visual Studio 확장 만들어보기</font>
 **만들 기능 설명** :  
 개발중에 궁금한 정보를 얻기위해서는 보통은 코드중 일부를 복사하고 브라우저에서 검색 엔진(예: Bing)을 열고 붙여넣기 한후 필요한 정보를 검색한다. 검색 결과중 가장 관련성이 높은 링크를 읽어서 최종정보를 얻는다.  
-
-일반적으로는 괜찮지만 매번 Visual Studio에서 브라우저로 화면을 전환 해야 한다. 
 
 외부 브라우저를 열지 않고도 Visual Studio에서 직접 콘텐츠를 검색하고 결과를 볼 수 있다면 좋지 않을까? 이것이 바로 우리가 새로 만드는 확장기능의 로직이다.
 
@@ -119,21 +117,22 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
 
             2장에서는 Visual Studio 2019에 해당하는 Visual Studio 16.0의 버전 및 제품 이름 매핑에 대해 논의했으며 17.0은 Visual Studio의 향후 버전을 나타냅니다. "[]"(대괄호)는 값이 포함됨을 지정합니다. "()"(괄호)는 배타적 값을 나타냅니다. 버전 범위에는 두 가지 값이 있습니다. 첫 번째는 "버전에서"를 나타내고 두 번째 것은 "버전으로"를 지정합니다. (16.0, 17.0)을 종합하면 버전 16.0(16.0 포함)부터 버전 17.0(17.0 제외)까지 지원됩니다. 식별자와 버전 범위를 추가, 편집 및 삭제할 수 있습니다. 커뮤니티 버전에서 확장을 지원하는 경우 Enterprise 등 모든 상위 버전에서 지원되지만 그 반대의 경우는 지원되지 않습니다.
 
-            버전 범위에 대한 상세하고 정교한 토론은 버전 범위에 대한 이 유익한 블로그를 읽으십시오.  
-            https://devblogs.microsoft.com/visualstudio/visual-studio-extensions-andversion-ranges-demystified/
+            버전 범위에 대한 상세하고 정교한 토론은 버전 범위에 대한 이 <a href="https://devblogs.microsoft.com/visualstudio/visual-studio-extensions-andversion-ranges-demystified/" target="_blank">유익한 블로그</a>를 읽어.  
+            
             
     - **3. 새 command 추가**   
-        솔루션 탐색기에서 프로젝트를 마우스 오른쪽 버튼으로 클릭합니다. 이 메뉴에서 "새 항목 추가"를 클릭합니다. 또는 프로젝트를 클릭하여 선택하고 Ctrl Shift A를 누를 수 있습니다. 그러면 '새 항목 추가' 대화상자가 열립니다. 확장성 범주(왼쪽 패널의 VSPackage 하위 범주)에서 명령 항목(Command) 템플릿을 클릭하여 프로젝트에 추가합니다. 그림 4-9와 같이 이 새 명령 클래스의 이름을 SearchCommand.cs로 지정했습니다.
+        솔루션 탐색기에서 프로젝트를 마우스 오른쪽 버튼 / 추가 / 새 항목 클릭.  
+        또는 프로젝트를 클릭하여 선택하고 Ctrl Shift A를 누를 수 있다. 그러면 '새 항목 추가' 대화상자가 열리는데 왼쪽에서 Visual C# 항목 / Extensibility / VSPackage / Command 선택하고 이름을 SearchCommand.cs로 지정.
 
         ![04_09_AddNewItem](image/04/04_09_AddNewItem.png)   
         그림 4-09 새 아이템 추가
 
-        그러면 몇 가지 새 파일(.cs, .vsct, .png)과 참조가 추가됩니다. 우리는 이미 지난 장에서 이러한 파일에 대해 논의했습니다.
+        그러면 몇 가지 새 파일(.cs, .vsct, .png)과 참조가 추가됩니다. 파일들의 자세한 설명은 3장에서 했음..
 
 - ### B. 메뉴에 명령 추가하기        
-    이전 장에서 우리는 또한 명령어를 추가한 후 확장기능을 실행할 수 있고 새 명령어가 Visual Studio의 최상위 메뉴중 **도구** 메뉴 아래 추가된다는 것을 배웠다. 하지만 매번 이렇게 찾아가는 것은 인체공학적 디자인이 아니기 때문에 이번에는 도구 메뉴에는 추가 하지 않겠다.  
+    이전 장에서 우리는 또한 명령어를 추가한 후 확장기능을 실행할 수 있고 기본 템플릿의 명령어가 Visual Studio의 최상위 메뉴중 **도구** 메뉴 아래 추가된다는 것을 배웠다. 하지만 매번 이렇게 찾아가는 것은 인체공학적 디자인이 아니기 때문에 이번에는 도구 메뉴에는 추가 하지 않겠다.  
 
-    텍스트를 선택하고 코드 편집기에서 오른쪽 마우스를 클릭해서 나오는 팝업메뉴를 사용하는 것이 훨씬 간편하다. 또한 코드 텍스트를 선택 후 바로가기 키 조합을 눌러 검색을 수행하는 것이 편리하니까 이 기능도 지원하도록 하자.
+    텍스트를 선택하고 코드 편집기에서 오른쪽 마우스를 클릭해서 나오는 팝업메뉴를 사용하거나 코드를 선택 후 바로가기 키를 눌러 검색을 수행하는 것이 편리하니까 이 기능도 지원하도록 하자.
     
     새로 추가된 명령어가 표시될 위치는 .vsct 파일에서 Groups 섹션, 특히 그림 4-10에서와 같이 Parent 요소의 id값에 지정해야 한다.
 
@@ -146,13 +145,15 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
         방법리스트는 다음과 같다.
 
         - **a. 인텔리센스 확장 사용하기**  
-            이 장의 앞부분에서 Extensibility Essentials 2019 확장 팩을 설치했다. 이 팩의 확장기능 중 일부는 VSCT IntelliSense입니다. 이렇게 하면 vsct 파일에서 IntelliSense 지원이 활성화된다. 이제 vsct 파일에서 id 값을 편집하고 코드(코드 텍스트용)를 입력하면 다음 그림과 같이 코드가 포함된 유효한 id 값 집합이 표시된다.  
+            Extensibility Essentials 2019 확장 팩 중 하나인 VSCT IntelliSense를 이용해보자. vsct 파일에서 IntelliSense 지원이 활성화된다. 이제 vsct 파일에서 id 값을 편집하기 위해 텍스트를 입력하면 다음 그림과 같이 코드가 포함된 유효한 id 값 집합이 표시된다.  
             값 목록중 IDM_VS_CTXT_CODEWIN은 코드 창의 컨텍스트 메뉴처럼 들리므로 우리 시나리오에 가장 적합하다. 온라인에서 검색해보니 실제로 코드 창에 대한 올바른 ID가 맞다. 그러나 이것은 히트 앤 트라이얼 접근 방식이며 다른 시나리오에서는 적합하지 않을 수 있다. IntelliSense가 올바른 값을 입력하도록 안내하지만 정확한 값을 찾지 못할 수도 있다. 아마도 도구 설명이나 해당 위치 글리프가 도움이 될 것이다. 그림 4-11을 참조하십시오.
             
             ![04_11_IntellisenseSupportVsctFile](image/04/04_11_IntellisenseSupportVsctFile.png)   
             그림 4-11 .vsct파일에서 인텔리센스 지원
 
         - **b. Commander Explorer(명령어 탐색기 확장) 사용하기 - 일반적으로 권장**  
+            
+
             코드 편집기에서 오른쪽 마우스를 클릭하면 나오는 컨텍스트 창에 명령어를 추가하고 싶기 때문에 먼저 코드 편집기에 맞는 어떤 적절한 명령어들이 있는지 살펴보자. 코드 창 컨텍스트 메뉴에 있는 명령은 그림 4-12에서 볼 수 있다.
 
             ![04_12_CodeWindowContextMenu](image/04/04_12_CodeWindowContextMenu.png)   
@@ -160,21 +161,13 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
 
             Extensibility Essentials 2019 확장 팩의 일부인 Commander Explorer를 사용하자. 
             
-            Visual Studio의 메뉴중 보기 ➤ 다른 창 ➤ Commander Explorer(명령어 탐색기)를 열자. Visual Studio IDE에서 제공하는 모든 명령을 표시된다. 명령어 이름을 입력하여 검색하거나 확인란을 선택하여 검사 모드에서 이 확장을 사용할 수 있습니다. 확인란을 선택하면 Ctrl Shift 키를 누른 후 명령을 실행할 수 있습니다. 그러면 그림 4-13과 같이 명령을 가로채서 명령 탐색기 창에 세부정보가 표시됩니다. 여기에서 그룹 섹션에서 컨텍스트 메뉴의 ID를 찾을 수 있다.
+            **현재는 이 확장기능이 제거됨. 책 작성 시점이후에 없어진거 같음.**
 
-            ![04_13_CommandExplorer](image/04/04_13_CommandExplorer.png)   
-            그림 4-13 명령어 탐색기
-
-            이 접근 방식은 적절한 명령어에 대한 ID를 찾는 데 사용할 수 있다.
-
-            ```note
-            이 장을 작성하는 시점에서 명령 탐색기 확장에 그룹 섹션이 채워지지 않고 표시되지 않는 문제가 있습니다. 그러나 이 문제가 곧 해결되고 이 확장 기능이 독자들이 이 접근 방식을 활용하는 데 도움이 되기를 바랍니다. 또는 이 문제가 해결될 때까지 모든 요구 사항에 가장 적합한 두 컨설턴트(Bing 및 Google)의 서비스를 활용하여 적절한 메뉴의 ID를 찾을 수 있습니다.
-            ```
+            ~~Visual Studio의 메뉴중 보기 ➤ 다른 창 ➤ Commander Explorer(명령어 탐색기)를 열자. Visual Studio IDE에서 제공하는 모든 명령을 표시된다. 명령어 이름을 입력하여 검색하거나 확인란을 선택하여 검사 모드에서 이 확장을 사용할 수 있습니다. 확인란을 선택하면 Ctrl Shift 키를 누른 후 명령을 실행할 수 있습니다. 그러면 그림 4-13과 같이 명령을 가로채서 명령 탐색기 창에 세부정보가 표시됩니다. 여기에서 그룹 섹션에서 컨텍스트 메뉴의 ID를 찾을 수 있다.~~
             
-            이제 명령어가 코드 창 컨텍스트 메뉴에 배치됩니다. 그러나 전문적이고 사용자 친화적으로 만들기 위해 아이콘과 키보드 지원을 제공해야 합니다.
 
 - ### C. 아이콘과 키보드 지원 추가
-    예, 기본 아이콘도 괜찮지만 더 좋은것을 사용하고 싶다. Visual Studio는 높은 DPI를 지원하고 원활하게 통합되며 Visual Studio IDE의 모든 색상 테마와 잘 어울리는 3,790개 이상의 아이콘 및 이미지와 함께 제공한다. 이번에는 확장 프로그램에서 이러한 아이콘을 활용하는 방법을 살펴보자.
+    기본 아이콘도 괜찮지만 더 좋은것을 사용하고 싶다. Visual Studio는 높은 DPI를 지원하고 모든 색상 테마와 잘 어울리는 3,790개 이상의 아이콘 및 이미지와 함께 제공한다. 이번에는 확장 프로그램에서 이러한 아이콘을 활용하는 방법을 살펴보자.
 
     - **1. 이미지 include세팅**       
         vsct 파일에서 상위 2개의 Extern 요소 바로 뒤에 Include 요소를 추가하고 href 속성이 KnownImageIds.vsct로 되게하자. href 값에 K를 입력하는 즉시 IntelliSense가 정확한 파일 이름을 표시하므로 정확한 이름을 기억할 필요가 없다. 
@@ -193,19 +186,17 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
         ![04_15_EditIcon](image/04/04_15_EditIcon.png)   
         그림 4-15 아이콘 편집 - 인텔리센스 지원과 글리프
 
-        Visual Studio 이미지 카탈로그의 기본 제공 이미지를 사용하고 있으므로 솔루션에 .png 파일이 필요하지 않는다. 따라서 vsct 파일에 이미 정의된 Bitmaps 요소와 해당 기호가 필요하지 않다. 앞으로 vsct 파일에서 이러한 모든 요소들을 제거할 것입니다.
+        Visual Studio 이미지 카탈로그의 제공 이미지를 사용하고 있으므로 기본 템플릿이 만든 .png 파일은 더 이상 필요 없다. 따라서 vsct 파일에 이미 정의된 Bitmaps 요소와 해당 기호를 뒤에서 제거할 것이다.
 
     - **2. 추가작업**   
-        그러나 이것은 그대로 작동하지 않는다. Icon 요소 뒤에 CommandFlag 요소를 추가하고 해당 값을 IconIsMoniker를 사용하여 명령어에 해당하는 아이콘을 설정 해야 합니다. 위의 단계를 통해 Visual Studio 이미지 카탈로그의 일부로 제공되는 이미지를 사용할 수 있지만 공식 Microsoft Visual Studio 확장성 문서에 Visual Studio의 이미지, 모니커, 이미지 서비스 및 이미지 렌더링 아키텍처에 대한 풍부한 정보가 있습니다. 
-        https://docs.microsoft.com/en-us/visualstudio/extensibility/image-service-and-catalog?view=vs-2019
+        그러나 이것은 그대로 작동하지 않는다.  
+        Icon 요소 뒤에 CommandFlag 요소를 추가하고 해당 값을 IconIsMoniker를 사용하여 명령어에 해당하는 아이콘을 설정 해야 한다. 위의 단계를 통해 Visual Studio 이미지 카탈로그의 일부로 제공되는 이미지를 사용할 수 있지만 공식 <a href="https://docs.microsoft.com/en-us/visualstudio/extensibility/image-service-and-catalog?view=vs-2019" target="_blank">Visual Studio의 이미지, 모니커, 이미지 서비스 및 이미지 렌더링 아키텍처</a>에 에 대한 풍부한 정보가 있다. 
 
         ![04_15_1_CommandFlag](image/04/04_15_1_CommandFlag.png)   
         그림 4-15_1 CommandFlag 지정
 
-        나는 독자들에게 이 훌륭한 자료를 읽고 이해할 것을 강력히 추천.
-
     - **3. 명령어 표시**   
-        다음으로 ButtonText 요소를 Search으로 수정하여 명령이 컨텍스트 메뉴에 Search 으로 표시되도록 합니다.
+        다음으로 ButtonText 요소를 Search으로 수정하여 컨텍스트 메뉴에 Search 으로 표시되도록 한다.
 
     - **4. 단축키 지정**   
         명령에 키보드 지원을 추가하기 위해 Commands 노드 바로 뒤에 KeyBindings 노드를 추가한다. 이제 이 명령에 대한 키보드 단축키를 지정하려면 먼저 이 명령에 사용하는 키보드 단축키가 이미 사용되고 있지 않은지 확인해야 한다. 이렇게 하려면 그림 4-16과 같이 도구 ➤ 옵션 ➤ 환경 ➤ 키보드로 이동. 여기에 도달하려면 옵션 대화 상자에서도 검색하거나 Visual Studio의 상단 검색 텍스트 상자에 키보드를 직접 입력하고 탐색할 수 있습니다.
@@ -214,7 +205,7 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
         그림 4-16 키보드 단축키
 
     - **5. 비어있는 단축키 확인**   
-        "Press Shortcut keys" 텍스트 상자(그림 4-16에서 #2로 표시)에서 사용하려는 키 조합을 누르고 사용 중인지 확인합니다. 데모 목적으로 Ctrl S를 눌렀습니다(문서를 저장하는 데 사용한다는 것을 알고 있습니다). 이 키 조합으로 텍스트 상자가 업데이트됩니다. 이 텍스트 상자 바로 아래에는 "현재 사용 중인 바로 가기" 필드가 있으며 이 필드는 업데이트되고 이 키 조합이 File.SaveSelectedItems 명령에서 사용됨을 보여줍니다. 이런 식으로 사용자 지정 명령에 키 조합을 사용할 수 있는지 여부를 확인할 수 있습니다. 같은 연습을 통해 내 Visual Studio의 다른 명령에서 Alt S를 사용하지 않는다고 말할 수 있으므로 검색 명령에 적합한 키 조합인 것 같습니다. 
+        "바로 가기 키 누르기" 텍스트 상자(그림 4-16에서 #2로 표시)에서 사용하려는 키 조합을 누르고 사용 중인지 확인한다. 데모 목적으로 Ctrl S를 눌렀습니다(우리는 문서를 저장하는 데 사용한다는 것을 이미 알고 있다). 이 키 조합으로 텍스트 상자가 업데이트되며 텍스트 상자 바로 아래에는 "이 바로 가기 키를 사용하는 명령" 필드가 있으며 이 필드는 업데이트되고 이 키 조합이 File.SaveSelectedItems 명령에서 사용됨을 보여준다. 이런 식으로 사용자 지정 명령에 키 조합을 사용할 수 있는지 여부를 확인할 수 있고 Alt S는 미사용 조합 키임을 알수 있다. 
         
     - **6. 단축키 최종지정**       
         Alt S의 키 조합을 명령에 할당하기 위해 KeyBindings 요소는 그림 4-17과 같이 표시됩니다.
@@ -231,9 +222,9 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
     코드 편지기 창에서 텍스트를 선택한 후 마우스 오른쪽 버튼을 클릭하고 검색 명령을 실행한다는 점을 기억하자.  
     또는 텍스트를 선택하고 Alt + S를 눌러 검색을 시작하므로 검색 명령의 이벤트 핸들러에서 다음을 수행해야 한다.
 
-        - a. 선택한 텍스트를 가져옵니다.
-        - b. 이 텍스트를 인코딩하여 검색 엔진에 전달하십시오.
-        - c. 브라우저에 검색 결과를 표시합니다.
+        - a. 선택한 텍스트를 가져온다.
+        - b. 이 텍스트를 인코딩하여 검색 엔진에 전달.
+        - c. 브라우저에 검색 결과를 표시.
 
     그럼 이벤트 핸들러에서 선택한 텍스트를 어떻게 얻을까? 
     
@@ -241,7 +232,8 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
     이는 Visual Studio 구성 요소 및 확장기능에서 사용할 수 있는 여러 서비스를 사용하고 노출한다. DTE 또는 문서 도구 확장성이라 불리는 기능은 문서를 확장하고 자동화하는 데 사용할 수 있는 속성과 API들을 제공한다.
 
     DTE의 중요한 속성 및 방법을 빠르게 살펴보자.  
-    DTE의 클래스 다이어그램은 그림 4-18에 나와 있으며 이번 장 끝 부분에 있는 "클래스 레퍼런스" 섹션에는 DTE의 속성과 메서드가 요약되어 있다. 같은 내용을 온라인(https://docs.microsoft.com/en-us/dotnet/api/envdte.dte?view=visualstudiosdk-2017&viewFallbackFrom=visualstudiosdk-2019)에서 볼수 있다.
+    DTE의 클래스 다이어그램은 그림 4-18에 나와 있으며 이번 장 끝 부분에 있는 "클래스 레퍼런스" 섹션에는 DTE의 속성과 메서드가 요약되어 있다. 같은 내용을 
+    <a href="https://docs.microsoft.com/en-us/dotnet/api/envdte.dte?view=visualstudiosdk-2017&viewFallbackFrom=visualstudiosdk-2019" target="_blank">온라인</a>에서 볼수 있다.
 
     ![04_18_DteClassDiagram](image/04/04_18_DteClassDiagram.png)   
     그림 4-18 DTE 클래스 다이어그램
@@ -249,7 +241,8 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
     따라서 DTE가 여러 가지를 달성하는 데 도움이 될 수 있음을 알 수 있다. 다음으로 해야 할 일은 DTE에 액세스하는 것이다.
 
     - **1. DTE 서비스가져오기**           
-        AsyncPackage 클래스는 type을 지정하여 서비스에 대한 참조를 가져오는 데 사용할 수 있는 GetServiceAsync라는 API를 노출한다. DTE 개체에 액세스하기 위해 그림 4-19와 같이 이 API를 이용해 만들것입니다. 이 API는 확장을 개발하는 동안 서비스에 대한 참조를 얻는 데 매우 유용하고 자주 사용됩니다. 이것은 비동기 API이므로 비차단 방식으로 올바르게 사용하기 위해 await 키워드를 사용했다. await 키워드를 사용하려면 이벤트 핸들러 메서드 서명에서도 async 키워드를 사용해야 합니다. 그러나 async void 메서드는 권장되지 않으므로 이미 비동기인 InitializeAsync 메서드에서 DTE에 액세스하도록 코드를 이동해야 한다. SearchCommand.cs 파일의 InitializeAsync메쏘드쪽으로 이 코드를 이동하자.
+        AsyncPackage 클래스는 type을 지정하여 서비스에 대한 참조를 가져오는 데 사용할 수 있는 GetServiceAsync라는 API를 노출한다. DTE 개체에 액세스하기 위해 그림 4-19와 같이 이 API를 이용해 만들것이다.  
+        이 API는 확장을 개발하는 동안 서비스에 대한 참조를 얻는 데 매우 유용하고 자주 사용되고 이것은 비동기 API이므로 비차단 방식으로 올바르게 사용하기 위해 await 키워드를 사용했다. await 키워드를 사용하려면 이벤트 핸들러 메서드 서명에서도 async 키워드를 사용해야 한다. 그러나 async void 메서드는 권장되지 않으므로 비동기인 InitializeAsync 메서드에서 DTE에 액세스하도록 코드를 이동하자. SearchCommand.cs 파일의 InitializeAsync메쏘드쪽으로 이 코드를 이동하자.
         
         ![04_19_GetServiceAsyncUsage](image/04/04_19_GetServiceAsyncUsage.png)   
         그림 4-19 GetServiceAsync 사용
@@ -274,23 +267,24 @@ Mads는 이 패키지에 있는 각 확장의 GitHub URL을 공유했습니다. 
 
         
     - **2. 선택한 텍스트 얻기**              
-        이제 DTE 개체에 대한 참조가 있지만 선택한 텍스트를 어떻게 얻습니까? 이를 위해 Visual Studio의 활성 문서를 반환하는 DTE의 ActiveDocument라는 속성을 사용해야 한다. 이 속성은 Document 유형. 이 속성을 사용하기 전에 Document 유형에 의해 노출되는 속성과 메서드를 살펴보자. Document의 클래스 다이어그램은 그림 4-22.
+        이제 DTE 개체에 대한 참조가 있기에 선택한 텍스트를 얻기 위해 Visual Studio의 활성 Document를 반환하는 DTE의 ActiveDocument라는 속성을 사용해야 한다. 이 속성은 Document 유형. 이 속성을 사용하기 전에 Document 유형에 의해 노출되는 속성과 메서드를 살펴보자. Document의 클래스 다이어그램은 그림 4-22.
 
         ![04_22_DocumentType](image/04/04_22_DocumentType.png)   
         그림 4-22 문서 타입
         
-        Document 인터페이스의 속성과 메소드는 이 장의 끝에 있는 "클래스 참조" 섹션에 요약되어 있다. 자세한 내용은 온라인(https://docs.microsoft.com/en-us/dotnet/api/envdte.document?view=visualstudiosdk2017&viewFallbackFrom=visualstudiosdk-2019)에서 읽어보자.
+        Document 인터페이스의 속성과 메소드는 이 장의 끝에 있는 "클래스 참조" 섹션에 요약되어 있다. 자세한 내용은 <a href="https://docs.microsoft.com/en-us/dotnet/api/envdte.document?view=visualstudiosdk2017&viewFallbackFrom=visualstudiosdk-2019" target="_blank">온라인</a>
 
         Document에 Selection이라는 속성이 있다는 것을 알 수 있다. 이 속성은 문서에서 선택 항목을 가져오는 데 기본적으로 object 형식이며 TextSelect형식으로 변환해서 사용하자. EnvDTE 어셈블리는 텍스트 선택을 처리하는 TextSelection이라는 형식을 노출한다. 그것들을 사용하여 우리는 선택된 텍스트를 얻을 수 있다. 
         
         Extension을 작성할 때 TextSelection 유형은 다양한 요구에 도움이 될 수 있으므로 추가 코드를 작성하기 전에 TextSelection 유형의 클래스 다이어그램, 속성 및 메서드를 살펴보겠다. 
         
-        Microsoft 공식 문서의 TextSelection 설명서는 Microsoft 설명서 사이트에서 온라인(https://docs.microsoft.com/en-us/dotnet/api/envdte.textselection?view=visualstudiosdk-2017)
+        Microsoft 공식 문서의 TextSelection 설명서는 Microsoft 설명서 사이트에서 
+        <a href="https://docs.microsoft.com/en-us/dotnet/api/envdte.textselection?view=visualstudiosdk-2017" target="_blank">온라인</a>
 
         이를 통해 이제 문서 및 텍스트 선택 작업에 사용할 수 있는 API 및 속성을 알게 되었다.
 
-    - **3. 텍스트가공**  
-        DTE의 ActiveDocument 속성에서 Selection 속성을 가져온 다음 TextSelection 형식으로 캐스팅할 수 있는지 확인합니다. 텍스트 선택이 null이면 검색할 항목이 없으므로 Visual Studio의 StatusBar 또는 OutputWindow에서 사용자에게 메시지를 표시할 수 있습니다. 텍스트 선택이 있는 경우 브라우저에서 URL을 열어 검색 엔진에서 검색할 URL을 구성할 수 있습니다. 이 전체 코드 흐름은 그림 4-23에 나와 있습니다.
+    - **3. 텍스트 가공**  
+        DTE의 ActiveDocument 속성에서 Selection 속성을 가져온 다음 TextSelection 형식으로 캐스팅할 수 있는지 확인한다. 텍스트 선택이 null이면 검색할 항목이 없으므로 Visual Studio의 StatusBar 또는 OutputWindow에서 사용자에게 메시지를 표시할 수 있다. 텍스트 선택이 있는 경우 브라우저에서 URL을 열어 검색 엔진에서 검색할 URL을 구성한다.
 
         ![04_23_ExeMethod](image/04/04_23_ExeMethod.png)   
         그림 4-23 빙에서 선택된 텍스트를 검색하기 위해 메쏘드 실행
