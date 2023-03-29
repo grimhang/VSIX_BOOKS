@@ -314,8 +314,8 @@ Customizations 바로 오른쪽에는 두 가지 더 이상 사용되지 않고 
                 * Toolbar(도구 모음)
                 * ToolWindowToolbar
 
-                이러한 유형의 자세한 목적과 사용을 위해 독자는 Visual Studio 2019에 대한 자세한 설명서를 읽어야 합니다.
-                https://docs.microsoft.com/en-in/visualstudio/extensibility/menu-element?view=vs-2019  
+                디테일은 Visual Studio 2019에 대한 <a href="https://docs.microsoft.com/en-in/visualstudio/extensibility/menu-element?view=vs-2019" target="_blank">자세한 설명서</a>를 읽어보자
+                 
 
                 Menu 요소의 구문은 세 개의 자식 항목이 있다.
 
@@ -333,11 +333,10 @@ Customizations 바로 오른쪽에는 두 가지 더 이상 사용되지 않고 
                     * TextChanges 
                     * TextIsAnchorCommand
 
-                    CommandFlag 요소에 대한 자세한 설명서는 Microsoft 설명서를 참조하십시오.                      
-                    https://docs.microsoft.com/en-in/visualstudio/extensibility/command-flag-element?view=vs-2019
+                    CommandFlag 요소에 대한<a href="https://docs.microsoft.com/en-in/visualstudio/extensibility/command-flag-element?view=vs-2019" target="_blank">자세한 설명서</a>
 
-                • Strings - 필수 요소입니다. 여러 자식을 가질 수 있다.  
-                    ButtonText 요소는 필수적이고 가장 중요한 자식 요소이며 메뉴가 표시하는 텍스트를 정의. 텍스트 문자열의 앰퍼샌드(&)는 명령에 대한 키보드 단축키를 지정합니다. Strings 요소의 구문은 다음과 같습니다.    
+                * Strings - 필수 요소. 여러 자식을 가질 수 있다.  
+                    ButtonText 요소는 필수이고 가장 중요한 자식 요소, 메뉴가 표시하는 텍스트를 정의. 텍스트 문자열의 앰퍼샌드(&)는 명령에 대한 키보드 단축키를 지정. Strings 요소의 구문은 다음과 같습니다.    
 
                     ```xml
                     <Strings>
@@ -594,13 +593,20 @@ Customizations 바로 오른쪽에는 두 가지 더 이상 사용되지 않고 
     Mads Kristensen은 Extensibility Essentials 2019라는 멋진 확장 팩을 작성했습니다. 이 팩에는 Visual Studio 확장 개발을 쉽게 해주는 멋지고 유용한 확장이 많이 있습니다. 팩의 확장 중 하나는 vsct 파일에 IntelliSense 지원을 제공할 수 있는 VSCT IntelliSense의 확장입니다. 나는 이 확장이 아직 미리보기에 있다는 점을 추가해야 합니다(이 챕터를 작성할 당시).    
 
 - ### 8. 확장 프로젝트 디버깅은 어떻게 새로운 IDE 인스턴스를 시작합니까?
-    Visual Studio 확장은 Visual Studio용으로 개발되었습니다. 오른쪽? 따라서 확장은 Visual Studio에서만 보고 테스트할 수 있습니다. 따라서 확장을 디버그할 때 개발/디버깅 중인 확장을 확인할 수 있는 VS IDE의 인스턴스가 필요합니다. 확장성 프로젝트의 프로젝트 속성을 확인하면 디버그 탭에서 프로젝트의 시작 작업이 외부 프로그램 시작으로 설정되어 있고 devenv.exe(사용자가 실행할 때 실행되는 실행 파일)에 대한 경로가 있습니다. Visual Studio IDE 시작). 또한 명령줄 인수 값은 /rootsuffix Exp로 설정되어 실행 파일이 실험적 인스턴스에서 시작되도록 지시합니다.
+    Visual Studio 확장은 Visual Studio용으로 개발되었습니다. 오른쪽? 따라서 확장은 Visual Studio에서만 보고 테스트할 수 있습니다. 따라서 확장을 디버그할 때 개발/디버깅 중인 확장을 확인할 수 있는 VS IDE의 인스턴스가 필요합니다. 확장성 프로젝트의 프로젝트 속성을 확인하면 디버그 탭에서 프로젝트의 시작 작업이 외부 프로그램 시작으로 설정되어 있고 devenv.exe(사용자가 실행할 때 실행되는 실행 파일)에 대한 경로가 있습니다. Visual Studio IDE 시작). 또한 명령줄 인수 값은 /rootsuffix Exp로 설정되어 실행 파일이 실험적 인스턴스에서 시작되도록 지시.
     템플릿에서 이 프로젝트를 생성했기 때문에 기본적으로 이미 설정되어 있습니다. 그러나 확장을 처음부터 디버그해야 하는 경우 동일한 디버그 설정을 사용하여 확장을 디버그할 수 있습니다. 
     
         내 Visual Studio Community 2019 설치에서 devenv.exe의 경로는  
-            "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.exe"  
+            "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\devenv.exe" 이며
+                argument는 /rootsuffix Exp 
+
         SSMS 18경로는
             C:\Program Files (x86)\Microsoft SQL Server Management Studio 18\Common7\IDE\Ssms.exe
+                argument는 공백
+
+        SSMS 19경로는
+            C:\Program Files (x86)\Microsoft SQL Server Management Studio 19\Common7\IDE\Ssms.exe
+                argument는 공백
 
     그림 3-19는 확장성 프로젝트의 디버그 속성을 보여줍니다.    
 
