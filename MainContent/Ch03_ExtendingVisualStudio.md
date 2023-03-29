@@ -608,7 +608,7 @@ Customizations 바로 오른쪽에는 두 가지 더 이상 사용되지 않고 
             C:\Program Files (x86)\Microsoft SQL Server Management Studio 19\Common7\IDE\Ssms.exe
                 argument는 공백
 
-    그림 3-19는 확장성 프로젝트의 디버그 속성을 보여줍니다.    
+    그림 3-19는 확장성 프로젝트의 디버그 속성을 보여줍니다.  
 
     ![03_19_DebugProperty](image/03/03_19_DebugProperty.png)   
     그림 3-19 확장성 프로젝트의 디버그 속성
