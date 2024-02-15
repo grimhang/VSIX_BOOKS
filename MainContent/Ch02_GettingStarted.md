@@ -213,7 +213,7 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
 
     그러나 비동기 로딩을 사용하도록 확장을 개발/업데이트해야 하므로 이 옵션을 사용하지 않는 것이 좋다. 또한 확장은 사용자별로 또는 모든 사용자에 대해 설치할 수 있으므로 "사용자별 확장" 및 "모든 사용자 확장"에 대한 두 개의 작은 섹션에 대해 유의하자.
 
-    다음은 Package 클래스의 정의이다.
+    다음은 VSIX 의 가장 처음이자 중요한 Package 클래스의 정의이다.
        
 
     ```cs
@@ -227,7 +227,7 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
     }
     ```
 
-    AsyncPackage의 정의 및 중요 멤버는 다음과 같이 정의된다.
+    Package클래스를 상속받은 비동기 AsyncPackage 클래스의 정의 및 중요 멤버는 다음과 같다.
 
     ```cs
     [ComVisible(true)]
@@ -250,7 +250,7 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
     }
     ```
 
-    이제 패키지의 기본 사항이 준비되었으므로 이 파일과 함께 제공되는 코드를 살펴보겠다. 코드가 잘 주석 처리되어 있으므로 InitializeAsync 메서드를 효과적으로 사용해야 하는 방법을 이해하려면 주석을 읽으십시오.
+    이제 패키지의 기본 사항이 준비되었으므로 이 파일과 함께 제공되는 코드를 살펴보겠다. 코드 주석 좋으니 InitializeAsync 메서드 사용법을 주석으로 알아내라.
 
     VSIXAnatomy 네임스페이스
     ```cs
@@ -268,11 +268,13 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
             /// <param name="progress">진행 상황 업데이트 제공자.</param>
             /// <returns>패키지 초기화의 비동기 작업을 나타내는 작업 또는 없는 경우 이미 완료된 작업입니다. 
             /// 이 메서드에서 null을 반환하지 마십시오.</returns>
-            protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
+            protected override async Task InitializeAsync(CancellationToken cancellationToken
+                , IProgress<ServiceProgressData> progress)
             {
                 // 비동기식으로 초기화되면 현재 스레드가 이 시점에서 백그라운드 스레드일 수 있습니다. 응답성을 유지하려면 
                 // UI 스레드로 전환하기 전에 백그라운드에서 최대한 많은 작업을 수행하십시오.
-                // UI 스레드로 전환한 후 UI 스레드가 필요한 초기화를 수행하십시오. 이것을 기다립니다.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                // UI 스레드로 전환한 후 UI 스레드가 필요한 초기화를 수행하십시오. 이것을 기다립니다.
+                // JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
                 //// JoinableTaskFactory 및 Visual Studio와 관련된 기타 스레딩 구성에 대해서는 이후 장에서 논의할 것입니다.
             }
         }
