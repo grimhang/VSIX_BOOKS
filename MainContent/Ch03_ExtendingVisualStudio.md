@@ -64,26 +64,26 @@ sort: 3
 ## <font color='dodgerblue' size="6">2) Visual Studio 확장성 모델</font>
 이 섹션에서는 Visual Studio 확장성 모델에 대해 설명한다.
 
-여러분의 마음을 사로잡을 수 있는 분명한 질문은 "확장성 모델을 알아야 하는 이유는 무엇입니까?"이다. 대답은 간단하다. WPF/Windows 형식을 모르면 C# 개발자가 Windows용 데스크톱 기반 GUI 응용 프로그램을 만들 수 없는 것처럼 간단하다. 또는 ASP.NET/ASP.NET Core를 알지 못하는 것과 마찬가지로 이러한 프레임워크를 기반으로 하는 웹 애플리케이션/API를 만들 수 없다. 마찬가지로 Visual Studio 확장성 모델을 모르면 좋은 Visual Studio 확장을 만드는 것이 매우 어렵습니다. Visual Studio 확장성 모델을 알게 되면 자신 있게 확장을 만들어 Visual Studio를 확장할 수 있습니다.
+여러분의 마음을 사로잡을 수 있는 분명한 질문은 "확장성 모델을 알아야 하는 이유는 무엇입니까?"이다. 대답은 간단하다. WPF/Windows 형식을 모르면 C# 개발자가 Windows용 데스크톱 기반 GUI 응용 프로그램을 만들 수 없는 것처럼 간단하다. 또는 ASP.NET/ASP.NET Core를 알지 못하는 것과 마찬가지로 이러한 프레임워크를 기반으로 하는 웹 애플리케이션/API를 만들 수 없다. 마찬가지로 Visual Studio 확장성 모델을 모르면 좋은 Visual Studio 확장을 만드는 것이 매우 어렵습니다. Visual Studio 확장성 모델을 알게 되면 자신 있게 확장을 만들어 Visual Studio를 확장할 수 있다.
 
 마지막 장의 "보일러 플레이트 확장 구조" 섹션에서 Microsoft.VisualStudio.SDK 패키지에 대한 참조가 있는 이 초기구조 확장에 대해 논의했음을 상기하자. 이 패키지는 메타 패키지이며 Visual Studio SDK를 포함한다.
 이 NuGet 패키지를 독립 실행형 프로젝트에 설치했을 때 150개 이상의 어셈블리가 다운되었다(이 장을 작성하는 시점에서 정확히 157개).
 
 ```tip
-메타 패키지는 함께 의미가 있는 패키지 그룹을 설명하는 특별한 NuGet 패키지입니다. 예를 들어 Microsoft는 .NET Core 앱을 개발하는 데 필요한 모든 NuGet 패키지가 포함된 Microsoft.NETCore.App이라는 메타 패키지를 정의했습니다. 마찬가지로 Microsoft.VisualStudio.SDK는 Visual Studio를 확장하기 위한 확장을 개발하는 데 필요한 여러 NuGet 패키지를 그룹화하는 메타 패키지입니다.
+메타 패키지는 함께 의미가 있는 패키지 그룹을 설명하는 특별한 NuGet 패키지이다. 예를 들어 Microsoft는 .NET Core 앱을 개발하는 데 필요한 모든 NuGet 패키지가 포함된 Microsoft.NETCore.App이라는 메타 패키지를 정의했다. 마찬가지로 Microsoft.VisualStudio.SDK는 Visual Studio를 확장하기 위한 확장을 개발하는 데 필요한 여러 NuGet 패키지를 그룹화하는 메타 패키지이다.
 ```
 
-이러한 어셈블리는 Visual Studio SDK를 누적적으로 구성합니다. 이러한 157개의 어셈블리 각각에 대해 논의하는 것은 실현 가능하지도 필요하지도 않기에 이 섹션에서는 가장 중요한 어셈블리만 논의할 것이다. 또한 이 책의 과정을 통해 확장을 개발하면서 네임스페이스, 인터페이스 및 클래스에 대해 자세히 논의합니다. 우리가 알아야 할 몇 가지 중요한 네임스페이스가 표 3-1에 나열되어 있습니다.
+이러한 어셈블리는 Visual Studio SDK를 누적적으로 구성한다. 이러한 157개의 어셈블리 중 가장 중요한 몇가지 어셈블리만 논의할 것이다. 또한 이 책의 과정을 통해 확장을 개발하면서 네임스페이스, 인터페이스 및 클래스에 대해 자세히 논의합니다. 우리가 알아야 할 몇 가지 중요한 네임스페이스가 표 3-1에 나열되어 있다.
 
 표3-1 Visual Studio SDK에서 중요한 네임스페이스
 ```
 네임스페이스                                    설명
-----------------------------------------------  -----------------------------------------------------------------------------------------
+----------------------------------------------  -----------------------------------------------------------------------------------
 Microsoft.VisualStudio.ComponentModelHost       이 네임스페이스는 Visual Studio의 MEF(Managed Extensibility Framework)에 사용되는 
                                                 인터페이스 및 GuidList를 정의합니다.
-Microsoft.VisualStudio.Shell                    여기에는 Visual Studio 패키지가 정의된 추상 클래스 AsyncPackage 및 Package가 포함됩니다. 
-                                                패키지는 Visual Studio IDE를 확장하는 기본 방법입니다.
-                                                이 어셈블리는 사용자 도구 창을 만들고 사용자 명령을 정의하는 데에도 사용됩니다.
+Microsoft.VisualStudio.Shell                    여기에는 Visual Studio 패키지가 정의된 추상 클래스 AsyncPackage 및 Package가 포함. 
+                                                Package는 Visual Studio IDE를 확장하는 기본 방법.
+                                                이 어셈블리는 사용자 도구 창을 만들고 사용자 명령을 정의하는 데에도 사용된다.
 Microsoft.VisualStudio.Text.Classification      코드 편집기 창에 분류자 및 형식을 추가하는 인터페이스 및 클래스의 컨테이너입니다. 
                                                 편집자 분류기라는 이름에서 알 수 있듯이 코드 텍스트를 다른 클래스(예: 키워드, 주석, 
                                                 다른 색상 및 테마로 분류하는 데 사용됩니다. 예를 들어 C#의 키워드는 주석과 색상이 다릅니다. 
@@ -103,8 +103,8 @@ Microsoft.VisualStudio.Threading                이 네임스페이스에는 Vis
                                                 형식이 포함되어 있습니다. 여기에는 몇 가지 중요한 유형의 이름을 지정하기 위해 스레딩 도구,
                                                 대기 확장, JointableTasks 및 SingleThreadedSynchronizationContext가 포함되어 있습니다.
 Microsoft.VisualStudio.ProjectAggregator        여기에는 Visual Studio 프로젝트에 사용되는 두 개의 인터페이스와 하나의 클래스가 포함됩니다.
-Microsoft.VisualStudio.ProjectSystem            Visual Studio 프로젝트 시스템 속성을 빌드, 디버그, 참조 및 작업하는 형식은 이 네임스페이스에
-                                                정의
+Microsoft.VisualStudio.ProjectSystem            Visual Studio 프로젝트 시스템 속성을 빌드, 디버그, 참조 및 작업하는 형식은 이 
+                                                네임스페이스에 정의
 Microsoft.VisualStudio.Language                 이 네임스페이스에는 코드 정리, CodeLens 및 IntelliSense에 대한 형식이 있습니다. 
                                                 Visual Studio의 코드 편집기에서 사용하는 다른 형식도 포함합니다.
 Microsoft.VisualStudio.Utilities                확장 개발에 사용되는 속성은 대부분 이 네임스페이스 아래에 정의됩니다. NameAttribute, 
@@ -115,8 +115,8 @@ EnvDTE                                          이 네임스페이스(EnvDTE)�
                                                 Visual Studio의 다른 버전에 추가된 접미사 80, 90, 90a 및 100을 볼 수 있습니다.
                                                 이 네임스페이스에는 Visual Studio의 작업 자동화에 사용되는 인터페이스와 형식이 포함되어 
                                                 있습니다. Visual Studio의 이전 버전(VS 2012까지)은 추가 기능을 지원하고 이 네임스페이스를 
-                                                광범위하게 사용하는 추가 기능을 만드는 멋진 마법사를 제공했습니다. 최신 VSPackage는 자동화 
-                                                모델 활용도 지원합니다.
+                                                광범위하게 사용하는 추가 기능을 만드는 멋진 마법사를 제공했습니다. 최신 VSPackage는 
+                                                자동화 모델 활용도 지원.
 EnvDTE80
 EnvDTE90
 EnvDTE90a
