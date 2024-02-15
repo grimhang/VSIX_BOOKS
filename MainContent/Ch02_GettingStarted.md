@@ -226,9 +226,7 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
     public abstract class Package : IVsPackage, OLE.Interop.IServiceProvider,IOleCommandTarget, IVsPersistSolutionOpts
         , IServiceContainer,System.IServiceProvider, IVsUserSettings, IVsUserSettingsMigration,IVsUserSettingsQuery
         , IVsToolWindowFactory, IVsToolboxItemProvider
-    {
-        //// 간결함을 위해 표시되지 않은 생성자, 속성 및 기타 멤버.
-    }
+    {        //// 간결함을 위해 표시되지 않은 생성자, 속성 및 기타 멤버.    }
     ```
 
     **Package** 클래스를 상속받은 비동기 **AsyncPackage** 클래스의 정의 및 중요 멤버는 다음과 같다.
@@ -254,7 +252,7 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
     }
     ```
 
-    이제 패키지의 기본 사항이 준비되었으므로 이 파일과 함께 제공되는 코드를 살펴보겠다. 코드 주석 좋으니 InitializeAsync 메서드 사용법을 주석으로 알아내라.
+    이제 패키지의 기본 사항이 준비되었으므로 실제 코드를 살펴보겠다. 코드 주석이 좋다고 하니 InitializeAsync 메서드 사용법을 주석을 읽어보자.
 
     VSIXAnatomy 네임스페이스
     ```cs
