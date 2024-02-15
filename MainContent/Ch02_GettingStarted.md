@@ -195,14 +195,14 @@ VSIX 파일은 Visual Studio의 기본 배포 단위입니다. Visual Studio 설
 VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야 합니다. URI(Uniform Resource Identifier)에 예약된 문자는 VSIX 패키지에 포함된 파일 이름에도 허용되지 않습니다. 이것은 [RFC2396]에 정의되어 있습니다.
 ```
 
-## <font color='dodgerblue' size="6">4) 보일러 플레이트 확장의 구조 그로킹</font>
+## <font color='dodgerblue' size="6">4) 보일러 플레이트 확장의 구조 설명</font>
 이제 VSIX의 기본 사항을 알았으므로 기본 VSIX 템플릿과 함께 제공되는 초기 코드와 해당 구조를 설명한다. 기본 VSIX 프로젝트 템플릿의 솔루션 구조에는 다음 파일이 포함되어 있습니다.
 
 - ### a. VSIXAnatomyPackage.cs 파일
     이 파일의 이름은 {프로젝트이름}Package.cs 형식이다. 이 클래스는 이 프로젝트를 빌드하여 만든 어셈블리에 의해 노출될 패키지를 구현한다.
 
     이제 유효한 Visual Studio 패키지를 구성하는 요소에 대한 질문이 떠오른다. IVsPackage 인터페이스를 구현하고 Visual Studio 셸에 등록하는 모든 클래스는 유효한 Visual Studio 패키지로 간주되는 최소 기준을 충족한다.  
-    Microsoft.VisualStudio.Shell.Package는 유효한 패키지를 만들기 위해 파생된 추상 클래스였다. 패키지를 로드하고 초기화하면 디스크 I/O가 발생할 수 있으며, 이것이 UI 스레드에서 발생하면 메인 UI 스레드가 UI 응답성을 유지하는 대신 I/O를 수행하므로 응답성 문제가 발생할 수 있다. 이것은 이 클래스의 단점이며 자동 로드 확장에 대한 Visual Studio의 시작 성능을 저하시킨다.
+    Microsoft.VisualStudio.Shell.Package는 유효한 패키지를 만들기 위해 파생된 추상 클래스였다. 패키지를 로드하고 초기화 할때 디스크 I/O가 발생할 수 있으며, 이것이 UI 스레드에서 발생하면 메인 UI 스레드가 UI 응답성을 유지하는 대신 I/O를 수행하므로 응답성 문제가 발생할 수 있다. 이것은 이 클래스의 단점이며 자동 로드 확장에 대한 Visual Studio의 시작 성능을 저하시킨다.
 
     이를 개선하기 위해 Visual Studio 2015에서 Package클래스에서 파생된 Microsoft.VisualStudio.Shell.AsyncPackage 추상 클래스를 도입했다.  
     이 클래스를 활용하여 확장의 비동기식 로드를 선택하고 성능 비용을 줄이고 UI의 응답성을 유지할 수 있게 되었다. Visual Studio 2019에서는 UI 스레드가 덜 엄격하게 사용되므로 Visual Studio가 더 빨리 시작되고 실행 중에 더 잘 수행되도록 확장의 동기 로드가 기본적으로 해제되어 있다.  
@@ -213,9 +213,11 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
 
     그러나 비동기 로딩을 사용하도록 확장을 개발/업데이트해야 하므로 이 옵션을 사용하지 않는 것이 좋다. 또한 확장은 사용자별로 또는 모든 사용자에 대해 설치할 수 있으므로 "사용자별 확장" 및 "모든 사용자 확장"에 대한 두 개의 작은 섹션에 대해 유의하자.
 
+    단 VS2017에는 이 메뉴가 없다. 2019에서 새로 생긴듯.
     ---
+    이제부터 구조를 설명한다.
 
-    다음은 VSIX 의 가장 처음이자 중요한 **Package** 클래스의 정의이다.
+    VSIX 의 가장 처음이자 중요한 클래스는 **Package** 이다.
        
 
     ```cs
@@ -229,7 +231,7 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
     }
     ```
 
-    Package클래스를 상속받은 비동기 AsyncPackage 클래스의 정의 및 중요 멤버는 다음과 같다.
+    **Package** 클래스를 상속받은 비동기 **AsyncPackage** 클래스의 정의 및 중요 멤버는 다음과 같다.
 
     ```cs
     [ComVisible(true)]
@@ -242,7 +244,7 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
         public JoinableTaskFactory JoinableTaskFactory { get; }
         // Summary:
         // Microsoft.VisualStudio.Threading을 가져옵니다.
-        JoinableTaskCollectionof asynchronous
+        // JoinableTaskCollection of asynchronous
         // 이 패키지에 의해 시작된 작업.
         //
         // Returns:
@@ -262,21 +264,24 @@ VSIX 패키지에 포함된 파일 이름에는 공백이 포함되지 않아야
         public sealed class VSIXAnatomyPackage : AsyncPackage
         {
             public const string PackageGuidString = "94eea500-2b7b-4701-bf8e0f6cd169f9ff";
+
             /// <summary>
-            /// 패키지 초기화 이 메서드는 패키지가 사이트화된 직후에 호출되므로 VisualStudio에서 제공한다.
-            /// 서비스에 의존하는 모든 초기화 코드를 넣을 수 있습니다.
+            /// 패키지 초기화 부분. 이 메서드는 패키지가 배치된 직후에 호출되며 VisualStudio에서 제공하는 서비스에 관련된
+            /// 모든 초기화 코드를 위치시키는 장소이다.
             /// </summary>
-            /// <param name="cancellationToken">VS가 종료될 때 발생할 수 있는 초기화 취소를 모니터링하기 위한 취소 토큰입니다.</param>
+            /// <param name="cancellationToken">VS 초기화 취소를 모니터링하기 위한 취소 토큰이며 VS가 종료될때 발생할수 있다.</param>
             /// <param name="progress">진행 상황 업데이트 제공자.</param>
-            /// <returns>패키지 초기화의 비동기 작업을 나타내는 작업 또는 없는 경우 이미 완료된 작업입니다. 
-            /// 이 메서드에서 null을 반환하지 마십시오.</returns>
+            /// <returns>패키지 초기화의 비동기 작업을 나타내는 작업이거나 또는 없는 경우 이미 완료이다. 
+            /// 이 메서드에서 null을 반환하지 마라.</returns>
             protected override async Task InitializeAsync(CancellationToken cancellationToken
                 , IProgress<ServiceProgressData> progress)
             {
-                // 비동기식으로 초기화되면 현재 스레드가 이 시점에서 백그라운드 스레드일 수 있습니다. 응답성을 유지하려면 
+                // 비동기식으로 초기화되면 현재 스레드가 이 시점에서 백그라운드 스레드일 수 있다. 응답성을 유지하려면 
                 // UI 스레드로 전환하기 전에 백그라운드에서 최대한 많은 작업을 수행하십시오.
-                // UI 스레드로 전환한 후 UI 스레드가 필요한 초기화를 수행하십시오. 이것을 기다립니다.
-                // JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                // UI 스레드로 전환한 후에는 UI 스레드가 필요한 초기화를 수행하라.
+                await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                // await ExecutorCommand.InitializeAsync(this);  이번 줄처럼 실제 호출이 될것이다.
+
                 //// JoinableTaskFactory 및 Visual Studio와 관련된 기타 스레딩 구성에 대해서는 이후 장에서 논의할 것입니다.
             }
         }
