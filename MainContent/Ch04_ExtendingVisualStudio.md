@@ -958,39 +958,40 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
     ```
     프로퍼티 이름             설명
     ----------------------  -----------------------------------------------------------------------------------------
-    AutomationObject        Gets the DTE automation model object for a given instance of a dialog page class.
-    SettingsRegistryPath    Gets or sets the subkey under the Visual Studio version-specific root for storing settings data for a dialog page.
-    SharedSettingsStorePath Gets the location where the settings are stored in the shared settings store. It''s based on the SharedSettingsAttribute on your AutomationObject, or the full type name if the attribute is not specified.
-    Site                    Gets or sets the site of the dialog page. Overrides the implementation inherited from Component.
-    Window                  Gets the window that is used as the user interface of the dialog page.
+    AutomationObject        다이얼로그 페이지 클래스의 주어진 인스턴스를 위한 DTE 자동화 모델 객체 얻기.
+    SettingsRegistryPath    다이얼로그 페이지의 세팅을 저장하는 Visual Studio 버전 지향 root아래의 서브키들 얻거나 지정.
+    SharedSettingsStorePath 공유 세팅 저장에서 저장되는 세팅들의 위치를 얻기. AutomationObject에서 SharedSettingsAttribute에
+                            기반하거나 아니면 특성이 지정되지 않는 경우의 전체 타입 이름.
+    Site                    컴포넌트에서 상속되는 구현하는 오버라이드. 다이얼로그 페이지의 사이트를 얻거나 지정.
+    Window                  다이얼로그 페이지의 사용자 인터페이스로서 사용되는 창을 얻는다.
     ```    
 
     ```
     메쏘드 이름              설명
     ---------------------   -------------------------------------------------------------------------------
     Dispose Releases the unmanaged resources that are used by a dialog page
-class and optionally releases the managed resources; the parent
-class, Component, supports unmanaged resources.
-GetSharedSettingsStorePath Gets the shared settings store path for the given property.
-IsPropertyValueMachineLocal Determines whether a given value from a property on the
-AutomationObject is local to this machine (vs. being roamable to
-other machines).
-LoadSettingFromStorage Loads the setting of a given property descriptor from the storage.
-LoadSettingsFromStorage Called by Visual Studio to load the settings of a dialog page from local
-storage, generally the registry.
-LoadSettingsFromXml Called by Visual Studio to load the settings of a dialog page from the
-Visual Studio settings storage on disk.
-OnActivate Handles Windows Activate messages from the Visual Studio
-environment.
-OnApply Handles Apply messages from the Visual Studio environment.
-OnClosed Handles Close messages from the Visual Studio environment.
-OnDeactivate Handles Deactivate messages from the Visual Studio environment.
-ResetSettings Should be overridden to reset settings to their default values.
-SaveSetting Saves the setting of given property descriptor in the storage.
-SaveSettingsToStorage Called by Visual Studio to store the settings of a dialog page in local
-storage, typically the registry.
-SaveSettingsToXml Called by Visual Studio to store the settings of a dialog page to the
-Visual Studio settings storage on disk.
+    class and optionally releases the managed resources; the parent
+    class, Component, supports unmanaged resources.
+    GetSharedSettingsStorePath Gets the shared settings store path for the given property.
+    IsPropertyValueMachineLocal Determines whether a given value from a property on the
+    AutomationObject is local to this machine (vs. being roamable to
+    other machines).
+    LoadSettingFromStorage Loads the setting of a given property descriptor from the storage.
+    LoadSettingsFromStorage Called by Visual Studio to load the settings of a dialog page from local
+    storage, generally the registry.
+    LoadSettingsFromXml Called by Visual Studio to load the settings of a dialog page from the
+    Visual Studio settings storage on disk.
+    OnActivate Handles Windows Activate messages from the Visual Studio
+    environment.
+    OnApply Handles Apply messages from the Visual Studio environment.
+    OnClosed Handles Close messages from the Visual Studio environment.
+    OnDeactivate Handles Deactivate messages from the Visual Studio environment.
+    ResetSettings Should be overridden to reset settings to their default values.
+    SaveSetting Saves the setting of given property descriptor in the storage.
+    SaveSettingsToStorage Called by Visual Studio to store the settings of a dialog page in local
+    storage, typically the registry.
+    SaveSettingsToXml Called by Visual Studio to store the settings of a dialog page to the
+    Visual Studio settings storage on disk.
     ```
 
 - ### E. ToolWindowPane
