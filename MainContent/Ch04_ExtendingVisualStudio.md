@@ -967,31 +967,23 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
     ```    
 
     ```
-    메쏘드 이름              설명
-    ---------------------   -------------------------------------------------------------------------------
-    Dispose Releases the unmanaged resources that are used by a dialog page
-    class and optionally releases the managed resources; the parent
-    class, Component, supports unmanaged resources.
-    GetSharedSettingsStorePath Gets the shared settings store path for the given property.
-    IsPropertyValueMachineLocal Determines whether a given value from a property on the
-    AutomationObject is local to this machine (vs. being roamable to
-    other machines).
-    LoadSettingFromStorage Loads the setting of a given property descriptor from the storage.
-    LoadSettingsFromStorage Called by Visual Studio to load the settings of a dialog page from local
-    storage, generally the registry.
-    LoadSettingsFromXml Called by Visual Studio to load the settings of a dialog page from the
-    Visual Studio settings storage on disk.
-    OnActivate Handles Windows Activate messages from the Visual Studio
-    environment.
-    OnApply Handles Apply messages from the Visual Studio environment.
-    OnClosed Handles Close messages from the Visual Studio environment.
-    OnDeactivate Handles Deactivate messages from the Visual Studio environment.
-    ResetSettings Should be overridden to reset settings to their default values.
-    SaveSetting Saves the setting of given property descriptor in the storage.
-    SaveSettingsToStorage Called by Visual Studio to store the settings of a dialog page in local
-    storage, typically the registry.
-    SaveSettingsToXml Called by Visual Studio to store the settings of a dialog page to the
-    Visual Studio settings storage on disk.
+    메쏘드 이름                 설명
+    --------------------------- ---------------------------------------------------------------------------------
+    Dispose                     dialog page 다이얼로그 페이지 클래스에서 사용되는 언매니지드 리소스 해제. 
+                                부모 class, 컴포넌트 같은 언매니지드 리소스를 지원하는 매니지드 리소스 해제.
+    GetSharedSettingsStorePath  주어진 속성 공유 세팅 저장소 경로 얻기.
+    IsPropertyValueMachineLocal AutomationObject의 속성 값들이 이 머신에서는 로컬인지 다른 머신으로 로밍 가능한지 를 결정.
+    LoadSettingFromStorage      저장소의 속성 설명자의 세팅 로드.
+    LoadSettingsFromStorage     Called by Visual Studio to load the settings of a dialog page from local storage, generally the registry.
+    LoadSettingsFromXml         Called by Visual Studio to load the settings of a dialog page from the Visual Studio settings storage on disk.
+    OnActivate                  Handles Windows Activate messages from the Visual Studio environment.
+    OnApply                     Handles Apply messages from the Visual Studio environment.
+    OnClosed                    Handles Close messages from the Visual Studio environment.
+    OnDeactivate                Handles Deactivate messages from the Visual Studio environment.
+    ResetSettings               Should be overridden to reset settings to their default values.
+    SaveSetting                 Saves the setting of given property descriptor in the storage.
+    SaveSettingsToStorage       로컬 스토리지, 전통적으로는 레지스트리에 다이얼로그 페이지의 세팅을 저장하기 위해 Visual Studio에 의해 호출됨.
+    SaveSettingsToXml           디스크에 있는 Visual Studio 세팅 저장소에 다이얼로그 페이지 세팅을 저장하기 위해 Visual Studio에 의해 호출됨.
     ```
 
 - ### E. ToolWindowPane
