@@ -85,7 +85,7 @@ Microsoft.VisualStudio.Shell                    Visual Studio 패키지가 정�
                                                 이 어셈블리는 사용자 도구 창을 만들고 사용자 명령을 정의하는 데에도 사용된다.
 Microsoft.VisualStudio.Text.Classification      코드 편집기 창에 분류자 및 형식을 추가하는 인터페이스 및 클래스의 컨테이너입니다. 
                                                 편집자 분류기라는 이름에서 알 수 있듯이 코드 텍스트를 다른 클래스(예: 키워드, 주석, 
-                                                다른 색상 및 테마)로 분류하는 데 사용됩니다. 예를 들어 C#의 키워드는 주석과 색상이 다릅니다. 
+                                                다른 색상 및 테마)로 분류하는 데 사용됩니다. 예를 들어 C#의 키워드는 주석과 색상이 다르다. 
                                                 이는 구문 강조 표시를 제공하는 방법을 제공.
 Microsoft.VisualStudio.Text.Editor              여기에는 옵션, 여백, 스크롤바 등과 같이 편집기에서 사용되는 클래스가 포함됩니다.
 Microsoft.VisualStudio.Editor                   여기에는 색상, 글꼴 등에 대해 편집기에서 사용하는 인터페이스와 클래스, 편집기 상수가 
@@ -105,7 +105,7 @@ Microsoft.VisualStudio.Threading                이 네임스페이스에는 Vis
                                                 형식이 포함되어 있습니다. 여기에는 몇 가지 중요한 유형의 이름을 지정하기 위해 스레딩 도구,
                                                 대기 확장, JointableTasks 및 SingleThreadedSynchronizationContext가 포함되어 있다.
 
-Microsoft.VisualStudio.ProjectAggregator        여기에는 Visual Studio 프로젝트에 사용되는 두 개의 인터페이스와 하나의 클래스가 포함됩니다.
+Microsoft.VisualStudio.ProjectAggregator        여기에는 Visual Studio 프로젝트에 사용되는 두 개의 인터페이스와 하나의 클래스가 포함된다.
 Microsoft.VisualStudio.ProjectSystem            Visual Studio 프로젝트 시스템 속성을 빌드, 디버그, 참조 및 작업하는 형식은 이 
                                                 네임스페이스에 정의
 Microsoft.VisualStudio.Language                 이 네임스페이스에는 코드 정리, CodeLens 및 IntelliSense에 대한 형식이 있습니다. 
@@ -115,8 +115,8 @@ Microsoft.VisualStudio.Utilities                확장 개발에 사용되는 �
                                                 ExportImplementationAttribute, ImportImplementationsAttribute는 이 네임스페이스에 
                                                 정의된 몇 가지 공통 속성. 또한 편집기에서 사용하는 클래스도 포함합니다.
 
-EnvDTE                                          이 네임스페이스(EnvDTE)는 꽤 오랫동안 Visual Studio에 있었고 수년에 걸쳐 발전해왔기 때문에 
-EnvDTE80                                        Visual Studio의 다른 버전에 추가된 접미사 80, 90, 90a 및 100을 볼 수 있습니다.
+EnvDTE                                          이 네임스페이스(EnvDTE)는 꽤 오랫동안 Visual Studio에 있었고 수년에 걸쳐 발전해왔기 
+EnvDTE80                                        때문에 Visual Studio의 다른 버전에 추가된 접미사 80, 90, 90a 및 100을 볼 수 있다.
 EnvDTE90                                        이 네임스페이스에는 Visual Studio의 작업 자동화에 사용되는 인터페이스와 형식이 포함되어 
 EnvDTE90a                                       있습니다. Visual Studio의 이전 버전(VS 2012까지)은 추가 기능을 지원하고 이 네임스페이스를 
 EnvDTE100                                       광범위하게 사용하는 추가 기능을 만드는 멋진 마법사를 제공했습니다. 최신 VSPackage는 
