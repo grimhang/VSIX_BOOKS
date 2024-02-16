@@ -1024,13 +1024,12 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
     ```
     메쏘드 이름              설명
     --------------------------- -----------------------------------------------------------------------------------
-    AddInfoBar                  Adds an info bar to this ToolWindowPane. The info bar will show at the top of the pane''s frame 
-                                when that frame is visible on screen.
+    AddInfoBar                  ToolWindowPane에 인포바 추가. 인포바는 프레임이 스크린에 나타날때 영역 프레임의 상단에 보여질것이다.
     ClearSearch                 Clears the pane of the results from a previously completed or partial search.
-    CreateSearch                Override at least this function if you need to support a search in a tool    window.
-    GetIVsWindowPane            Gets the IVsWindowPane that is associated with the tool window.
-    OnInfoBarActionItemClicked  Called when an action item on an info bar added via AddInfoBar is clicked. If this method is overridden, 
-                                the base implementation must be called to raise the InfoBarActionItemClicked event.
+    CreateSearch                Override at least this function 도구윈도우가 검색을 지원하는 경우 최소한 이 함수를 오버라이드.
+    GetIVsWindowPane            도구 윈도우와 연관된 IVsWindowPane 얻기.
+    OnInfoBarActionItemClicked  Called when an action item on an info bar added via AddInfoBar is clicked. 이 메쏘드가 오버라이드 된 경우, 
+                                the base 구현체 must be called to raise the InfoBarActionItemClicked event.
     OnInfoBarClosed             Called when an info bar added via AddInfoBar is closed. If this method is overridden, the base implementation
                                 must be called to raise the InfoBarClosed event.
     OnNavigationKeyDown         Allows the pane to intercept certain keys after a search is started, and to navigate between the results 
