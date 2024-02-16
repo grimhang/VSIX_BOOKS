@@ -11,9 +11,9 @@ sort: 5
 
 https://docs.microsoft.com/enus/visualstudio/extensibility/ux-guidelines/notifications-and-progress-forvisual-studio?view=vs-2019#BKMK_Infobars 참조.
 
-구현할 인포바의 핵심기능.
-**가능한 시나리오**  
-    - 중요한 개념적 논블로킹 메시지들 표시하기  
+구현할 인포바의 핵심기능.  
+**가능한 시나리오**   
+    - 중요한 개념적 논블로킹 메시지들 표시하기   
     - 감지된 문제에 대해 사용자에게 경고하기 위해 확장 또는 성능 문제를 일으키는 확장에서 충돌이 발생합니다.  
     - 탭과 공백이 혼합된 편집기가 감지한 파일과 같은 시나리오에서 사용자가 쉽게 작업할 수 있는 방법을 제시.  
     - UI가 기록 디버깅과 같은 상호작용에 영향을 미치는 특정 상태에 있음을 사용자에게 알리기 위해.  
