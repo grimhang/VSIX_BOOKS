@@ -1008,10 +1008,12 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
                             IVsWindowSearchFilter 인터페이스를 구현하는 검색 필터들의 배열상에서 enumerator를 구축하기 위하여 사용될수 있다. 
     SearchHost              도구 윈도우와 연관된 검색 호스트 구현체를 얻는다.
     SearchOptionsEnum       도구 윈도우가 검색 옵션을 지원하는 경우 이 함수를 오버라이드한다.
-                            T:Microsoft.VisualStudio.PlatformUI.WindowSearchOptionEnumerator 클래스는 IVsWindowSearchOption 인터페이스를
-                            구현하는 검색 옵션들의 배열상에서 enumerator를 건설하기 위해 사용될 수 있다.
+                            T:Microsoft.VisualStudio.PlatformUI.WindowSearchOptionEnumerator 클래스는 
+                            IVsWindowSearchOption 인터페이스를 구현하는 검색 옵션들의 배열상에서 enumerator를 건설하기 위해 사용될 수 있다.
     ToolBar                 숫자 명령어 ID와 GUID 메뉴 그룹 식별자로 구성되어 있는 고유 명령어 식별자를 얻는다.
-    ToolBarCommandTarget    If the tool window has a ToolBar, then you can use this property to customize its command target. If this value is null, then the window frame of this tool window is used as the command target for the ToolBar. Like other toolbar-related properties, this property must be set
+    ToolBarCommandTarget    도구 윈도우가 툴바를 가지는 경우 이 속성은 명령어 타겟을 커스터마이징하기 위해 사용될수 있다.
+                            값이 널이면 도구 윈도우의 윈도우 프레임은 툴바를 위한 명령어 타겟으로 사용된다. 다른 툴바 관련 속성처럼 이 속성은
+                            필수 설정 값. 
     before the initialization of the ToolWindowPane is complete.
     ToolBarDropTarget       툴바 드롭타겟을 얻거나 지정.
     ToolBarLocation         도구 윈도우에서 툴바의 위치를 얻거나 지정.
@@ -1022,18 +1024,25 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
     ```
     메쏘드 이름              설명
     --------------------------- -----------------------------------------------------------------------------------
-    AddInfoBar                  Adds an info bar to this ToolWindowPane. The info bar will show at the top of the pane''s frame when that frame is visible on screen.
+    AddInfoBar                  Adds an info bar to this ToolWindowPane. The info bar will show at the top of the pane''s frame 
+                                when that frame is visible on screen.
     ClearSearch                 Clears the pane of the results from a previously completed or partial search.
     CreateSearch                Override at least this function if you need to support a search in a tool    window.
     GetIVsWindowPane            Gets the IVsWindowPane that is associated with the tool window.
-    OnInfoBarActionItemClicked  Called when an action item on an info bar added via AddInfoBar is clicked. If this method is overridden, the base implementation must be called to raise the InfoBarActionItemClicked event.
-    OnInfoBarClosed             Called when an info bar added via AddInfoBar is closed. If this method is overridden, the base implementation must be called to raise the InfoBarClosed event.
-    OnNavigationKeyDown         Allows the pane to intercept certain keys after a search is started, and to navigate between the results or select one of the results displayed    in the pane.
+    OnInfoBarActionItemClicked  Called when an action item on an info bar added via AddInfoBar is clicked. If this method is overridden, 
+                                the base implementation must be called to raise the InfoBarActionItemClicked event.
+    OnInfoBarClosed             Called when an info bar added via AddInfoBar is closed. If this method is overridden, the base implementation
+                                must be called to raise the InfoBarClosed event.
+    OnNavigationKeyDown         Allows the pane to intercept certain keys after a search is started, and to navigate between the results 
+                                or select one of the results displayed    in the pane.
     OnToolBarAdded              Called when a toolbar is added to the tool window.
     OnToolWindowCreated         This method can be overridden by the derived class to execute any code that must run after the creation of IVsWindowFrame.
     ProvideSearchSettings       기본 검색 세팅의 오버라드를 허용. 기본적으로, 검색이 지연되어 시작되며 무한정 진행됩니다.
                                 재정의할 수 있는 속성의 이름은 SearchSettingsDataSource, PropertyNames 클래스에 정의되어 있습니다.
-                                IVsUIObject 인터페이스를 구현하는 값들은 Microsoft.Internal.VisualStudio.PlatformUI.BuiltInPropertyValue 클래스를 사용하여 공통 타입을 위해 건설될수 있거나 또는 데이터 소스에 값을 설정하기 위해 Microsoft.Internal.VisualStudio.PlatformUI.Utilities.SetValue(Microsoft.VisualStudio.Shell.Interop.IVsUIDataSource, System.String ,System.Object) 같은 헬퍼 함수들을 사용할수 있다. 
+                                IVsUIObject 인터페이스를 구현하는 값들은 Microsoft.Internal.VisualStudio.PlatformUI.BuiltInPropertyValue 클래스를 
+                                사용하여 공통 타입을 위해 건설될수 있거나 또는 데이터 소스에 값을 설정하기 위해 
+                                Microsoft.Internal.VisualStudio.PlatformUI.Utilities.SetValue(
+                                Microsoft.VisualStudio.Shell.Interop.IVsUIDataSource, System.String ,System.Object) 같은 헬퍼 함수들을 사용할수 있다. 
 
     RemoveInfoBar               Removes an info bar from this ToolWindowPane.
     ToolWindowPane              ToolWindowPane의 생성자. 하나의 오버로드된 생성자 중 하나는 ServiceProvider를 매개변수로 받는다.
@@ -1044,5 +1053,5 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
     이벤트 이름                  설명
     ------------------------    -------------------------------------------------------------------------------
     InfoBarActionItemClicked    정보 표시줄의 버튼 또는 하이퍼링크가 이 ToolWindowPane과 연결될 때 발생하는 이벤트.
-    InfoBarClosed Event raised when an info bar associated with this ToolWindowPane is closed.
+    InfoBarClosed               ToolWindowPane와 연관된 인포바가 닫힐때 발생하는 이벤트.
     ```
