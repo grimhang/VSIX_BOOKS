@@ -58,7 +58,8 @@ Infobar 메시지가 짧고 요점을 명확하게 전달하는지 확인.      
     ![05_04_InfobarType](image/05/05_04_InfobarType.png)   
     중요한 타입은 맨 뒤의 클래스 정의에서 요약 기술할것.  
 
-    인포바를 표시하기 위해서는 다음 절차 필요
+    인포바를 표시하기 위해서는 다음 절차 필요  
+    
         1. IVsInfoBarUIEvents 구현하는 클래스 생성   
         2. IVsInfoBarTextSpan을 구현하는 InfoBarTextSpan 생성하는 메시지 지정하기 위해 infobar 모델 생성  
         3. IServiceProvider를 사용하는 IVsInfoBarUIFactory 레퍼런스 얻기  
