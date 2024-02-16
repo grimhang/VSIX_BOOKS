@@ -958,13 +958,39 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
     ```
     프로퍼티 이름             설명
     ----------------------  -----------------------------------------------------------------------------------------
-    
+    AutomationObject        Gets the DTE automation model object for a given instance of a dialog page class.
+    SettingsRegistryPath    Gets or sets the subkey under the Visual Studio version-specific root for storing settings data for a dialog page.
+    SharedSettingsStorePath Gets the location where the settings are stored in the shared settings store. It''s based on the SharedSettingsAttribute on your AutomationObject, or the full type name if the attribute is not specified.
+    Site                    Gets or sets the site of the dialog page. Overrides the implementation inherited from Component.
+    Window                  Gets the window that is used as the user interface of the dialog page.
     ```    
 
     ```
     메쏘드 이름              설명
     ---------------------   -------------------------------------------------------------------------------
-    
+    Dispose Releases the unmanaged resources that are used by a dialog page
+class and optionally releases the managed resources; the parent
+class, Component, supports unmanaged resources.
+GetSharedSettingsStorePath Gets the shared settings store path for the given property.
+IsPropertyValueMachineLocal Determines whether a given value from a property on the
+AutomationObject is local to this machine (vs. being roamable to
+other machines).
+LoadSettingFromStorage Loads the setting of a given property descriptor from the storage.
+LoadSettingsFromStorage Called by Visual Studio to load the settings of a dialog page from local
+storage, generally the registry.
+LoadSettingsFromXml Called by Visual Studio to load the settings of a dialog page from the
+Visual Studio settings storage on disk.
+OnActivate Handles Windows Activate messages from the Visual Studio
+environment.
+OnApply Handles Apply messages from the Visual Studio environment.
+OnClosed Handles Close messages from the Visual Studio environment.
+OnDeactivate Handles Deactivate messages from the Visual Studio environment.
+ResetSettings Should be overridden to reset settings to their default values.
+SaveSetting Saves the setting of given property descriptor in the storage.
+SaveSettingsToStorage Called by Visual Studio to store the settings of a dialog page in local
+storage, typically the registry.
+SaveSettingsToXml Called by Visual Studio to store the settings of a dialog page to the
+Visual Studio settings storage on disk.
     ```
 
 - ### E. ToolWindowPane
@@ -972,17 +998,58 @@ Microsoft 확장성 샘플로 GitHub (https://github.com/microsoft/VSSDK-Extensi
     ```
     프로퍼티 이름             설명
     ----------------------  -----------------------------------------------------------------------------------------
+    BitmapImageMoniker      도구 윈도우 용 아이콘을 위한 ImageMoniker 얻거나 지정.
+                            이 속성은 DPI 지향성 아이콘을 허용하기 위하여 BitmapResource와 BitmapIndex 대신에 사용되어야 한다.
+    BitmapIndex             윈도우 프레임 아이콘을 위해 사용하기 위해 비트맵 스트립에서 이미지의 인덱스를 얻거나 지정.
+    BitmapResourceID        윈도우 프레임 아이콘을 얻는것에서 비트 스트립을 위한 리소스 ID 얻거나 지정.
+    Caption                 도구 윈도우의 캡션을 얻거나 지정.
+    Content                 도구 윈도우의 내용을 얻거나 지정.
+    Frame                   Gets or sets the type that provides access to behaviors and properties of environment window frames, 
+                            for both tool and document windows, which host the ToolWindowPane.
+    Package                 도구 윈도우를 소유하고 있는 package를 얻거나 세팅.
+    SearchCategory          도구 창에 대한 창 검색 구현이 가장 최근에 사용된 검색 문자열을 지원하는 경우 MRU 항목을 저장하는 데 
+                            사용되는 검색 범주를 가져옵니다. 기본적으로 도구 창 GUID는 검색 범주에 사용됩니다.
+    SearchEnabled           윈도우에서 검색을 지원하고자 한다면 이 프로퍼티를 오버라이드한다.
+                            IVsWindowSearch 인터페이스, like CreateSearch 등등의 다른 함수들을 오버라이드 역시 해야 한다..
+    SearchFiltersEnum       도구 윈도우가 검색 필터를 지원하려면 이 프로퍼티를 오버라이드. WindowSearchFilterEnumerator클래스는 
+                            IVsWindowSearchFilter 인터페이스를 구현하는 검색 필터들의 배열상에서 enumerator를 구축하기 위하여 사용될수 있다. 
+    SearchHost              도구 윈도우와 연관된 검색 호스트 구현체를 얻는다.
+    SearchOptionsEnum       도구 윈도우가 검색 옵션을 지원하는 경우 이 함수를 오버라이드한다.
+                            T:Microsoft.VisualStudio.PlatformUI.WindowSearchOptionEnumerator 클래스는 IVsWindowSearchOption 인터페이스를
+                            구현하는 검색 옵션들의 배열상에서 enumerator를 건설하기 위해 사용될 수 있다.
+    ToolBar                 숫자 명령어 ID와 GUID 메뉴 그룹 식별자로 구성되어 있는 고유 명령어 식별자를 얻는다.
+    ToolBarCommandTarget    If the tool window has a ToolBar, then you can use this property to customize its command target. If this value is null, then the window frame of this tool window is used as the command target for the ToolBar. Like other toolbar-related properties, this property must be set
+    before the initialization of the ToolWindowPane is complete.
+    ToolBarDropTarget       툴바 드롭타겟을 얻거나 지정.
+    ToolBarLocation         도구 윈도우에서 툴바의 위치를 얻거나 지정.
+    ToolClsid               도구 윈도우에 사용되는 도구의 CLSID를 얻거나 지정.
     
     ```    
 
     ```
     메쏘드 이름              설명
-    ---------------------   -------------------------------------------------------------------------------
-    
+    --------------------------- -----------------------------------------------------------------------------------
+    AddInfoBar                  Adds an info bar to this ToolWindowPane. The info bar will show at the top of the pane''s frame when that frame is visible on screen.
+    ClearSearch                 Clears the pane of the results from a previously completed or partial search.
+    CreateSearch                Override at least this function if you need to support a search in a tool    window.
+    GetIVsWindowPane            Gets the IVsWindowPane that is associated with the tool window.
+    OnInfoBarActionItemClicked  Called when an action item on an info bar added via AddInfoBar is clicked. If this method is overridden, the base implementation must be called to raise the InfoBarActionItemClicked event.
+    OnInfoBarClosed             Called when an info bar added via AddInfoBar is closed. If this method is overridden, the base implementation must be called to raise the InfoBarClosed event.
+    OnNavigationKeyDown         Allows the pane to intercept certain keys after a search is started, and to navigate between the results or select one of the results displayed    in the pane.
+    OnToolBarAdded              Called when a toolbar is added to the tool window.
+    OnToolWindowCreated         This method can be overridden by the derived class to execute any code that must run after the creation of IVsWindowFrame.
+    ProvideSearchSettings       기본 검색 세팅의 오버라드를 허용. 기본적으로, 검색이 지연되어 시작되며 무한정 진행됩니다.
+                                재정의할 수 있는 속성의 이름은 SearchSettingsDataSource, PropertyNames 클래스에 정의되어 있습니다.
+                                IVsUIObject 인터페이스를 구현하는 값들은 Microsoft.Internal.VisualStudio.PlatformUI.BuiltInPropertyValue 클래스를 사용하여 공통 타입을 위해 건설될수 있거나 또는 데이터 소스에 값을 설정하기 위해 Microsoft.Internal.VisualStudio.PlatformUI.Utilities.SetValue(Microsoft.VisualStudio.Shell.Interop.IVsUIDataSource, System.String ,System.Object) 같은 헬퍼 함수들을 사용할수 있다. 
+
+    RemoveInfoBar               Removes an info bar from this ToolWindowPane.
+    ToolWindowPane              ToolWindowPane의 생성자. 하나의 오버로드된 생성자 중 하나는 ServiceProvider를 매개변수로 받는다.
+                                이것은 Visual Studio에서 호출됩니다.
     ```    
 
     ```
     이벤트 이름                  설명
     ------------------------    -------------------------------------------------------------------------------
     InfoBarActionItemClicked    정보 표시줄의 버튼 또는 하이퍼링크가 이 ToolWindowPane과 연결될 때 발생하는 이벤트.
+    InfoBarClosed Event raised when an info bar associated with this ToolWindowPane is closed.
     ```
