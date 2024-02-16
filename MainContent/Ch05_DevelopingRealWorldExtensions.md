@@ -40,12 +40,33 @@ Infobar 메시지가 짧고 요점을 명확하게 전달하는지 확인.      
 - ### A. 인포바 확장기능 시작하기
     Visual Studio의 문서 창 위에 인포바를 표시하는 확장을 개발해 보겠다.
 
-    - **1. VSIX 프로젝트 생성하고 이름을 DisplayInfoBar 로 지정**  
+    - **1. VSIX 프로젝트 생성**  
+        이름을 DisplayInfoBar 로 지정
 
-    - **2. VSIX 프로젝트 생성하고 이름을 DisplayInfoBar 로 지정**  
-        
+    - **2. vsixmanifest 파일 업데이트**  
+        설명, 아이콘, 메타데이터를 vsixmanifest 파일에 업데이트        
+
+    - **3. Async Tool Window 추가**  
+        ![05_02_AddAsyncToolWindow](image/05/05_02_AddAsyncToolWindow.png)   
+
+    - **4. vsct 파일 수정**  
+        그러면 도구 창과 도구 창을 실행하는 명령이 추가됩니다. 새로 추가된 명령에 아이콘, 명령 이름 및 키보드 단축키를 연결하려면 vsct 파일을 업데이트하세요. vsct 파일 업데이트에 대한 자세한 내용은 4장에서 개발된 확장 단계를 참조하세요. 업데이트된 vsct 파일의 스크린샷은 그림 5-3에 나와 있습니다. 쉽게 참조할 수 있도록 변경 사항이 강조 표시됩니다. 그림 5-3에 표시된 KeyBinding 요소는 데모 목적으로만 사용되며 독자는 기억할 수 있고 Visual Studio에서 아직 사용하지 않는 적절한 키 조합을 사용해야 합니다.  
+        ![05_03_UpdateVsct](image/05/05_03_UpdateVsct.png)   
 
 - ### B. 인포바 표시하기
+    다음으로 프로젝트에 클래스를 추가하겠습니다. 이 클래스는 정보 표시줄을 표시하는 역할을 담당합니다. 해당 클래스의 이름을 InfobarService.cs로 지정하겠습니다. 이 클래스의 코드를 작성하기 전에 정보 표시줄을 만들고 표시할 수 있는 다양한 유형에 대해 논의해 보겠습니다. 이러한 중요한 유형은 그림 5-4에 설명되어 있습니다.  
+    ![05_04_InfobarType](image/05/05_04_InfobarType.png)   
+    중요한 타입은 맨 뒤의 클래스 정의에서 요약 기술할것.  
+
+    인포바를 표시하기 위해서는 다음 절차 필요
+        1. IVsInfoBarUIEvents 구현하는 클래스 생성   
+        2. IVsInfoBarTextSpan을 구현하는 InfoBarTextSpan 생성하는 메시지 지정하기 위해 infobar 모델 생성  
+        3. IServiceProvider를 사용하는 IVsInfoBarUIFactory 레퍼런스 얻기  
+        4. IVsInfoBarUIElement 타입의 InfobarUIElement를 얻기 위한 팩토리의 CreateInfoBar 메쏘드 호출   
+        5. 버튼 또는 하이퍼링크의 클릭 이벤트같이 인포바에서 발생한 이벤트를 구독   
+        6. 인포바 호스트 레퍼런스 얻기. 메인 윈도우 인포바 호스트이거나 도구 윈도우영역의 호스트 둘중.   
+        7. 호스트에서 AddInfoBar 메쏘드를 호출하고 IVsInfoBarUIElement 객체를 넘긴다. 호스트에서 인포바 표시
+
     - **1. 인포바 디스플레이 클래스 작성하기**  
     - **2. 이벤트 핸들러 수정하기**  
 - ### C. 확장기능 실행하기
