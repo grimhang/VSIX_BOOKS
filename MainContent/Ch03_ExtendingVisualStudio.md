@@ -79,20 +79,17 @@ sort: 3
 ```
 네임스페이스                                    설명
 ----------------------------------------------  -----------------------------------------------------------------------------------
-Microsoft.VisualStudio.ComponentModelHost       이 네임스페이스는 Visual Studio의 MEF(Managed Extensibility Framework)에 사용되는 
-                                                인터페이스 및 GuidList를 정의합니다.
-Microsoft.VisualStudio.Shell                    여기에는 Visual Studio 패키지가 정의된 추상 클래스 AsyncPackage 및 Package가 포함. 
+Microsoft.VisualStudio.ComponentModelHost       Visual Studio MEF(Managed Extensibility Framework)의 인터페이스와 GuidList정의.
+Microsoft.VisualStudio.Shell                    Visual Studio 패키지가 정의된 추상 클래스 AsyncPackage 및 Package가 포함. 
                                                 Package는 Visual Studio IDE를 확장하는 기본 방법.
                                                 이 어셈블리는 사용자 도구 창을 만들고 사용자 명령을 정의하는 데에도 사용된다.
 Microsoft.VisualStudio.Text.Classification      코드 편집기 창에 분류자 및 형식을 추가하는 인터페이스 및 클래스의 컨테이너입니다. 
                                                 편집자 분류기라는 이름에서 알 수 있듯이 코드 텍스트를 다른 클래스(예: 키워드, 주석, 
-                                                다른 색상 및 테마로 분류하는 데 사용됩니다. 예를 들어 C#의 키워드는 주석과 색상이 다릅니다. 
-                                                이는 구문 강조 표시를 제공하는 방법을 제공합니다.
+                                                다른 색상 및 테마로 분류하는 데 사용됩니다. 예를 들어 C#의 키워드는 주석과 색상이 다릅니다. 이는 구문 강조 표시를 제공하는 방법을 제공.
 Microsoft.VisualStudio.Text.Editor              여기에는 옵션, 여백, 스크롤바 등과 같이 편집기에서 사용되는 클래스가 포함됩니다.
 Microsoft.VisualStudio.Editor                   여기에는 색상, 글꼴 등에 대해 편집기에서 사용하는 인터페이스와 클래스, 편집기 상수가 
                                                 포함됩니다.
-Microsoft.VisualStudio.Language.Intellisense    이 네임스페이스에는 작업 제안, 전구, 서명 도우미 및 IntelliSense를 담당하는 인터페이스와
-                                                클래스가 포함.
+Microsoft.VisualStudio.Language.Intellisense    작업 제안, 전구, 서명 도우미 및 IntelliSense를 담당하는 인터페이스와 클래스 포함.
 Microsoft.VisualStudio.Text                     여기에서 코드 편집기에서 텍스트 선택, 장식, 서식 지정, 개요 및 태그 중괄호 완성 기능을
                                                 제공하고 노출하는 유형 및 인터페이스가 있습니다.
 Microsoft.VisualStudio.Text.*
