@@ -97,9 +97,11 @@ Microsoft.VisualStudio.Text.*
 Microsoft.VisualStudio.CommandBars              명령 모음, 명령 모음 단추, 이벤트 및 처리기에 대한 정의가 포함되어 있습니다.
 Microsoft.VisualStudio.TextTemplating           이 네임스페이스는 텍스트 템플릿 유형, 텍스트 템플릿 엔진 및 텍스트 템플릿 프로세서의
                                                 홈입니다. (텍스트 템플릿 변환 도구 키트) 또는 T4 템플릿에 대해 들어본 적이 있다면 동일.
+
 Microsoft.VisualStudio.Threading                이 네임스페이스에는 Visual Studio에서 스레딩을 효과적으로 활용하는 데 도움이 되는 클래스와
                                                 형식이 포함되어 있습니다. 여기에는 몇 가지 중요한 유형의 이름을 지정하기 위해 스레딩 도구,
-                                                대기 확장, JointableTasks 및 SingleThreadedSynchronizationContext가 포함되어 있습니다.
+                                                대기 확장, JointableTasks 및 SingleThreadedSynchronizationContext가 포함되어 있다.
+
 Microsoft.VisualStudio.ProjectAggregator        여기에는 Visual Studio 프로젝트에 사용되는 두 개의 인터페이스와 하나의 클래스가 포함됩니다.
 Microsoft.VisualStudio.ProjectSystem            Visual Studio 프로젝트 시스템 속성을 빌드, 디버그, 참조 및 작업하는 형식은 이 
                                                 네임스페이스에 정의
@@ -109,6 +111,7 @@ Microsoft.VisualStudio.Utilities                확장 개발에 사용되는 �
                                                 PriorityAttribute, DisplayAttribute, AppliesToProjectAttribute, OrderAttribute, 
                                                 ExportImplementationAttribute, ImportImplementationsAttribute는 이 네임스페이스에 
                                                 정의된 몇 가지 공통 속성. 또한 편집기에서 사용하는 클래스도 포함합니다.
+
 EnvDTE                                          이 네임스페이스(EnvDTE)는 꽤 오랫동안 Visual Studio에 있었고 수년에 걸쳐 발전해왔기 때문에 
                                                 Visual Studio의 다른 버전에 추가된 접미사 80, 90, 90a 및 100을 볼 수 있습니다.
                                                 이 네임스페이스에는 Visual Studio의 작업 자동화에 사용되는 인터페이스와 형식이 포함되어 
@@ -119,6 +122,7 @@ EnvDTE80
 EnvDTE90
 EnvDTE90a
 EnvDTE100
+
 VSLangProj                                      이 네임스페이스에 정의된 형식과 인터페이스는 언어(C# 또는 VB) 프로젝트 시스템과 자동화에
                                                 의해 사용되어 진다.
 Microsoft.Build*                                이러한 네임스페이스(Microsoft.Build로 시작하는 네임스페이스)는 MSBuild 인프라에서 사용.
