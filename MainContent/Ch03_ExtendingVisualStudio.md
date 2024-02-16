@@ -90,10 +90,12 @@ Microsoft.VisualStudio.Text.Classification      코드 편집기 창에 분류�
 Microsoft.VisualStudio.Text.Editor              여기에는 옵션, 여백, 스크롤바 등과 같이 편집기에서 사용되는 클래스가 포함됩니다.
 Microsoft.VisualStudio.Editor                   여기에는 색상, 글꼴 등에 대해 편집기에서 사용하는 인터페이스와 클래스, 편집기 상수가 
                                                 포함됩니다.
+
 Microsoft.VisualStudio.Language.Intellisense    작업 제안, 전구, 서명 도우미 및 IntelliSense를 담당하는 인터페이스와 클래스 포함.
+
 Microsoft.VisualStudio.Text                     여기에서 코드 편집기에서 텍스트 선택, 장식, 서식 지정, 개요 및 태그 중괄호 완성 기능을
-                                                제공하고 노출하는 유형 및 인터페이스가 있습니다.
-Microsoft.VisualStudio.Text.*
+Microsoft.VisualStudio.Text.*                   제공하고 노출하는 유형 및 인터페이스가 있습니다.
+
 
 Microsoft.VisualStudio.CommandBars              명령 모음, 명령 모음 단추, 이벤트 및 처리기에 대한 정의가 포함되어 있습니다.
 Microsoft.VisualStudio.TextTemplating           이 네임스페이스는 텍스트 템플릿 유형, 텍스트 템플릿 엔진 및 텍스트 템플릿 프로세서의
@@ -114,15 +116,11 @@ Microsoft.VisualStudio.Utilities                확장 개발에 사용되는 �
                                                 정의된 몇 가지 공통 속성. 또한 편집기에서 사용하는 클래스도 포함합니다.
 
 EnvDTE                                          이 네임스페이스(EnvDTE)는 꽤 오랫동안 Visual Studio에 있었고 수년에 걸쳐 발전해왔기 때문에 
-                                                Visual Studio의 다른 버전에 추가된 접미사 80, 90, 90a 및 100을 볼 수 있습니다.
-                                                이 네임스페이스에는 Visual Studio의 작업 자동화에 사용되는 인터페이스와 형식이 포함되어 
-                                                있습니다. Visual Studio의 이전 버전(VS 2012까지)은 추가 기능을 지원하고 이 네임스페이스를 
-                                                광범위하게 사용하는 추가 기능을 만드는 멋진 마법사를 제공했습니다. 최신 VSPackage는 
+EnvDTE80                                        Visual Studio의 다른 버전에 추가된 접미사 80, 90, 90a 및 100을 볼 수 있습니다.
+EnvDTE90                                        이 네임스페이스에는 Visual Studio의 작업 자동화에 사용되는 인터페이스와 형식이 포함되어 
+EnvDTE90a                                       있습니다. Visual Studio의 이전 버전(VS 2012까지)은 추가 기능을 지원하고 이 네임스페이스를 
+EnvDTE100                                       광범위하게 사용하는 추가 기능을 만드는 멋진 마법사를 제공했습니다. 최신 VSPackage는 
                                                 자동화 모델 활용도 지원.
-EnvDTE80
-EnvDTE90
-EnvDTE90a
-EnvDTE100
 
 VSLangProj                                      이 네임스페이스에 정의된 형식과 인터페이스는 언어(C# 또는 VB) 프로젝트 시스템과 자동화에
                                                 의해 사용되어 진다.
